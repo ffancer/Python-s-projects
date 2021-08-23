@@ -1,3 +1,2 @@
 # test
-print(1 + 4)
-print('hghfhfghfghf')
+print(1 + 5)
