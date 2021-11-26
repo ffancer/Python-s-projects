@@ -7,4 +7,6 @@ def number_of_distinct(lst):
 
 
 print(number_of_distinct([1, 4, 5, 1, 1, 3]))
+print(number_of_distinct([11, 12, 13, 'our', 'pip']))
+print(number_of_distinct([1, '1', 'pop', '77', 77, 1, '1', '77']))
 
