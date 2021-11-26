@@ -2,3 +2,5 @@
 # Find the number of distinct elements in the array. Example: for 1 4 5 1 1 3 the answer is 4.
 
 
+lst = [1,4,5,1,1,3]
+print(len(set(lst)))
