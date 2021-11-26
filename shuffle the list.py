@@ -2,15 +2,19 @@
 # Дан массив. Перемешать его элементы случайным образом так, чтобы каждый элемент оказался на новом месте.
 
 from random import shuffle
+from copy import copy
+
 
 def shuffle_list(lst):
-    arr = tuple(lst)
+    old_lst = copy(lst)
     shuffle(lst)
-    return lst, arr
+
+    while lst != old_lst:
+        return lst
 
 
 print(shuffle_list([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]))
 print(shuffle_list(['a', 'b', 'c', 'd']))
 print(shuffle_list(['one', '777', 12, 54, [1, 2]]))
 
-
+# print([1,2,3] == [1,2])
