@@ -5,12 +5,18 @@ from random import shuffle
 from copy import copy
 
 
-def shuffle_list(lst):
-    old_lst = copy(lst)
-    shuffle(lst)
+# def shuffle_list(lst):
+#     old_lst = copy(lst)
+#     shuffle(lst)
+#     new_lst = lst
+#
+#     if old_lst != new_lst:
+#         return lst
+#     shuffle(new_lst)
+#     # return new_lst
 
-    while lst != old_lst:
-        return lst
+def shuffle_list(lst):
+    return lst[-1:]+lst[:-1]
 
 
 print(shuffle_list([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]))
