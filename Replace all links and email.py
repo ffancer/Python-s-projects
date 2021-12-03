@@ -7,7 +7,7 @@
 # Solve in two ways: using regular expressions and without. Compare the speed of work.
 
 def replace_links(s):
-    pass
+    return '*' * len(s)
 
 
 print(replace_links('http://site.com'))
