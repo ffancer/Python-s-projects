@@ -15,13 +15,13 @@ while True:
     title = soup.find(class_="firstHeading").text
 
     print(f"{title} \nDo you want to view it? (Y/N)")
-    answer = input("").lower()
+    answer_view = input("").lower()
 
-    if answer == "y":
+    if answer_view == "y":
         url = "https://ru.wikipedia.org/wiki/%s" % title
         webbrowser.open(url)
         break
-    elif answer == "n":
+    elif answer_view == "n":
         print("Try again!")
         continue
     else:
