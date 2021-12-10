@@ -3,7 +3,14 @@ from bs4 import BeautifulSoup
 import webbrowser
 
 while True:
-    url = requests.get("https://ru.wikipedia.org/wiki/Special:Random")
+    print("What wiki version u need? Ru or Eng? (R/E)")
+    answer_language = input("").lower()
+
+    if answer_language == 'r':
+        url = requests.get("https://ru.wikipedia.org/wiki/Special:Random")
+    else:
+        url = requests.get("https://en.wikipedia.org/wiki/Special:Random")
+
     soup = BeautifulSoup(url.content, "html.parser")
     title = soup.find(class_="firstHeading").text
 
