@@ -1,10 +1,10 @@
-import string
-import random
+from string import ascii_letters, digits, punctuation
+from random import sample
 
 
 def pass_generator(length):
-    symbols = string.ascii_letters + string.digits + string.punctuation
-    return ''.join(random.sample(symbols, length))
+    symbols = ascii_letters + digits + punctuation
+    return ''.join(sample(symbols, length))
 
 
 print(pass_generator(20))
