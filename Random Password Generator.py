@@ -1,5 +1,14 @@
+import string
+
+
 def pass_generator(length):
-    pass
+    symbols = string.ascii_letters + string.digits + string.punctuation
+
+
+
+
+
+
 
 
 
