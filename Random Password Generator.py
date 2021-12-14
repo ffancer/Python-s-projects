@@ -9,11 +9,15 @@ while True:
     if choice == 'q':
         print('Come back :)')
         break
+    while choice not in ['q', 'y', 'n']:
+        choice = input('Only Y/N/Q: ').lower()
 
-    length = input('Enter the length of password: ')
+    length = input('Enter the length of password: ').lower()
     if length == 'q':
         print('Come back :)')
         break
+    while length != 'q' and not length.isdigit():
+        length = input('Enter only numbers: ').lower()
 
 
     def pass_generator(symbols, length):
