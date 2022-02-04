@@ -7,10 +7,17 @@ Task: Count the total number of repetitions for the entire "ladder".
 """
 
 
-n = 1
-total = 0
-for i in range(n, n*5+1, n):
-    total += i
-for j in range(n*4,n-1, -n):
-    total += j
-print(total)
+def workout_1(step=1, sets=5):
+    total = 0
+
+    for i in range(step, step * sets + 1, step):
+        total += i
+    for j in range(step * (sets - 1), step - 1, -step):
+        total += j
+
+    return total
+
+
+print(workout_1())
+print(workout_1(2))
+print(workout_1(3))
