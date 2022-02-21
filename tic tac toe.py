@@ -4,9 +4,22 @@ Our algorithm:
 6)check tie 7)flip player
 """
 
+
+# ------ Global Variables ------
+
+# Game board
 board = ['-', '-', '-',
          '-', '-', '-',
          '-', '-', '-']
+
+# If game still going
+game_still_going = True
+
+# Who win? Or tie?
+winner = None
+
+# Who's turn is it
+current_player = 'X'
 
 
 def display_board():
@@ -23,12 +36,27 @@ def play_game():
         flip_player()
 
 
-def handle_turn():
+def handle_turn(current_player):
     position = input('Choose position from 1-9: ')
     position = int(position) - 1
 
     board[position] = 'X'
     display_board()
+
+
+def check_if_game_over():
+    check_if_win()
+    check_if_tie()
+
+def check_if_win():
+    # check rows/columns/diagonals
+    return
+
+def check_if_tie():
+    return
+
+def flip_player(): # flip X to O
+    return
 
 
 play_game()
