@@ -53,9 +53,28 @@ def check_if_game_over():
     check_if_tie()
 
 def check_for_winner():
-    # check rows/columns/diagonals
+    global winner
+    # check rows
+    row_winner = check_rows()
+    # check columns
+    column_winner = check_columns()
+    # check diagonals
+    diagonal_winner = check_diagonals()
+    if row_winner:
+        winner = row_winner
+    elif column_winner:
+        winner = column_winner
+    elif diagonal_winner:
+        winner = diagonal_winner
+    else:
+        winner = None
     return
-
+def check_rows():
+    return
+def check_columns():
+    return
+def check_diagonals():
+    return
 def check_if_tie():
     return
 
