@@ -17,7 +17,10 @@ def display_board():
 
 def play_game():
     display_board()
-    handle_turn()
+    while game_still_going:
+        handle_turn(current_player)
+        check_if_game_over()
+        flip_player()
 
 
 def handle_turn():
