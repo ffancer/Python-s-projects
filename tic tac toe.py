@@ -38,7 +38,7 @@ def play_game():
     # The game has ended
     if winner == 'X' or winner == 'O':
         print(winner + ' won.')
-    elif winner:
+    elif winner == None:
         print('Tie.')
 def handle_turn(player):
     position = input('Choose position from 1-9: ')
@@ -108,7 +108,11 @@ def check_diagonals():
 
 
 def check_if_tie():
-    return
+    global game_still_going
+    if '-' not in board:
+        game_still_going = False
+        return True
+    return False
 
 def flip_player(): # flip X to O
     global current_player
