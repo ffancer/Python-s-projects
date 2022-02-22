@@ -41,7 +41,10 @@ def play_game():
     elif winner == None:
         print('Tie.')
 def handle_turn(player):
+    print(player + "'s turn.")
     position = input('Choose position from 1-9: ')
+    while position not in ['1', '2', '3', '4', '5', '6', '7', '8', '9']:
+        position = input('Choose position from 1-9: ')
     position = int(position) - 1
 
     board[position] = player
