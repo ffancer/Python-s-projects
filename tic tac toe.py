@@ -44,7 +44,7 @@ def handle_turn(player):
     position = input('Choose position from 1-9: ')
     position = int(position) - 1
 
-    board[position] = 'X'
+    board[position] = player
     display_board()
 
 
@@ -83,14 +83,39 @@ def check_rows():
     elif row_3:
         return board[6]
 def check_columns():
-    return
+    global game_still_going
+    column_1 = board[0] == board[3] == board[6] != '-'
+    column_2 = board[1] == board[4] == board[7] != '-'
+    column_3 = board[2] == board[5] == board[8] != '-'
+    if column_1 or column_2 or column_3:
+        game_still_going = False
+    if column_1:
+        return board[0]
+    elif column_2:
+        return board[1]
+    elif column_3:
+        return board[2]
 def check_diagonals():
-    return
+    global game_still_going
+    diagonal_1 = board[0] == board[4] == board[8] != '-'
+    diagonal_2 = board[2] == board[4] == board[6] != '-'
+    if diagonal_1 or diagonal_2:
+        game_still_going = False
+    if diagonal_1:
+        return board[0]
+    elif diagonal_2:
+        return board[2]
+
+
 def check_if_tie():
     return
 
 def flip_player(): # flip X to O
-    return
+    global current_player
+    if current_player == 'X':
+        current_player = 'O'
+    elif current_player == 'O':
+        current_player = 'X'
 
 
 play_game()
