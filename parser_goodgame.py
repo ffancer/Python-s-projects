@@ -25,10 +25,15 @@ soup = BeautifulSoup(src, 'lxml')
 
 
 # all_topics_info = soup.find_all(class_='thread-block')
-all_topics_info = soup.find('div', class_='thread-block')
+# all_topics_info = soup.find('div', class_='thread-block')
+all_topics_info = soup.find(class_='thread-block')
+topics_name = all_topics_info.find_all(class_='name')
+topics_count = all_topics_info.find_all(class_='count')
+# print(topics_name)
 
-# print(all_topics_info)
+# for i, j in enumerate(topics_name, 1):
+#     print(i, j.text)
 
-for item in all_topics_info:
-    item_topic_name = item.find_all(class_='name')
-    print(item_topic_name)
+for item in topics_count:
+    print(item.text)
+
