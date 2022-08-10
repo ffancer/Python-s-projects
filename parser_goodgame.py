@@ -20,10 +20,15 @@ with open('index.html', encoding="utf-8-sig") as file:
     src = file.read()
 
 soup = BeautifulSoup(src, 'lxml')
-topics = soup.find(class_='thread-block').find_all('div', class_='name')
-lst = []
+# topic_name = soup.find(class_='thread-block').find_all('div', class_='name')
+# topic_count = soup.find(class_='thread-block').find_all('div', class_='count')
 
-for item in topics:
-    lst.append(item.text.strip())
 
-print(lst)
+# all_topics_info = soup.find_all(class_='thread-block')
+all_topics_info = soup.find('div', class_='thread-block')
+
+# print(all_topics_info)
+
+for item in all_topics_info:
+    item_topic_name = item.find_all(class_='name')
+    print(item_topic_name)
