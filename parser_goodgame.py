@@ -1,5 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
+import csv
+import xlsxwriter
 
 # url = 'https://goodgame.ru/'
 #
@@ -18,29 +20,57 @@ from bs4 import BeautifulSoup
 
 with open('index.html', encoding="utf-8-sig") as file:
     src = file.read()
-
-
 soup = BeautifulSoup(src, 'lxml')
-
-# print(type(soup))
-# all_topics_info = soup.find_all('div', class_='theme')
 all_topics_info = soup.find_all('div', class_='forum-block')
 
+lst = [[], [], []]
 
 for item in all_topics_info:
-
     topics_name = item.find_all(class_='name')
     topics_count = item.find_all(class_='count')
     topics_href = item.find_all('a', class_='creater')
 
     for i in topics_name:
-        print(i.text.strip())
+        lst[0].append(i.text.strip())
 
     for i in topics_count:
-        print(i.text)
+        lst[1].append(i.text)
 
     for i in topics_href:
-        print(i.get('href'))
+        lst[2].append(i.get('href'))
+
+
+    # первый способ записи в эксель таблицу, записываёт всю инфу в 1 столбик
+    # with open(f'data.csv', 'w', newline='') as file:
+    #     writer = csv.writer(file)
+    #     writer.writerow([
+    #         'Название темы: ',
+    #         'Кол-во постов: ',
+    #         'Ссылка: '
+    #     ])
+
+
+def writer(parametr):
+    book = xlsxwriter.Workbook(r'C:\Users\Paul\Desktop\goodgame_parsing.xlsx')
+    page = book.add_worksheet("goodgame")
+
+    row, column = 0, 0
+
+    page.set_column('A:A', 50)
+    page.set_column('B:B', 50)
+    page.set_column('C:C', 50)
+
+    for item in parametr():
+        page.write(row, column, item[0])
+        page.write(row, column, item[1])
+        page.write(row, column, item[2])
+        row += 1
+        column += 1
+
+    book.close()
+
+
+writer(lst)
 
 
 
