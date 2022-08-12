@@ -73,31 +73,36 @@
 # writer(lst)
 
 
-
 from bs4 import BeautifulSoup
 import requests
 
 # with open('index.html', 'r', encoding="utf-8-sig") as file:
 #     url = file.read()
-#
-# # url = 'https://goodgame.ru/'
+
+# url = 'https://goodgame.ru/'
 #
 # page = requests.get(url)
 #
-# soup = BeautifulSoup(page.content, 'html.parser')
+# soup = BeautifulSoup(page.content, 'html-parser')
 #
-# print(soup)
+# lists = soup.find_all('div', class_='thread-block')
+# print(lists)
+# name = lists.find_all('div', class_='name')
+# print(name)
 
 
 with open('index.html', 'r', encoding="utf-8-sig") as f:
     contents = f.read()
 
-    soup = BeautifulSoup(contents, 'lxml')
-
-    print(soup.h2)
-    print(soup.head)
-    print(soup.li)
+    soup = BeautifulSoup(contents, 'html.parser')
 
 
+    # lists = soup.find_all('div', class_='thread-block')
+    lists = soup.find_all('div', {'class': 'thread-block'})
+    # lists2 = lists.find_all(class_='theme')
+    # name = lists.find_all('div', class_='name')
+    print(lists)
 
-
+    # for li in lists:
+    #     name = li.find('div', class_='name')
+    #     print(title)
