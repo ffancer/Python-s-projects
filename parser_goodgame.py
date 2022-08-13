@@ -96,13 +96,15 @@ with open('index.html', 'r', encoding="utf-8-sig") as f:
 
     soup = BeautifulSoup(contents, 'html.parser')
 
-
     # lists = soup.find_all('div', class_='thread-block')
-    lists = soup.find_all('div', {'class': 'thread-block'})
+    # lists = soup.find_all('div', {'class': 'thread-block'})
+    lists = soup.find_all('div', {'class': 'name'})
     # lists2 = lists.find_all(class_='theme')
     # name = lists.find_all('div', class_='name')
-    print(lists)
-
+    lst = []
+    for i in lists:
+        lst.append(i.text.replace('\n', '').strip())
+    print(lst)
     # for li in lists:
     #     name = li.find('div', class_='name')
     #     print(title)
