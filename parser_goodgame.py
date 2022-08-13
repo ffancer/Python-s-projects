@@ -75,6 +75,7 @@
 
 from bs4 import BeautifulSoup
 import requests
+import pandas as pd
 
 # with open('index.html', 'r', encoding="utf-8-sig") as file:
 #     url = file.read()
@@ -95,16 +96,21 @@ with open('index.html', 'r', encoding="utf-8-sig") as f:
     contents = f.read()
 
     soup = BeautifulSoup(contents, 'html.parser')
+    names = soup.find_all('div', {'class': 'name'})
+    counts = soup.find_all('div', {'class': 'count'})
+    links = soup.find_all('a', {'class': 'creater'})
 
-    # lists = soup.find_all('div', class_='thread-block')
-    # lists = soup.find_all('div', {'class': 'thread-block'})
-    lists = soup.find_all('div', {'class': 'name'})
-    # lists2 = lists.find_all(class_='theme')
-    # name = lists.find_all('div', class_='name')
-    lst = []
-    for i in lists:
-        lst.append(i.text.replace('\n', '').strip())
-    print(lst)
-    # for li in lists:
-    #     name = li.find('div', class_='name')
-    #     print(title)
+    lst = [[], [], []]
+
+    for name in names:
+        lst[0].append(name.text.replace('\n', '').strip())
+
+    for count in counts:
+        lst[1].append(int(count.text))
+
+    for link in links:
+        lst[2].append(link.get('href'))
+
+    df = pd.DataFrame.from_dict({'Горячие темы: ': lst[0], 'Кол-во постов: ': lst[1], 'Ссылки: ': lst[2]})
+    df.to_excel('goodgame_parsing.xlsx', header=True, index=False)
+
