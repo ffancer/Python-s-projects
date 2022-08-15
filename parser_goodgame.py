@@ -114,3 +114,9 @@ with open('index.html', 'r', encoding="utf-8-sig") as f:
     df = pd.DataFrame.from_dict({'Горячие темы: ': lst[0], 'Кол-во постов: ': lst[1], 'Ссылки: ': lst[2]})
     df.to_excel('goodgame_parsing.xlsx', header=True, index=False)
 
+
+
+
+
+
+
