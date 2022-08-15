@@ -23,8 +23,11 @@ def time():
 lbl = Label(root, font=('calibri', 40, 'bold'),
             background='purple',
             foreground='white')
-
-lbl.pack(anchor='n')
+# root.attributes('-alpha', 0.5)  # делает прозрачным окно
+root.lift()
+root.attributes('-topmost', 2)  # поверх всех окон
+root.geometry('196x65+700+0')
+lbl.pack(anchor='center')
 time()
 
 mainloop()
