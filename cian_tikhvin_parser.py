@@ -5,6 +5,8 @@ Searching 1-2 room apartments in Tikhvin, Len. region, for the purpose of purcha
 
 import requests
 from bs4 import BeautifulSoup
+import json
+
 
 url = 'https://spb.cian.ru/kupit-kvartiru-1-komn-ili-2-komn-leningradskaya-oblast-tihvin'
 
@@ -67,11 +69,8 @@ data = '{"jsonQuery":{"_type":"flatsale","geo":{"type":"geo","value":[{"type":"l
 
 response = requests.post('https://api.cian.ru/search-offers/v2/search-offers-desktop/', cookies=cookies, headers=headers, data=data)
 data = response.json()
-print(data)
+
+with open('data.json', 'w', encoding='utf-8') as f:
+    json.dump(data, f, ensure_ascii=False, indent=4)
 
 
-# req = requests.get(url, headers=headers)
-# src = req.text
-#
-# with open('index.html', 'w') as file:
-#     file.write(src)
