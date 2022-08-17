@@ -6,7 +6,7 @@ Searching 1-2 room apartments in Tikhvin, Len. region, for the purpose of purcha
 import requests
 from bs4 import BeautifulSoup
 import json
-
+from datetime import datetime
 
 url = 'https://spb.cian.ru/kupit-kvartiru-1-komn-ili-2-komn-leningradskaya-oblast-tihvin'
 
@@ -77,8 +77,17 @@ url = 'https://spb.cian.ru/kupit-kvartiru-1-komn-ili-2-komn-leningradskaya-oblas
 # открываем джсон файл с нашего компа (выше мы его на наш комп сохранили)
 f = open('data.json', encoding='utf-8')
 data = json.load(f)
-print(data)
+# print(data)
 
+
+def get_offer(item):
+    offer = {}
+
+    # return item['data']["jsonQuery"]["offersSerialized"]["geo"]["userInput"]
+    return item["data"]
+
+
+print(get_offer(data))
 
 
 
