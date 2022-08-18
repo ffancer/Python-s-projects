@@ -79,16 +79,20 @@ url = 'https://spb.cian.ru/kupit-kvartiru-1-komn-ili-2-komn-leningradskaya-oblas
 # открываем джсон файл с нашего компа (выше мы его на наш комп сохранили)
 f = open('data.json', encoding='utf-8')
 data = json.load(f)
-# print(data)
 
+
+# print(data)
+# print(json.dumps(data, indent=4))  # more readable
 
 def get_offer(items):
     dct = {}
+
     for item in items['data']["offersSerialized"]:
-        print(item["fullUrl"])  # здесь все наши ссылочки на объявляения города
+        # print(item["fullUrl"])  # здесь все наши ссылочки на объявляения города
+        # print(item['description'])  # описание квартиры
+        dct.update({item['description'].replace('\n', ''): item["fullUrl"]})
+
+    return dct
 
 
 print(get_offer(data))
-
-
-
