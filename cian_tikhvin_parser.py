@@ -1,6 +1,8 @@
 """
 Парсим 1-2 комнатные квартиы в г. Тихвин, Лен. обл, с целью покупки.
 Searching 1-2 room apartments in Tikhvin, Len. region, for the purpose of purchase.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+В ходе работы выяснилось, что в реальном времени парсинг данного сайта затруднен - нужно качать JSON-файл
 """
 
 import requests
@@ -80,11 +82,10 @@ data = json.load(f)
 # print(data)
 
 
-def get_offer(item):
-    offer = {}
-
-    # return item['data']["jsonQuery"]["offersSerialized"]["geo"]["userInput"]
-    return item["data"]
+def get_offer(items):
+    dct = {}
+    for item in items['data']["offersSerialized"]:
+        print(item["fullUrl"])  # здесь все наши ссылочки на объявляения города
 
 
 print(get_offer(data))
