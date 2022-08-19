@@ -5,6 +5,7 @@ Searching 1-2 room apartments in Tikhvin, Len. region, for the purpose of purcha
 В ходе работы выяснилось, что в реальном времени парсинг данного сайта затруднен - нужно качать JSON-файл
 """
 
+import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 import json
@@ -94,5 +95,11 @@ def get_offer(items):
 
     return dct
 
+# print(get_offer(data))
 
-print(get_offer(data))
+# сохраняем данные в файле
+df = pd.DataFrame(get_offer(data), index=[0])
+df = (df.T)
+print(df)
+df.to_excel('Тихвин_1-2комн квартиры_описание и ссылка.xlsx')
+
