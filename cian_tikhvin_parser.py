@@ -97,7 +97,7 @@ def get_offer(items):
 # print(get_offer(data))
 
 # сохраняем данные в файле
-df = pd.DataFrame(get_offer(data), index=[0])
+df = pd.DataFrame(get_offer(data), index=['ссылка'])
 df = (df.T)
 print(df)
 df.to_excel('Тихвин 1-2комн квартиры описание и ссылка.xlsx')
