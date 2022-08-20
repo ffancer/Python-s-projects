@@ -6,10 +6,7 @@ Searching 1-2 room apartments in Tikhvin, Len. region, for the purpose of purcha
 """
 
 import pandas as pd
-import requests
-from bs4 import BeautifulSoup
 import json
-from datetime import datetime
 
 url = 'https://spb.cian.ru/kupit-kvartiru-1-komn-ili-2-komn-leningradskaya-oblast-tihvin'
 
@@ -95,11 +92,12 @@ def get_offer(items):
 
     return dct
 
+
+# проверка
 # print(get_offer(data))
 
 # сохраняем данные в файле
 df = pd.DataFrame(get_offer(data), index=[0])
 df = (df.T)
 print(df)
-df.to_excel('Тихвин_1-2комн квартиры_описание и ссылка.xlsx')
-
+df.to_excel('Тихвин 1-2комн квартиры описание и ссылка.xlsx')
