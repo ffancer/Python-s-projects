@@ -48,6 +48,10 @@ file = open("avito.html", "r", encoding='utf-8')
 # req = requests.get(file.read())
 soup = BeautifulSoup(file.read(), 'lxml') #.get_text()
 
-a = soup.find('span', {'class': 'tooltip-tooltip-box-RsJbq'})
-for i in a:
+# a = soup.find('span', {'class': 'tooltip-tooltip-box-RsJbq'})
+# print(a)
+
+# print(soup.text)
+# print(soup.get_text())
+for i in soup.find_all('span'):
     print(i)
