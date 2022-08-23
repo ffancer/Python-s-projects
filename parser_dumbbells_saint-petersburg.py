@@ -44,26 +44,18 @@ from selectolax.parser import HTMLParser
 # print(src)
 
 
-# file = open("avito.html", "r", encoding='utf-8')
-# # req = requests.get(file.read())
+file = open("avito.html", "r", encoding='utf-8')
+# req = requests.get(file.read())
 # soup = BeautifulSoup(file.read(), 'lxml') #.get_text()
 
 # a = soup.find('span', {'class': 'tooltip-tooltip-box-RsJbq'})
 # print(a)
 
-# print(soup.text)
-# print(soup.get_text())
-
-# for i in soup.find_all('span', class_='html-attribute-value'):
-#     print(i)
-headers = {
-    'Accept': '*/*',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
-}
-product = 'геймпад'
-url = 'https://www.avito.ru/sankt-peterburg?q=' + product
-request = requests.get(url, headers=headers)
-bs = BeautifulSoup(request.text, 'html.parser')
+# product = 'геймпад'
+# url = 'https://www.avito.ru/sankt-peterburg?q=' + product
+# request = requests.get(url, headers=headers)
+request = requests.get(file.read())
+bs = BeautifulSoup(request, 'html.parser')
 print(bs)
 # all_links = bs.find_all('a', class_='iva-item-title-py3i_')
 # print(all_links)
