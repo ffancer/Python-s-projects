@@ -47,4 +47,7 @@ from selectolax.parser import HTMLParser
 file = open("avito.html", "r", encoding='utf-8')
 # req = requests.get(file.read())
 soup = BeautifulSoup(file.read(), 'lxml') #.get_text()
-print(soup)
+
+a = soup.find('span', {'class': 'tooltip-tooltip-box-RsJbq'})
+for i in a:
+    print(i)
