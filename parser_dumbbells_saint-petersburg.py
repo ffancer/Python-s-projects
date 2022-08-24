@@ -10,6 +10,7 @@ from bs4 import BeautifulSoup
 import requests
 from selectolax.parser import HTMLParser
 
+
 # url = 'https://www.avito.ru/sankt-peterburg/hobbi_i_otdyh?cd=1&q=%D0%B3%D0%B0%D0%BD%D1%82%D0%B5%D0%BB%D0%B8+%D1%80%D0%B0%D0%B7%D0%B1%D0%BE%D1%80%D0%BD%D1%8B%D0%B5+%D0%B1%D1%83'
 #
 # response = requests.get(url=url)
@@ -44,7 +45,7 @@ from selectolax.parser import HTMLParser
 # print(src)
 
 
-file = open("avito.html", "r", encoding='utf-8')
+# file = open("avito.html", "r", encoding='utf-8')
 # req = requests.get(file.read())
 # soup = BeautifulSoup(file.read(), 'lxml') #.get_text()
 
@@ -54,10 +55,20 @@ file = open("avito.html", "r", encoding='utf-8')
 # product = 'геймпад'
 # url = 'https://www.avito.ru/sankt-peterburg?q=' + product
 # request = requests.get(url, headers=headers)
-request = requests.get(file.read())
-bs = BeautifulSoup(request, 'html.parser')
-print(bs)
+# request = requests.get(file.read())
+# bs = BeautifulSoup(request, 'html.parser')
+# print(bs)
 # all_links = bs.find_all('a', class_='iva-item-title-py3i_')
 # print(all_links)
 # for link in all_links:
 #     print(link)
+
+
+def get_data(url):
+    headers = {
+        'user-agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
+    }
+
+    def main():
+        get_data(
+            'https://www.avito.ru/sankt-peterburg/hobbi_i_otdyh?cd=1&q=%D0%B3%D0%B0%D0%BD%D1%82%D0%B5%D0%BB%D0%B8+%D1%80%D0%B0%D0%B7%D0%B1%D0%BE%D1%80%D0%BD%D1%8B%D0%B5+%D0%B1%D1%83')
