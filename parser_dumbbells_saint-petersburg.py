@@ -10,7 +10,6 @@ from bs4 import BeautifulSoup
 import requests
 from selectolax.parser import HTMLParser
 
-
 # url = 'https://www.avito.ru/sankt-peterburg/hobbi_i_otdyh?cd=1&q=%D0%B3%D0%B0%D0%BD%D1%82%D0%B5%D0%BB%D0%B8+%D1%80%D0%B0%D0%B7%D0%B1%D0%BE%D1%80%D0%BD%D1%8B%D0%B5+%D0%B1%D1%83'
 #
 # response = requests.get(url=url)
@@ -63,6 +62,16 @@ from selectolax.parser import HTMLParser
 # for link in all_links:
 #     print(link)
 
+import random
+import re
+import time
+import pandas
+import requests
+from bs4 import BeautifulSoup
+from pandas import ExcelWriter
+
+url = 'https://www.avito.ru/sankt-peterburg/hobbi_i_otdyh?cd=1&q=%D0%B3%D0%B0%D0%BD%D1%82%D0%B5%D0%BB%D0%B8+%D1%80%D0%B0%D0%B7%D0%B1%D0%BE%D1%80%D0%BD%D1%8B%D0%B5+%D0%B1%D1%83'
+
 
 def get_html(url, params=None):
     """ получение кода страницы """
@@ -73,4 +82,15 @@ def get_html(url, params=None):
     html = requests.get(url, headers=headers, params=params)
     return html
 
-print(get_html('https://www.avito.ru/sankt-peterburg/hobbi_i_otdyh?cd=1&q=%D0%B3%D0%B0%D0%BD%D1%82%D0%B5%D0%BB%D0%B8+%D1%80%D0%B0%D0%B7%D0%B1%D0%BE%D1%80%D0%BD%D1%8B%D0%B5+%D0%B1%D1%83'))
+
+# находим кол-во страниц, рабоатет плохо, видит 1 страницу
+# def get_pages(html):
+#     soup = BeautifulSoup(html.text, 'html.parser')
+#     try:
+#         pages = soup.find('span', {'data-marker': 'pagination-button/next'}).previous_element
+#     except:
+#         pages = 1
+#     print('Количество найденных страниц: ', pages)
+#     return pages
+#
+# print(get_pages(get_html(url)))
