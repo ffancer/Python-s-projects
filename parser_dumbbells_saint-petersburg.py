@@ -132,10 +132,15 @@ url = 'https://www.avito.ru/'
 #
 # print(get_json())
 
-
 import json
-f = open('avito.json', encoding="utf-8")
-data = json.load(f)
-print(data)
-f.close()
+# with open('avito.json', encoding='utf-8') as json_file:
+#     data = json.load(json_file)
+#     # print(data)
+#     print(json.dumps(data, indent=4))
 
+
+f = open('avito.json', encoding='utf-8')
+data = json.load(f)
+# print(data)
+print(json.dumps(data, indent=4, ensure_ascii=False))
+f.close()
