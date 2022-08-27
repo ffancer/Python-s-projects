@@ -87,12 +87,24 @@ file = open('avito.json', encoding='utf-8')
 data = json.load(file)
 # data_for_viewing = json.dumps(data, indent=4, ensure_ascii=False)  # тут все видно
 # print(data["result"]["items"])
-lst = [[], []]
+lst = [[], [], [], []]
 
 # description of our products in the first cell / описание наших товаров в первой ячейке
+# for item in data["result"]["items"]:
+#     lst[0].append(item['value']['title'])
+
+# price / цена
 for item in data["result"]["items"]:
-    lst[0].append(item['value']['title'])
+    lst[1].append(item['value']['price'])
 
 # location of our goods / местонахождение наших товаров
-for item in data["result"]["items"]:
-    lst[1].append(item['value']['location'])
+# for item in data["result"]["items"]:
+#     lst[2].append(item['value']['location'])
+
+# links / ссылка на объявление
+# for item in data["result"]["items"]:
+#     lst[3].append('https://www.avito.ru/' + str(item['value']['id']))
+
+
+
+
