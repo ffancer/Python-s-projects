@@ -13,6 +13,9 @@ from bs4 import BeautifulSoup
 import requests
 from selectolax.parser import HTMLParser
 import json
+import pandas as pd
+import datetime
+import os
 
 # это нужно для извлечения json, на след. день информация устаревает, но джсон уже на компе ========================================
 # url = 'https://www.avito.ru/'
@@ -88,9 +91,23 @@ data = json.load(file)
 # print(data["result"]["items"])
 lst = [[], [], [], []]
 
-for item in data["result"]["items"]:
-    lst[0].append(item['value'][
-                      'title'])  # description of our products in the first cell / описание наших товаров в первой ячейке
-    lst[1].append(item['value']['price'])  # price / цена
-    lst[2].append(item['value']['location'])  # location of our goods / местонахождение наших товаров
-    lst[3].append('https://www.avito.ru/' + str(item['value']['id']))  # links / ссылка на объявление
+# for item in data["result"]["items"]:
+#     lst[0].append(item['value'][
+#                       'title'])  # description of our products in the first cell / описание наших товаров в первой ячейке
+#     lst[1].append(item['value']['price'])  # price / цена
+#     lst[2].append(item['value']['location'])  # location of our goods / местонахождение наших товаров
+#     lst[3].append('https://www.avito.ru/' + str(item['value']['id']))  # links / ссылка на объявление
+
+
+# now = datetime.now()
+# today = date.today().strftime("%d.%m.%Y")
+# current_time = now.strftime("%H часов %M минут")
+#
+# df = pd.DataFrame.from_dict({'Горячие темы: ': lst[0], 'Кол-во постов: ': lst[1], 'Ссылки: ': lst[2], f'Парсинг произведён {today} в {current_time}': ''})
+# df.to_excel('goodgame_parsing.xlsx', header=True, index=False)
+
+
+path = r"H:\Python\myProjects\avito.json"
+c_time = os.path.getctime(path)
+dt_c = datetime.datetime.fromtimestamp(c_time)
+print('Created on:', dt_c)
