@@ -148,4 +148,6 @@ url = 'https://www.avito.ru/'
 file = open('avito.json', encoding='utf-8')
 data = json.load(file)
 # data_for_viewing = json.dumps(data, indent=4, ensure_ascii=False)  # тут все видно
-print(data["result"]["items"])
+# print(data["result"]["items"])
+for item in data["result"]["items"]:
+    print(item, end='\n' * 8)
