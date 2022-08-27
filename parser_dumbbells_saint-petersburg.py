@@ -9,6 +9,7 @@ Let's look for collapsible dumbbells in St. Petersburg.
 from bs4 import BeautifulSoup
 import requests
 from selectolax.parser import HTMLParser
+import json
 
 # url = 'https://www.avito.ru/sankt-peterburg/hobbi_i_otdyh?cd=1&q=%D0%B3%D0%B0%D0%BD%D1%82%D0%B5%D0%BB%D0%B8+%D1%80%D0%B0%D0%B7%D0%B1%D0%BE%D1%80%D0%BD%D1%8B%D0%B5+%D0%B1%D1%83'
 #
@@ -74,7 +75,6 @@ from pandas import ExcelWriter
 
 url = 'https://www.avito.ru/'
 
-
 # def get_json():
 #     cookies = {
 #         'u': '2tdzradi.1dgq338.1k7igespwg900',
@@ -132,15 +132,20 @@ url = 'https://www.avito.ru/'
 #
 # print(get_json())
 
-import json
 # with open('avito.json', encoding='utf-8') as json_file:
 #     data = json.load(json_file)
 #     # print(data)
 #     print(json.dumps(data, indent=4))
 
 
-f = open('avito.json', encoding='utf-8')
-data = json.load(f)
-# print(data)
-print(json.dumps(data, indent=4, ensure_ascii=False))
-f.close()
+#  открываем и смотрим файл        ==========================
+# f = open('avito.json', encoding='utf-8')
+# data = json.load(f)
+# # print(data)
+# print(json.dumps(data, indent=4, ensure_ascii=False))
+# f.close()
+
+file = open('avito.json', encoding='utf-8')
+data = json.load(file)
+# data_for_viewing = json.dumps(data, indent=4, ensure_ascii=False)  # тут все видно
+print(data["result"]["items"])
