@@ -14,7 +14,6 @@ import requests
 from selectolax.parser import HTMLParser
 import json
 
-
 # это нужно для извлечения json, на след. день информация устаревает, но джсон уже на компе ========================================
 # url = 'https://www.avito.ru/'
 # def get_json():
@@ -89,22 +88,9 @@ data = json.load(file)
 # print(data["result"]["items"])
 lst = [[], [], [], []]
 
-# description of our products in the first cell / описание наших товаров в первой ячейке
-# for item in data["result"]["items"]:
-#     lst[0].append(item['value']['title'])
-
-# price / цена
 for item in data["result"]["items"]:
-    lst[1].append(item['value']['price'])
-
-# location of our goods / местонахождение наших товаров
-# for item in data["result"]["items"]:
-#     lst[2].append(item['value']['location'])
-
-# links / ссылка на объявление
-# for item in data["result"]["items"]:
-#     lst[3].append('https://www.avito.ru/' + str(item['value']['id']))
-
-
-
-
+    lst[0].append(item['value'][
+                      'title'])  # description of our products in the first cell / описание наших товаров в первой ячейке
+    lst[1].append(item['value']['price'])  # price / цена
+    lst[2].append(item['value']['location'])  # location of our goods / местонахождение наших товаров
+    lst[3].append('https://www.avito.ru/' + str(item['value']['id']))  # links / ссылка на объявление
