@@ -19,5 +19,7 @@ headers = {
 }
 req = requests.get(url, headers=headers)
 src = req.text
+soup = BeautifulSoup(src, 'html.parser')
+a = soup.find_all('div', {'class': 'col-md-12 col-8'})
 
-print(src)
+print(a)
