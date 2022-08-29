@@ -5,6 +5,9 @@
 import requests
 from bs4 import BeautifulSoup
 
+
+# https://5ka.ru/special_offers/16290
+# https://5ka.ru/?city_id=12270   town id
 url = 'https://5ka.ru/special_offers/'
 
 # headers = {
