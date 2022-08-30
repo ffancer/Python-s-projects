@@ -25,8 +25,13 @@ from bs4 import BeautifulSoup
 #
 # print(a)
 
-
+import time
 from selenium import webdriver
 import chromedriver_binary
 # Версия 104.0.5112.102 (Официальная сборка), (64 бит)
 browser = webdriver.Chrome()
+browser.maximize_window()
+browser.get('https://5ka.ru/special_offers')
+# browser.get('https://goodgame.ru/')
+time.sleep(5)
+browser.close()
