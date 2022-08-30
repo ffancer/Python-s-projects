@@ -27,5 +27,6 @@ from bs4 import BeautifulSoup
 
 
 from selenium import webdriver
-
+import chromedriver_binary
+# Версия 104.0.5112.102 (Официальная сборка), (64 бит)
 browser = webdriver.Chrome()
