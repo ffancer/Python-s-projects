@@ -27,11 +27,14 @@ from bs4 import BeautifulSoup
 
 import time
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 import chromedriver_binary
-# Версия 104.0.5112.102 (Официальная сборка), (64 бит)
+
+
 browser = webdriver.Chrome()
 browser.maximize_window()
 browser.get('https://5ka.ru/special_offers')
-# browser.get('https://goodgame.ru/')
-time.sleep(5)
+search_button = browser.find_element(By.CSS_SELECTOR, '[data-v-663b5104]')
+search_button.click()
+time.sleep(50)
 browser.close()
