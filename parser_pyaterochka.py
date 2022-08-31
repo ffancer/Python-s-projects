@@ -33,7 +33,7 @@ import chromedriver_binary
 
 browser = webdriver.Chrome()
 browser.maximize_window()
-browser.get('https://5ka.ru/special_offers')
+browser.get('https://5ka.ru/special_offers/')
 
 
 # убираем всплывающее окошко с городом, если город правильный
@@ -45,9 +45,15 @@ def location_confirm():
 
 # выбираем нужный нам магазин
 def location_shop():
-    search_button = browser.find_element(By.CSS_SELECTOR, '[data-v-663b5104]')
-    search_button.click()
-
+    search_button_1 = browser.find_element(By.CSS_SELECTOR, '[data-v-663b5104]')
+    search_button_1.click()
+    time.sleep(3)
+    search_button_2 = browser.find_element(By.CSS_SELECTOR, '[data-v-7475baa1]')
+    search_button_2.click()
+    search_button_3 = browser.find_element(By.CSS_SELECTOR, '[store - bottom]')
+    search_button_3.click()
+    time.sleep(1)
+    # store - bottom
 
 
 location_confirm()
