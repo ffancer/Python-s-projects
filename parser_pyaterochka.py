@@ -51,9 +51,10 @@ def location_shop():
     search_button_2.click()
     time.sleep(2)
 
-    search_button_3 = browser.find_element(By.XPATH, "//a[contains(string(.),'г.Пикалево, ул. Вокзальная, 21'']")
+    # search_button_3 = browser.find_element(By.XPATH, "//a[contains(string(.),'г.Пикалево, ул. Вокзальная, 21'']")
 
-
+    # search_button_3 = browser.find_element("г.Пикалево, ул. Вокзальная, 21")
+    search_button_3 = browser.find_element(By.CSS_SELECTOR, '[data-v-663b5104]').find_element(By.PARTIAL_LINK_TEXT, "г.Пикалево, ул. Вокзальная, 21")
     search_button_3.click()
 
 
