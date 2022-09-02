@@ -69,7 +69,7 @@ def location_shop():
 
 location_confirm()
 location_shop()
-click()
+# click()
 
 time.sleep(500)
 browser.close()
