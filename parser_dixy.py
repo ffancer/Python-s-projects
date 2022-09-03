@@ -29,4 +29,9 @@ with open('dixy.html', encoding='utf-8') as file:
     src = file.read()
 
 soup = BeautifulSoup(src, 'lxml')
-print(soup)
+
+articles = soup.find_all('div', {'class': 'dixyCatalogItem'})
+for article in articles:
+    # price = article.find('div', class_='dixyCatalogItemPrice__new')
+    price = article.find('p').text.strip()
+    print(price)
