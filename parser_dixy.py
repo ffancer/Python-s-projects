@@ -34,4 +34,5 @@ articles = soup.find_all('div', {'class': 'dixyCatalogItem'})
 for article in articles:
     # price = article.find('div', class_='dixyCatalogItemPrice__new')
     price = article.find('p').text.strip()
-    print(price)
+    price_coins = article.find('div', class_='dixyCatalogItemPrice__kopeck').text.strip()
+    print(f'Цена товара {price}-{price_coins}')
