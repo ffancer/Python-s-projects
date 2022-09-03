@@ -32,7 +32,8 @@ soup = BeautifulSoup(src, 'lxml')
 
 articles = soup.find_all('div', {'class': 'dixyCatalogItem'})
 for article in articles:
-    # price = article.find('div', class_='dixyCatalogItemPrice__new')
-    price = article.find('p').text.strip()
-    price_coins = article.find('div', class_='dixyCatalogItemPrice__kopeck').text.strip()
-    print(f'Цена товара {price}-{price_coins}')
+    # price = article.find('p').text.strip()
+    # price_coins = article.find('div', class_='dixyCatalogItemPrice__kopeck').text.strip()
+    # print(f'Цена товара {price}-{price_coins}')
+    name = article.find('div', class_='dixyCatalogItem__title').text.strip()
+    print(name)
