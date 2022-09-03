@@ -23,7 +23,10 @@
 # browser.close()
 
 
+from bs4 import BeautifulSoup
+
 with open('dixy.html', encoding='utf-8') as file:
     src = file.read()
 
-print(src)
+soup = BeautifulSoup(src, 'lxml')
+print(soup)
