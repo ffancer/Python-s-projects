@@ -17,10 +17,12 @@ time.sleep(2)
 #     search_button2 = browser.find_element(By.XPATH, '/html/body/header/div/div/ul[1]/li[1]/div/div[3]/div/ul/li[4]/a')
 #     search_button2.click()
 #
-
-search_continue_button = browser.find_element(By.XPATH, '/html/body/section[3]/div/a')
-time.sleep(1)
-search_continue_button.click()
+flag = True
+while flag:
+    search_continue_button = browser.find_element(By.XPATH, '/html/body/section[3]/div/a')
+    time.sleep(1)
+    search_continue_button.click()
+    time.sleep(1)
 
 # select_town()
 time.sleep(500)
