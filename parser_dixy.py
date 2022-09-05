@@ -17,11 +17,9 @@ time.sleep(2)
 #     search_button2 = browser.find_element(By.XPATH, '/html/body/header/div/div/ul[1]/li[1]/div/div[3]/div/ul/li[4]/a')
 #     search_button2.click()
 #
-# search_continue_button = browser.find_element(By.CLASS_NAME, 'icon-arrow-down')
-search_continue_button = browser.find_element(By.CLASS_NAME, 'btn view-more')
+
+search_continue_button = browser.find_element(By.XPATH, '/html/body/section[3]/div/a')
 time.sleep(1)
-# search_continue_button = browser.find_element(By.XPATH, '/html/body/section[3]/div/a/text()')
-# search_continue_button = browser.find_element(By.PARTIAL_LINK_TEXT, 'Показать еще')
 search_continue_button.click()
 
 # select_town()
