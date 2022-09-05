@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import requests
 
-
+6
 url = 'https://dixy.ru/catalog/'
 browser = webdriver.Chrome()
 browser.maximize_window()
