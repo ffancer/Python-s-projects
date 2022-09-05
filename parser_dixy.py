@@ -25,6 +25,10 @@
 
 from bs4 import BeautifulSoup
 
+# headers = {
+#     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'
+# }
+
 with open('dixy.html', encoding='utf-8') as file:
     src = file.read()
 
@@ -32,8 +36,8 @@ soup = BeautifulSoup(src, 'lxml')
 
 articles = soup.find_all('div', {'class': 'dixyCatalogItem'})
 for article in articles:
-    # price = article.find('p').text.strip()
-    # price_coins = article.find('div', class_='dixyCatalogItemPrice__kopeck').text.strip()
+    price = article.find('p').text.strip()
+    price_coins = article.find('div', class_='dixyCatalogItemPrice__kopeck').text.strip()
     # print(f'Цена товара {price}-{price_coins}')
     name = article.find('div', class_='dixyCatalogItem__title').text.strip()
-    print(name)
+    print(name, price+price_coins, sep='\n')
