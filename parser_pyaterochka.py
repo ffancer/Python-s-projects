@@ -31,8 +31,9 @@ from selenium.webdriver.common.by import By
 import chromedriver_binary
 
 browser = webdriver.Chrome()
-browser.maximize_window()
+# browser.maximize_window()
 browser.get('https://5ka.ru/special_offers/')
+# browser.get('https://5ka.ru/')
 
 
 # убираем всплывающее окошко с городом, если город правильный
@@ -43,7 +44,7 @@ browser.get('https://5ka.ru/special_offers/')
 
 
 # выбираем нужный нам магазин
-def location_shop():
+# def location_shop():
     # search_button_1 = browser.find_element(By.CSS_SELECTOR, '[data-v-663b5104]')
     # search_button_1.click()
     # time.sleep(1)
@@ -57,7 +58,7 @@ def location_shop():
     # search_button_3 = browser.find_element(By.CSS_SELECTOR, '[data-v-663b5104]').find_element(By.XPATH, '"//input[@type= "radio"][@value="г.Пикалево, ул. Вокзальная, 21"]"')
     # search_button_3.click()
     # search_button = browser.find_element(By.CSS_SELECTOR, '[data-v-6179c049]').click()
-    search_button = browser.find_element(By.XPATH, '//*[@id="layout"]/main/div[1]/div/div[1]/div/div/div[1]/div/div/div/div/div/div[1]/div[2]/button/div').click()
+    # search_button = browser.find_element(By.XPATH, '//*[@id="layout"]/main/div[1]/div/div[1]/div/div/div[1]/div/div/div/div/div/div[1]/div[2]/button/div').click()
 
 
 
@@ -70,7 +71,7 @@ def location_shop():
 
 
 # location_confirm()
-location_shop()
+# location_shop()
 # click()
 
 time.sleep(500)
