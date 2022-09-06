@@ -52,5 +52,12 @@ def check_location():
 
 
 check_location()
-time.sleep(500)
+time.sleep(5000)
 browser.close()
+
+тут работаем
+for article in articles:
+    # name = article.find('div', class_='item-name').text.strip()
+    price = article.find("div", {"class": "price-discount"}).text.replace('от', '').replace('\n', '')
+    # первые 2 цифры нынешняя цена, 3 и 4 это старая цена нужно разбить как-то... сплит поможет по точке
+    print(f'{price}')
