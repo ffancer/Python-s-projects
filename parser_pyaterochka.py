@@ -30,7 +30,8 @@ def check_location():
     button = browser.find_element(By.XPATH, '//*[@id="__layout"]/main/div[2]/div[2]/aside/div/div[2]/div/div/input')
     button.send_keys('Пикалево')
     time.sleep(1)
-    browser.find_element(By.CLASS_NAME, 'data-v-46e5db7a').click()
+    # browser.find_element(By.CLASS_NAME, 'data-v-46e5db7a').click()
+    browser.find_element(By.XPATH, '//*[@id="__layout"]/main/div[2]/div[2]/aside/div/div[3]/div/div/span').click()
 
 
 
