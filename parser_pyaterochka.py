@@ -4,6 +4,7 @@
 
 import time
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 import requests
 from bs4 import BeautifulSoup
 
@@ -20,9 +21,20 @@ headers = {
 # soup = BeautifulSoup(req.text, 'html.parser')
 
 def check_location():
-    if soup.find('span', class_='location-confirm__title').strip() == 'Вы в г.Пикалево?':
+    # жмем на кнопку "г. Москва" для того что бы вылезло меню с городами
+    # browser.find_element(By.CLASS_NAME, 'data-v-0e0a63ec').click()
+    browser.find_element(By.XPATH, '//*[@id="__layout"]/main/div[1]/div/div[1]/div/div/div[1]/div/div/div/div/div/div[1]/div[2]/button[1]/div/span').click()
+    time.sleep(2)
+    browser.find_element(By.XPATH, '//*[@id="__layout"]/main/div[1]/div/div[1]/div/div/div[1]/div/div/button/div').click()
+    # нужно ввести название города в форме, для меня это новое поэтому подробнее распишем
+    button = browser.find_element(By.XPATH, '//*[@id="__layout"]/main/div[2]/div[2]/aside/div/div[2]/div/div/input')
+    button.send_keys('Пикалево')
+    time.sleep(1)
+    browser.find_element(By.CLASS_NAME, 'data-v-46e5db7a').click()
 
-#
+
+
+check_location()
 time.sleep(500)
 browser.close()
 
