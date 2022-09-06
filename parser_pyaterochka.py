@@ -35,20 +35,20 @@ def check_location():
     browser.find_element(By.XPATH, '//*[@id="__layout"]/main/div[2]/div[2]/aside/div/div[3]/div/div/span').click()
 
 
-def loop_collect_products():
-    flag = 9
-    while flag != 0:
-        req = requests.get(url, verify=False)
-        soup = BeautifulSoup(req.text, 'lxml')
-        articles = soup.find_all('div', {'class': 'product-card item'})
-
-        # наполняем наш список данными
-        for article in articles:
-            name = article.find('div', class_='dixyCatalogItem__title').text.strip()
-            list_with_names_prices[0].append(name)
-            price = article.find('p').text.strip()
-            price_coins = article.find('div', class_='dixyCatalogItemPrice__kopeck').text.strip()
-            list_with_names_prices[1].append(float(price + '.' + price_coins))
+# def loop_collect_products():
+#     flag = 9
+#     while flag != 0:
+#         req = requests.get(url, verify=False)
+#         soup = BeautifulSoup(req.text, 'lxml')
+#         articles = soup.find_all('div', {'class': 'product-card item'})
+#
+#         # наполняем наш список данными
+#         for article in articles:
+#             name = article.find('div', class_='dixyCatalogItem__title').text.strip()
+#             list_with_names_prices[0].append(name)
+#             price = article.find('p').text.strip()
+#             price_coins = article.find('div', class_='dixyCatalogItemPrice__kopeck').text.strip()
+#             list_with_names_prices[1].append(float(price + '.' + price_coins))
 
 
 check_location()
