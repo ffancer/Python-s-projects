@@ -62,4 +62,9 @@ browser.close()
 #     # первые 2 цифры нынешняя цена, 3 и 4 это старая цена нужно разбить как-то... сплит поможет по точке
 #     print(f'{price}')
 
-price = article.find("div", {"class": "price-discount"}).find('span').text.replace('от', '').strip()
+for div in divs:
+    names_and_jpg = str(div.find('img')).split('data-v-2d064667=""')
+    name = names_and_jpg[0].replace('<img alt=', '')
+    jpg = names_and_jpg[1].replace('src="', '').replace('"/>', '')
+    price = div.find("div", {"class": "price-discount"}).find('span').text.replace('от', '').strip()
+    print(name, price, jpg)
