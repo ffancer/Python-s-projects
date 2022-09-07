@@ -7,6 +7,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import requests
 from bs4 import BeautifulSoup
+import pandas as pd
+
 
 url = 'https://5ka.ru/special_offers/'
 browser = webdriver.Chrome()
@@ -36,13 +38,11 @@ def check_location():
 
 
 def loop_collect_products():
-    flag = 9
+    flag = 3
     while flag != 0:
         req = requests.get(url, verify=False)
         soup = BeautifulSoup(req.text, 'lxml')
         divs = soup.find_all('div', {'class': 'product-card item'})
-
-
 
         # наполняем наш список данными
         for div in divs:
@@ -54,26 +54,24 @@ def loop_collect_products():
             jpg = names_and_jpg[1].replace('src="', '').replace('"/>', '')
             list_names_prices_jpg[2].append(jpg)
 
-        # щелкаем кнопку "показать ещё"
-            # continue_button = browser.find_element(By.XPATH,
-            #                                        '//*[@id="__layout"]/main/div[1]/main/div/div/div[3]/div/div/div[16]/button')
+        # щелкаем кнопку "загрузить ещё"
         continue_button = browser.find_element(By.CLASS_NAME, 'description-text')
         time.sleep(1)
-
         continue_button.click()
-        # continue_button = browser.find_element(By.XPATH, '//*[@id="__layout"]/main/div[1]/main/div/div/div[3]/div/div/div[16]/button')
-        # continue_button.click()
-        time.sleep(3)
+        time.sleep(1)
         flag -= 1
-        print(list_names_prices_jpg)
 
+
+def list_to_excel():
+    df = pd.DataFrame.from_dict({'Название продукта: ': list_names_prices_jpg[0], 'Цена: ': list_names_prices_jpg[1], 'Картинка: ': list_names_prices_jpg[2]})
+    df.to_excel('5ka_parsing.xlsx', header=True, index=False)
 
 
 check_location()
-time.sleep(2)
+time.sleep(1)
 loop_collect_products()
-print(list_names_prices_jpg)
-time.sleep(5000)
+list_to_excel()
+time.sleep(500)
 browser.close()
 
 
