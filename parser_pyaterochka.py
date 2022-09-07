@@ -52,17 +52,29 @@ def loop_collect_products():
             jpg = names_and_jpg[1].replace('src="', '').replace('"/>', '')
             list_names_prices_jpg[2].append(jpg)
 
+        # щелкаем кнопку "показать ещё"
+            cnt = 1
+            # continue_button = browser.find_element(By.XPATH,
+            #                                        '//*[@id="__layout"]/main/div[1]/main/div/div/div[3]/div/div/div[16]/button')
+            continue_button = browser.find_element(By.CLASS_NAME, 'description-text')
+            print(cnt)
+            cnt += 1
+            time.sleep(1)
+
+            continue_button.click()
+            # continue_button = browser.find_element(By.XPATH, '//*[@id="__layout"]/main/div[1]/main/div/div/div[3]/div/div/div[16]/button')
+            # continue_button.click()
+            time.sleep(3)
+            flag -= 1
 
 
 
 check_location()
+time.sleep(2)
+loop_collect_products()
+print(list_names_prices_jpg)
 time.sleep(5000)
 browser.close()
 
-# тут работаем
-# for article in articles:
-#     # name = article.find('div', class_='item-name').text.strip()
-#     price = article.find("div", {"class": "price-discount"}).text.replace('от', '').replace('\n', '')
-#     # первые 2 цифры нынешняя цена, 3 и 4 это старая цена нужно разбить как-то... сплит поможет по точке
-#     print(f'{price}')
+
 
