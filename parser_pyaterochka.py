@@ -42,6 +42,8 @@ def loop_collect_products():
         soup = BeautifulSoup(req.text, 'lxml')
         divs = soup.find_all('div', {'class': 'product-card item'})
 
+
+
         # наполняем наш список данными
         for div in divs:
             names_and_jpg = str(div.find('img')).split('data-v-2d064667=""')
@@ -53,19 +55,17 @@ def loop_collect_products():
             list_names_prices_jpg[2].append(jpg)
 
         # щелкаем кнопку "показать ещё"
-            cnt = 1
             # continue_button = browser.find_element(By.XPATH,
             #                                        '//*[@id="__layout"]/main/div[1]/main/div/div/div[3]/div/div/div[16]/button')
-            continue_button = browser.find_element(By.CLASS_NAME, 'description-text')
-            print(cnt)
-            cnt += 1
-            time.sleep(1)
+        continue_button = browser.find_element(By.CLASS_NAME, 'description-text')
+        time.sleep(1)
 
-            continue_button.click()
-            # continue_button = browser.find_element(By.XPATH, '//*[@id="__layout"]/main/div[1]/main/div/div/div[3]/div/div/div[16]/button')
-            # continue_button.click()
-            time.sleep(3)
-            flag -= 1
+        continue_button.click()
+        # continue_button = browser.find_element(By.XPATH, '//*[@id="__layout"]/main/div[1]/main/div/div/div[3]/div/div/div[16]/button')
+        # continue_button.click()
+        time.sleep(3)
+        flag -= 1
+        print(list_names_prices_jpg)
 
 
 
