@@ -16,7 +16,7 @@ headers = {
     'Accept': '*/*',
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
 }
-list_with_names_prices = [[], []]
+list_names_prices_jpg = [[], [], []]
 
 # req = requests.get(url, headers=headers)
 # soup = BeautifulSoup(req.text, 'html.parser')
@@ -35,20 +35,24 @@ def check_location():
     browser.find_element(By.XPATH, '//*[@id="__layout"]/main/div[2]/div[2]/aside/div/div[3]/div/div/span').click()
 
 
-# def loop_collect_products():
-#     flag = 9
-#     while flag != 0:
-#         req = requests.get(url, verify=False)
-#         soup = BeautifulSoup(req.text, 'lxml')
-#         articles = soup.find_all('div', {'class': 'product-card item'})
-#
-#         # наполняем наш список данными
-#         for article in articles:
-#             name = article.find('div', class_='dixyCatalogItem__title').text.strip()
-#             list_with_names_prices[0].append(name)
-#             price = article.find('p').text.strip()
-#             price_coins = article.find('div', class_='dixyCatalogItemPrice__kopeck').text.strip()
-#             list_with_names_prices[1].append(float(price + '.' + price_coins))
+def loop_collect_products():
+    flag = 9
+    while flag != 0:
+        req = requests.get(url, verify=False)
+        soup = BeautifulSoup(req.text, 'lxml')
+        divs = soup.find_all('div', {'class': 'product-card item'})
+
+        # наполняем наш список данными
+        for div in divs:
+            names_and_jpg = str(div.find('img')).split('data-v-2d064667=""')
+            name = names_and_jpg[0].replace('<img alt=', '')
+            list_names_prices_jpg[0].append(name)
+            price = div.find("div", {"class": "price-discount"}).find('span').text.replace('от', '').strip()
+            list_names_prices_jpg[1].append(price)
+            jpg = names_and_jpg[1].replace('src="', '').replace('"/>', '')
+            list_names_prices_jpg[2].append(jpg)
+
+
 
 
 check_location()
@@ -62,9 +66,3 @@ browser.close()
 #     # первые 2 цифры нынешняя цена, 3 и 4 это старая цена нужно разбить как-то... сплит поможет по точке
 #     print(f'{price}')
 
-for div in divs:
-    names_and_jpg = str(div.find('img')).split('data-v-2d064667=""')
-    name = names_and_jpg[0].replace('<img alt=', '')
-    jpg = names_and_jpg[1].replace('src="', '').replace('"/>', '')
-    price = div.find("div", {"class": "price-discount"}).find('span').text.replace('от', '').strip()
-    print(name, price, jpg)
