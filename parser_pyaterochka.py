@@ -61,3 +61,5 @@ browser.close()
 #     price = article.find("div", {"class": "price-discount"}).text.replace('от', '').replace('\n', '')
 #     # первые 2 цифры нынешняя цена, 3 и 4 это старая цена нужно разбить как-то... сплит поможет по точке
 #     print(f'{price}')
+
+price = article.find("div", {"class": "price-discount"}).find('span').text.replace('от', '').strip()
