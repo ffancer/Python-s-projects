@@ -6,9 +6,11 @@ url = 'https://magnit.ru/'
 browser = webdriver.Chrome()
 browser.maximize_window()
 browser.get(url)
-time.sleep(3)
+time.sleep(5)
 def select_location():
-    browser.find_element(By.CLASS_NAME, 'g-button g-button_filter js-geo-another').click()
+    # browser.find_element(By.CLASS_NAME, 'header__contacts-text').click()
+    # browser.find_element(By.CLASS_NAME, 'remodal-wrapper remodal-is-opened').click()
+    browser.find_element(By.XPATH, '/html/body/div[1]/header/div/div[1]/a[1]/span').click()
     time.sleep(2)
     # тут новое для меня - удаление текста и прописка своего
     button_town = browser.find_element(By.CLASS_NAME, 'g-input js-search-input ui-autocomplete-input')
@@ -16,6 +18,7 @@ def select_location():
     time.sleep(1)
     button_town.send_keys('Пикалево')
     time.sleep(1)
+    browser.find_element(By.CLASS_NAME, 'city-search__link').click()
 
 
 
