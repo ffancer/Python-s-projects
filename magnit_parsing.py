@@ -79,3 +79,14 @@ scrolling_to_end()
 loop_collect_products()
 time.sleep(6000)
 browser.close()
+
+
+
+soup = BeautifulSoup(req, 'html.parser')
+divs = soup.find_all('div', {'class': 'сatalogue__main js-promo-container'})
+
+for div in divs:
+    name = div.find('img', alt=True)['alt']
+    price_int = div.find('div', class_='label__price_new').find('span', class_='label__price-integer').text
+    price_dec = div.find('div', class_='label__price_new').find('span', class_='label__price-decimal').text
+    print(name, '|', price_int, '.', price_dec)
