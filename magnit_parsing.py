@@ -48,18 +48,19 @@ def scrolling_to_end():
 def loop_collect_products():
     req = requests.get(URL, headers=headers)
     soup = BeautifulSoup(req.text, 'lxml')
-    # soup = BeautifulSoup(req, 'html.parser')
-    # divs = soup.find_all('div', {'class': 'сatalogue__main js-promo-container'})
-    divs = soup.find_all('div', {'class': 'col-t-9'})
+    divs = soup.find('div', class_='col-2 col-t-9').find_all('a')
 
     for div in divs:
-        name = div.find('img', alt=True)['alt']
-        list_names_prices_jpg[0].append(name)
+        try:
+            name = div.find('img', alt=True)['alt']
+            list_names_prices_jpg[0].append(name)
+        except TypeError:
+            continue
         price_int = div.find('div', class_='label__price_new').find('span', class_='label__price-integer').text
         price_dec = div.find('div', class_='label__price_new').find('span', class_='label__price-decimal').text
         list_names_prices_jpg[1].append(f'{price_int}.{price_dec}')
 
-    scrolling_to_end()
+    # scrolling_to_end()
     # print(divs)
     # flag = 3
     # while flag != 0:
@@ -84,17 +85,17 @@ def loop_collect_products():
 
 
 select_location()
-# scrolling_to_end()
+scrolling_to_end()
 loop_collect_products()
 print(list_names_prices_jpg)
 time.sleep(6000)
 browser.close()
 
-divs = soup.find('div', class_='col-2 col-t-9').find_all('a')
 
-for div in divs:
-    name = div.find('img', alt=True)['alt']
-    price_int = div.find('div', class_='label__price_new').find('span', class_='label__price-integer').text
-    price_dec = div.find('div', class_='label__price_new').find('span', class_='label__price-decimal').text
-    print(name, price_int, price_dec)
+
+# for div in divs:
+#     name = div.find('img', alt=True)['alt']
+#     price_int = div.find('div', class_='label__price_new').find('span', class_='label__price-integer').text
+#     price_dec = div.find('div', class_='label__price_new').find('span', class_='label__price-decimal').text
+#     print(name, price_int, price_dec)
 
