@@ -4,10 +4,10 @@ from selenium.webdriver.common.by import By
 
 
 # url = 'https://magnit.ru/'
-url = 'https://magnit.ru/promo/'
+URL = 'https://magnit.ru/promo/'
 browser = webdriver.Chrome()
 browser.maximize_window()
-browser.get(url)
+browser.get(URL)
 time.sleep(1)
 
 
@@ -26,12 +26,21 @@ def select_location():
     time.sleep(1)
     # выбираем город
     browser.find_element(By.CLASS_NAME, 'city-search__link').click()
-    time.sleep(3)
+    time.sleep(4)
     # закрываем поп-ап, если появится еще - сделаем переменную
     browser.find_element(By.XPATH, '/html/body/div[7]/div/a').click()
 
 
+
 # город выбрали, теперь осталось скроллить (кнопки "далее" или аналога нет), т.е. скроллим путём перетаскивания мышки
+
+def scrolling_to_end():
+    browser.find_element(By.XPATH, '/html/body/div[7]/div/a').click()
+    time.sleep(1)
+    browser.execute_script("window.scrollTo(0,document.body.scrollHeight)")
+
+
 select_location()
+scrolling_to_end()
 time.sleep(6000)
 browser.close()
