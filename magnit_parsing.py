@@ -48,6 +48,8 @@ def scrolling_to_end():
 def loop_collect_products():
     req = requests.get(URL, headers=headers)
     soup = BeautifulSoup(req.text, 'html.parser')
+    with open('magnit.html', 'w') as file:
+        file.write(soup)
     # divs = soup.find_all('div', {'class': 'сatalogue__main js-promo-container'})
     # print(divs)
     # flag = 3
