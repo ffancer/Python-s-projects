@@ -11,6 +11,10 @@ browser = webdriver.Chrome()
 browser.maximize_window()
 browser.get(URL)
 list_names_prices_jpg = [[], [], []]
+headers = {
+    'Accept': '*/*',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
+}
 time.sleep(1)
 
 
@@ -42,31 +46,34 @@ def scrolling_to_end():
 
 
 def loop_collect_products():
-    flag = 3
-    while flag != 0:
-        req = requests.get(URL, verify=False)
-        soup = BeautifulSoup(req.text, 'lxml')
-        divs = soup.find_all('div', {'class': 'product-card item'})
-
-        # наполняем наш список данными
-        for div in divs:
-            names_and_jpg = str(div.find('img')).split('data-v-2d064667=""')
-            name = names_and_jpg[0].replace('<img alt=', '')
-            list_names_prices_jpg[0].append(name)
-            price = div.find("div", {"class": "price-discount"}).find('span').text.replace('от', '').strip()
-            list_names_prices_jpg[1].append(price)
-            jpg = names_and_jpg[1].replace('src="', '').replace('"/>', '')
-            list_names_prices_jpg[2].append(jpg)
-
-        # щелкаем кнопку "загрузить ещё"
-        continue_button = browser.find_element(By.CLASS_NAME, 'description-text')
-        time.sleep(1)
-        continue_button.click()
-        time.sleep(1)
-        flag -= 1
+    req = requests.get(URL, headers=headers)
+    soup = BeautifulSoup(req.text, 'html.parser')
+    # divs = soup.find_all('div', {'class': 'сatalogue__main js-promo-container'})
+    # print(divs)
+    # flag = 3
+    # while flag != 0:
+    #     # req = requests.get(URL, verify=False)
+    #     # soup = BeautifulSoup(req.text, 'lxml')
+    #     req = requests.get(URL, headers=headers)
+    #     soup = BeautifulSoup(req.text, 'html.parser')
+    #     divs = soup.find_all('div', {'class': 'card-sale card-sale_catalogue'})
+    #     print(divs)
+    #     # наполняем наш список данными
+    #     # for div in divs:
+    #     #     names_and_jpg = str(div.find('img')).split('data-v-2d064667=""')
+    #     #     name = names_and_jpg[0].replace('<img alt=', '')
+    #     #     list_names_prices_jpg[0].append(name)
+    #     #     price = div.find("div", {"class": "price-discount"}).find('span').text.replace('от', '').strip()
+    #     #     list_names_prices_jpg[1].append(price)
+    #     #     jpg = names_and_jpg[1].replace('src="', '').replace('"/>', '')
+    #     #     list_names_prices_jpg[2].append(jpg)
+    #
+    #     # щелкаем кнопку "загрузить ещё"
+    #     flag -= 1
 
 
 select_location()
 scrolling_to_end()
+loop_collect_products()
 time.sleep(6000)
 browser.close()
