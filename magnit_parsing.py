@@ -90,5 +90,11 @@ print(list_names_prices_jpg)
 time.sleep(6000)
 browser.close()
 
+divs = soup.find('div', class_='col-2 col-t-9').find_all('a')
 
+for div in divs:
+    name = div.find('img', alt=True)['alt']
+    price_int = div.find('div', class_='label__price_new').find('span', class_='label__price-integer').text
+    price_dec = div.find('div', class_='label__price_new').find('span', class_='label__price-decimal').text
+    print(name, price_int, price_dec)
 
