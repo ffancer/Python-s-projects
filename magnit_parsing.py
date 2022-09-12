@@ -4,7 +4,6 @@ from selenium.webdriver.common.by import By
 import requests
 from bs4 import BeautifulSoup
 
-
 # url = 'https://magnit.ru/'
 URL = 'https://magnit.ru/promo/'
 browser = webdriver.Chrome()
@@ -51,37 +50,19 @@ def loop_collect_products():
     divs = soup.find('div', class_='col-2 col-t-9').find_all('a')
 
     for div in divs:
+        # названия продукта, из-за рекламы пришлось использовать try-except
         try:
             name = div.find('img', alt=True)['alt']
             list_names_prices_jpg[0].append(name)
         except TypeError:
             continue
+        # собираем цену
         price_int = div.find('div', class_='label__price_new').find('span', class_='label__price-integer').text
         price_dec = div.find('div', class_='label__price_new').find('span', class_='label__price-decimal').text
         list_names_prices_jpg[1].append(f'{price_int}.{price_dec}')
-
-    # scrolling_to_end()
-    # print(divs)
-    # flag = 3
-    # while flag != 0:
-    #     # req = requests.get(URL, verify=False)
-    #     # soup = BeautifulSoup(req.text, 'lxml')
-    #     req = requests.get(URL, headers=headers)
-    #     soup = BeautifulSoup(req.text, 'html.parser')
-    #     divs = soup.find_all('div', {'class': 'card-sale card-sale_catalogue'})
-    #     print(divs)
-    #     # наполняем наш список данными
-    #     # for div in divs:
-    #     #     names_and_jpg = str(div.find('img')).split('data-v-2d064667=""')
-    #     #     name = names_and_jpg[0].replace('<img alt=', '')
-    #     #     list_names_prices_jpg[0].append(name)
-    #     #     price = div.find("div", {"class": "price-discount"}).find('span').text.replace('от', '').strip()
-    #     #     list_names_prices_jpg[1].append(price)
-    #     #     jpg = names_and_jpg[1].replace('src="', '').replace('"/>', '')
-    #     #     list_names_prices_jpg[2].append(jpg)
-    #
-    #     # щелкаем кнопку "загрузить ещё"
-    #     flag -= 1
+        # ссылка на продукт
+        link = div.get('href')
+        list_names_prices_jpg[2].append('https://magnit.ru' + link)
 
 
 select_location()
@@ -91,11 +72,8 @@ print(list_names_prices_jpg)
 time.sleep(6000)
 browser.close()
 
-
-
 # for div in divs:
 #     name = div.find('img', alt=True)['alt']
 #     price_int = div.find('div', class_='label__price_new').find('span', class_='label__price-integer').text
 #     price_dec = div.find('div', class_='label__price_new').find('span', class_='label__price-decimal').text
 #     print(name, price_int, price_dec)
-
