@@ -3,8 +3,9 @@ import time
 from selenium.webdriver.common.by import By
 import requests
 from bs4 import BeautifulSoup
+import pandas as pd
 
-# url = 'https://magnit.ru/'
+
 URL = 'https://magnit.ru/promo/'
 browser = webdriver.Chrome()
 browser.maximize_window()
@@ -65,15 +66,14 @@ def loop_collect_products():
         list_names_prices_jpg[2].append('https://magnit.ru' + link)
 
 
+def list_to_excel():
+    df = pd.DataFrame.from_dict({'Название продукта: ': list_names_prices_jpg[0], 'Цена: ': list_names_prices_jpg[1], 'ССылка: ': list_names_prices_jpg[2]})
+    df.to_excel('magnit_parsing.xlsx', header=True, index=False)
+
+
 select_location()
 scrolling_to_end()
 loop_collect_products()
-print(list_names_prices_jpg)
-time.sleep(6000)
+list_to_excel()
+time.sleep(60)
 browser.close()
-
-# for div in divs:
-#     name = div.find('img', alt=True)['alt']
-#     price_int = div.find('div', class_='label__price_new').find('span', class_='label__price-integer').text
-#     price_dec = div.find('div', class_='label__price_new').find('span', class_='label__price-decimal').text
-#     print(name, price_int, price_dec)
