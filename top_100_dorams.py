@@ -18,13 +18,15 @@ headers = {
 
 with open('topdorams.html', encoding='utf-8') as file:
     src = file.read()
-
 soup = BeautifulSoup(src, 'lxml')
-
 cards = soup.find('ol', class_='clearfix').find_all('li', class_='top100-item')
-
+lst = [[], []]
 for card in cards:
-    name = card.find('img', alt=True)
-    print(name['alt'])
+    title = card.find('img', alt=True)
+    lst[0].append(title['alt'])
+    img = card.find('img', src=True)
+    lst[1].append('https://vsedoramy.net' + img['src'])
+
+print(len(lst[0]))
 
 
