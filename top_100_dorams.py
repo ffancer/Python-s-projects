@@ -3,6 +3,8 @@ top 100 dorams from https://vsedoramy.net/top100korean.html
 """
 import requests
 from bs4 import BeautifulSoup
+import pandas as pd
+
 
 url = 'https://vsedoramy.net/top100korean.html'
 headers = {
@@ -20,15 +22,27 @@ with open('topdorams.html', encoding='utf-8') as file:
     src = file.read()
 soup = BeautifulSoup(src, 'lxml')
 cards = soup.find('ol', class_='clearfix').find_all('li', class_='top100-item')
-lst = [[], [], []]
-for card in cards:
-    # title = card.find('img', alt=True)
-    # lst[0].append(title['alt'])
-    # img = card.find('img', src=True)
-    # lst[1].append('https://vsedoramy.net' + img['src'])
-    # print(card)
-    link = card.find('a').get('href')
-    lst[2].append(link)
+# сделал нумерование от 1 до 100 в первом вложенном списке
+data_list = [[i for i in range(1, 101)], [], [], []]
+
+
+def data_search():
+    for card in cards:
+        title = card.find('img', alt=True)
+        data_list[1].append(title['alt'])
+        img = card.find('img', src=True)
+        data_list[2].append('https://vsedoramy.net' + img['src'])
+        link = card.find('a').get('href')
+        data_list[3].append(link)
+
+
+def list_to_excel():
+    df = pd.DataFrame.from_dict({'Место: ': data_list[0], 'Название: ': data_list[1], 'Картинка: ': data_list[2], 'Ссылка: ': data_list[3]})
+    df.to_excel('top_100_dorams.xlsx', header=True, index=False)
+
+
+data_search()
+list_to_excel()
 
 
 
