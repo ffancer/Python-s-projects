@@ -20,7 +20,11 @@ with open('topdorams.html', encoding='utf-8') as file:
     src = file.read()
 
 soup = BeautifulSoup(src, 'lxml')
-print(soup)
 
+cards = soup.find('ol', class_='clearfix').find_all('li', class_='top100-item')
+
+for card in cards:
+    name = card.find('img', alt=True)
+    print(name['alt'])
 
 
