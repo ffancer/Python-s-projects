@@ -44,5 +44,10 @@ def list_to_excel():
 data_search()
 list_to_excel()
 
+"""
+link at google docs with my work:
+https://docs.google.com/spreadsheets/d/1pC1hWyYc6YNKary4_NAzG4GQLaaUF5sCGrxToaxIyjU/edit#gid=1182540734
+"""
+
 
 
