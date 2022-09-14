@@ -20,13 +20,15 @@ with open('topdorams.html', encoding='utf-8') as file:
     src = file.read()
 soup = BeautifulSoup(src, 'lxml')
 cards = soup.find('ol', class_='clearfix').find_all('li', class_='top100-item')
-lst = [[], []]
+lst = [[], [], []]
 for card in cards:
-    title = card.find('img', alt=True)
-    lst[0].append(title['alt'])
-    img = card.find('img', src=True)
-    lst[1].append('https://vsedoramy.net' + img['src'])
+    # title = card.find('img', alt=True)
+    # lst[0].append(title['alt'])
+    # img = card.find('img', src=True)
+    # lst[1].append('https://vsedoramy.net' + img['src'])
+    # print(card)
+    link = card.find('a').get('href')
+    lst[2].append(link)
 
-print(len(lst[0]))
 
 
