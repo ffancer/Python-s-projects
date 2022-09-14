@@ -18,14 +18,17 @@ headers = {
 #     file.write(req.text)
 
 
+# можно работать с сохраненой страничкой, т.к. динамики на сайте нет
 with open('topdorams.html', encoding='utf-8') as file:
     src = file.read()
+
 soup = BeautifulSoup(src, 'lxml')
 cards = soup.find('ol', class_='clearfix').find_all('li', class_='top100-item')
 # сделал нумерование от 1 до 100 в первом вложенном списке
 data_list = [[i for i in range(1, 101)], [], [], []]
 
 
+# ищем и записываем данные в список
 def data_search():
     for card in cards:
         title = card.find('img', alt=True)
@@ -36,6 +39,7 @@ def data_search():
         data_list[3].append(link)
 
 
+# записываем данные из списка в Excel файл
 def list_to_excel():
     df = pd.DataFrame.from_dict({'Место: ': data_list[0], 'Название: ': data_list[1], 'Картинка: ': data_list[2], 'Ссылка: ': data_list[3]})
     df.to_excel('top_100_dorams.xlsx', header=True, index=False)
@@ -45,7 +49,7 @@ data_search()
 list_to_excel()
 
 """
-link at google docs with my work:
+link at google docs with top 100 dorams:
 https://docs.google.com/spreadsheets/d/1pC1hWyYc6YNKary4_NAzG4GQLaaUF5sCGrxToaxIyjU/edit#gid=1182540734
 """
 
