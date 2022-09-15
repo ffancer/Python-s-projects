@@ -15,12 +15,11 @@ browser = webdriver.Chrome()
 browser.maximize_window()
 browser.get(url)
 time.sleep(2)
-# headers = {
-#     'Accept': '*/*',
-#     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
-# }
-# req = requests.get(url, headers=headers)
-# soup = BeautifulSoup(req.text, 'lxml')
+headers = {
+    'Accept': '*/*',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
+}
+
 
 
 def topic_selection(topic_name):
@@ -31,7 +30,15 @@ def topic_selection(topic_name):
     button.send_keys(u'\ue007')
 
 
-topic_selection('man')
+def take_href():
+    req = requests.get(url, headers=headers)
+    soup = BeautifulSoup(req.text, 'lxml')
+
+    divs = soup.find('div', class_='search-photos-route')
+    print(divs)
+
+
+topic_selection('woman')
 time.sleep(500)
 browser.close()
 
