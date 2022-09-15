@@ -23,13 +23,15 @@ time.sleep(2)
 # soup = BeautifulSoup(req.text, 'lxml')
 
 
-# def topic_selection():
-#     browser.find_element(By.XPATH, '//*[@id="app"]/div/div/main/section/div[2]/div/p[1]/button/span').click()
-#
-#
-#
-# browser.find_element(By.XPATH, '//*[@id="app"]/div/div/main/section/div[2]/div/p[1]/button/span').click()
-# topic_selection()
+def topic_selection(topic_name):
+    button = browser.find_element(By.XPATH, '//*[@id="app"]/div/div[3]/div[1]/div/div[2]/div/div[1]/div/div/div/div[2]/div[1]/form/div[1]/input')
+    button.send_keys(topic_name)
+    time.sleep(1)
+    # нажимаем enter
+    button.send_keys(u'\ue007')
+
+
+topic_selection('man')
 time.sleep(500)
 browser.close()
 
