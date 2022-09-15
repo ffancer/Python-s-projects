@@ -68,5 +68,12 @@ for div in divs:
         names.append(name)
         link_list.append(link.get('srcset').split()[-2])
 
-for i, j in zip(names, link_list):
-    print(i, j)
+
+# for i, j in zip(names, link_list):
+#     with open(i + j, "wb") as file:
+#         file.write()
+
+import os
+for name, url in zip(names, link_list):
+    print('Downloading %s' % url)
+    os.system('wget %s' % url)
