@@ -58,11 +58,15 @@ with open('Woman.html', encoding='utf-8') as file:
 soup = BeautifulSoup(src, 'lxml')
 
 
-links, names = [], []
+link_list, names = [], []
 divs = soup.find('div', class_='mItv1')
 for div in divs:
     links = div.find_all('img')
     for link in links:
-        # [28:].split('?')[0]
-        print(link.get('srcset').split()[-2])
+        # получаем название
+        name = (link.get('srcset').split()[-2])[28:].split('?')[0]
+        names.append(name)
+        link_list.append(link.get('srcset').split()[-2])
 
+for i, j in zip(names, link_list):
+    print(i, j)
