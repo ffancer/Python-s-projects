@@ -73,7 +73,5 @@ for div in divs:
 #     with open(i + j, "wb") as file:
 #         file.write()
 
-import os
-for name, url in zip(names, link_list):
-    print('Downloading %s' % url)
-    os.system('wget %s' % url)
+with open('data.dir', 'w') as file:
+    file.write(zip(names, link_list))
