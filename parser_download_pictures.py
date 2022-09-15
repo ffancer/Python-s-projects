@@ -60,6 +60,13 @@ soup = BeautifulSoup(src, 'lxml')
 
 divs = soup.find('div', class_='mItv1')
 for div in divs:
-    link = div.find_all('img')
-    print(link)
+    links = div.find_all('img')
+    # print(links)
+    # for link in links:
+    #     print(link['src'][1:])
+
+    # for link in links:
+    #     print(link['srcset'])
+    for link in links:
+        print('https://images.unsplash.com' + link['src'][8:] + '?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxzZWFyY2h8MXx8d29tYW58ZW58MHx8MHx8&auto=format&fit=crop&w=1100&q=60')
 
