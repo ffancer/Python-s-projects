@@ -43,9 +43,9 @@
 # browser.close()
 
 
-
 import requests
 from bs4 import BeautifulSoup
+
 # url = 'https://unsplash.com/'
 # headers = {
 #     'Accept': '*/*',
@@ -56,7 +56,6 @@ with open('Woman.html', encoding='utf-8') as file:
 # req = requests.get(url, headers=headers)
 # soup = BeautifulSoup(req.text, 'lxml')
 soup = BeautifulSoup(src, 'lxml')
-
 
 link_list, names = [], []
 divs = soup.find('div', class_='mItv1')
@@ -74,15 +73,23 @@ for div in divs:
 #         file.write()
 
 
-
 # так создается папка
-import os
-directory = 'pictures'
-parent_dir = 'H:\Python\myProjects'
-path = os.path.join(parent_dir, directory)
-os.mkdir(path)
+# import os
+# directory = 'pictures'
+# parent_dir = 'H:\Python\myProjects'
+# path = os.path.join(parent_dir, directory)
+# os.mkdir(path)
 # =============================================
 
 
-# with open('data.dir', 'w') as file:
-#     file.write(zip(names, link_list))
+
+import os
+# def download_image(img_url):
+data_folder = 'H:\Python\myProjects\pictures'
+try:
+    res = requests.get([i for i in link_list], allow_redirects=True)
+    img_bytes = requests.get([i for i in link_list]).content  # download bytes for a image
+    with open(os.path.join(data_folder, [j for j in names]), "wb") as img_file:
+        img_file.write(img_bytes)
+except Exception as e:
+    print(e)
