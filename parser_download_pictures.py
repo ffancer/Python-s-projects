@@ -81,7 +81,8 @@ for div in divs:
 # os.mkdir(path)
 # =============================================
 
-for i, j in zip(names, link_list):
-    with open(i, 'wb') as f:
-        for chunk in j:
-            f.write(chunk)
+
+import urllib.request
+# for i, j in zip(names, link_list):
+img = link_list[0]
+urllib.request.urlretrieve(img, 'H:\Python\myProjects\picture.jpg')
