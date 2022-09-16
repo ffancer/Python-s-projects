@@ -73,5 +73,16 @@ for div in divs:
 #     with open(i + j, "wb") as file:
 #         file.write()
 
-with open('data.dir', 'w') as file:
-    file.write(zip(names, link_list))
+
+
+# так создается папка
+import os
+directory = 'pictures'
+parent_dir = 'H:\Python\myProjects'
+path = os.path.join(parent_dir, directory)
+os.mkdir(path)
+# =============================================
+
+
+# with open('data.dir', 'w') as file:
+#     file.write(zip(names, link_list))
