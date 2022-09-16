@@ -83,13 +83,6 @@ for div in divs:
 
 
 
-import os
-# def download_image(img_url):
-data_folder = 'H:\Python\myProjects\pictures'
-try:
-    res = requests.get([i for i in link_list], allow_redirects=True)
-    img_bytes = requests.get([i for i in link_list]).content  # download bytes for a image
-    with open(os.path.join(data_folder, [j for j in names]), "wb") as img_file:
-        img_file.write(img_bytes)
-except Exception as e:
-    print(e)
+for i, j in zip(names, link_list):
+    with open(j, 'wb') as file:
+        file.write(i)
