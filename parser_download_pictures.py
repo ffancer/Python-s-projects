@@ -81,8 +81,7 @@ for div in divs:
 # os.mkdir(path)
 # =============================================
 
-
-
 for i, j in zip(names, link_list):
-    with open(j, 'wb') as file:
-        file.write(i)
+    with open(i, 'wb') as f:
+        for chunk in j:
+            f.write(chunk)
