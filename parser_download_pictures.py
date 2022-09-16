@@ -7,7 +7,9 @@
 # from selenium import webdriver
 # from selenium.webdriver.common.by import By
 # import time
-#
+import urllib.request
+import os
+
 #
 # url = 'https://unsplash.com/'
 # # url = 'https://stock.adobe.com/free'
@@ -56,33 +58,26 @@ with open('Woman.html', encoding='utf-8') as file:
 # req = requests.get(url, headers=headers)
 # soup = BeautifulSoup(req.text, 'lxml')
 soup = BeautifulSoup(src, 'lxml')
-
 link_list, names = [], []
-divs = soup.find('div', class_='mItv1')
-for div in divs:
-    links = div.find_all('img')
-    for link in links:
-        # получаем название
-        name = (link.get('srcset').split()[-2])[28:].split('?')[0]
-        names.append(name)
-        link_list.append(link.get('srcset').split()[-2])
 
 
-# for i, j in zip(names, link_list):
-#     with open(i + j, "wb") as file:
-#         file.write()
+def collect_names_links():
+    divs = soup.find('div', class_='mItv1')
+    for div in divs:
+        links = div.find_all('img')
+        for link in links:
+            # получаем название
+            name = (link.get('srcset').split()[-2])[28:].split('?')[0]
+            names.append(name)
+            link_list.append(link.get('srcset').split()[-2])
 
 
-# так создается папка
-# import os
-# directory = 'pictures'
-# parent_dir = 'H:\Python\myProjects'
-# path = os.path.join(parent_dir, directory)
-# os.mkdir(path)
-# =============================================
+# path - 'H:\Python\myProjects'    folder_name - 'pictures'
+def make_folder(path, folder_name):
+    full_path = os.path.join(path, folder_name)
+    os.mkdir(full_path)
 
 
-# решил проблему вложенного цикла зипом, все сохраняется в папку
-import urllib.request
-for link, name in zip(link_list, names):
-    urllib.request.urlretrieve(link, f'H:\Python\myProjects\pictures\{name}.jpg')
+def save_names_links():
+    for link, name in zip(link_list, names):
+        urllib.request.urlretrieve(link, f'H:\Python\myProjects\pictures\{name}.jpg')
