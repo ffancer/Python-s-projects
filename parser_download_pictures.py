@@ -85,4 +85,4 @@ for div in divs:
 import urllib.request
 # for i, j in zip(names, link_list):
 img = link_list[0]
-urllib.request.urlretrieve(img, 'H:\Python\myProjects\picture.jpg')
+urllib.request.urlretrieve(img, 'H:\Python\myProjects\pictures\\name.jpg')
