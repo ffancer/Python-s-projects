@@ -82,7 +82,7 @@ for div in divs:
 # =============================================
 
 
+# решил проблему вложенного цикла зипом, все сохраняется в папку
 import urllib.request
-# for i, j in zip(names, link_list):
-img = link_list[0]
-urllib.request.urlretrieve(img, 'H:\Python\myProjects\pictures\\name.jpg')
+for link, name in zip(link_list, names):
+    urllib.request.urlretrieve(link, f'H:\Python\myProjects\pictures\{name}.jpg')
