@@ -66,9 +66,9 @@ topic_selection('woman')
 time.sleep(1)
 # скролим в самый конец странички
 browser.execute_script("window.scrollTo(0,document.body.scrollHeight)")
-time.sleep(1)
+time.sleep(2)
 # скролим наверх
-browser.execute_script(("window.scrollTo(0, document.body.scrollHeight)"))
+browser.execute_script("window.scrollTo(0,document.head.scrollHeight)")
 time.sleep(1)
 collect_names_links()
 make_folder('H:\Python\myProjects', 'pictures')
