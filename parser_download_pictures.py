@@ -13,35 +13,62 @@ from selenium.webdriver.common.by import By
 import time
 import urllib.request
 import os
-#
-#
-# url = 'https://unsplash.com/'
-# browser = webdriver.Chrome()
-# browser.maximize_window()
-# browser.get(url)
-# time.sleep(2)
-# headers = {
-#     'Accept': '*/*',
-#     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
-# }
-# link_list, names = [], []
-#
-#
-# def topic_selection(topic_name):
-#     button = browser.find_element(By.XPATH, '//*[@id="app"]/div/div[3]/div[1]/div/div[2]/div/div[1]/div/div/div/div[2]/div[1]/form/div[1]/input')
-#     button.send_keys(topic_name)
-#     time.sleep(1)
-#     # нажимаем enter
-#     button.send_keys(u'\ue007')
-#
-#
-# def take_href():
-#     req = requests.get(url, headers=headers)
-#     soup = BeautifulSoup(req.text, 'lxml')
-#     divs = soup.find('div', class_='search-photos-route')
-#     print(divs)
-#
-#
+import ssl
+
+
+url = 'https://unsplash.com/'
+browser = webdriver.Chrome()
+browser.maximize_window()
+browser.get(url)
+time.sleep(2)
+headers = {
+    'Accept': '*/*',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
+}
+link_list, names = [], []
+
+
+def topic_selection(topic_name):
+    button = browser.find_element(By.XPATH, '//*[@id="app"]/div/div[3]/div[1]/div/div[2]/div/div[1]/div/div/div/div[2]/div[1]/form/div[1]/input')
+    button.send_keys(topic_name)
+    time.sleep(1)
+    # нажимаем enter
+    button.send_keys(u'\ue007')
+
+
+def take_href():
+    req = requests.get(url, headers=headers)
+    soup = BeautifulSoup(req.text, 'lxml')
+    divs = soup.find('div', class_='search-photos-route')
+    print(divs)
+
+
+def collect_names_links():
+    # req = requests.get(url, verify=False)
+    global picture_name
+    req = requests.get(url, headers=headers)
+    soup = BeautifulSoup(req.text, 'lxml')
+    divs = soup.find('div', class_='mItv1').find_all('div')
+    for div in divs:
+        links = div.find_all('img')
+        for link in links:
+            fotos = link.get('srcset')
+            pictures_links_list = []
+            for foto in fotos.split():
+                if foto[:5] == 'https':
+                    pictures_links_list.append(foto)
+
+            for picture in pictures_links_list:
+                ssl_create_default_context = ssl.create_default_context()
+
+
+                # name = picture[28:]
+                for i in picture:
+                    if i in '&?.=':
+                        picture_name = picture.replace(i, '')
+                urllib.request.urlopen('https://unsplash.com/s/photos/woman')
+                urllib.request.urlretrieve(picture, f'H:\Python\myProjects\pictures\{1}.jpg')
+
 # def collect_names_links():
 #     req = requests.get(url, verify=False)
 #     soup = BeautifulSoup(req.text, 'lxml')
@@ -66,51 +93,32 @@ import os
 #         urllib.request.urlretrieve(link, f'H:\Python\myProjects\pictures\{name}.jpg')
 #
 #
-# topic_selection('woman')
-# time.sleep(1)
-# # скролим в самый конец странички
-# browser.execute_script("window.scrollTo(0,document.body.scrollHeight)")
-# time.sleep(2)
-# # скролим наверх
-# browser.execute_script("window.scrollTo(0,document.head.scrollHeight)")
-# time.sleep(1)
-# collect_names_links()
-# make_folder('H:\Python\myProjects', 'pictures')
-# time.sleep(1)
-# save_names_links()
-# time.sleep(500)
-# browser.close()
-
-
-with open('Woman.html', encoding='utf-8') as file:
-    src = file.read()
-headers = {
-    'Accept': '*/*',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
-}
-link_list, names = [], []
-
-
-def collect_names_links():
-    # req = requests.get(src, verify=False)
-    soup = BeautifulSoup(src, 'lxml')
-    divs = soup.find('div', class_='mItv1').find_all('div')
-    for div in divs:
-        links = div.find_all('img')
-        for link in links:
-            fotos = link.get('srcset')
-            pictures_links_list = []
-            for foto in fotos.split():
-                if foto[:5] == 'https':
-                    pictures_links_list.append(foto)
-
-            for picture in pictures_links_list:
-                for i in picture:
-                    if i in '&?.=':
-                        picture = picture.replace(i, '')
-
-                name = picture[28:]
-                urllib.request.urlretrieve(picture, f'H:\Python\myProjects\pictures\{name}.jpg')
-
-
+topic_selection('woman')
+time.sleep(1)
+# скролим в самый конец странички
+browser.execute_script("window.scrollTo(0,document.body.scrollHeight)")
+time.sleep(2)
+# скролим наверх
+browser.execute_script("window.scrollTo(0,document.head.scrollHeight)")
+time.sleep(1)
 collect_names_links()
+# make_folder('H:\Python\myProjects', 'pictures')
+time.sleep(1)
+# save_names_links()
+time.sleep(500)
+browser.close()
+
+
+# with open('Woman.html', encoding='utf-8') as file:
+#     src = file.read()
+# headers = {
+#     'Accept': '*/*',
+#     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
+# }
+# link_list, names = [], []
+#
+#
+#
+#
+#
+# collect_names_links()
