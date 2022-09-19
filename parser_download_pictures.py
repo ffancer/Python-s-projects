@@ -13,6 +13,8 @@ from selenium.webdriver.common.by import By
 import time
 import urllib.request
 import os
+import certifi
+import urllib3
 
 
 url = 'https://unsplash.com/'
@@ -43,71 +45,59 @@ def take_href():
 
 
 def collect_names_links():
+    req = requests.get(url)
     # req = requests.get(url, verify=False)
-    global picture_name
-    req = requests.get(url, headers=headers)
+    # req = requests.get(url, headers=headers)
     soup = BeautifulSoup(req.text, 'lxml')
-    divs = soup.find('div', class_='mItv1').find_all('div')
+    divs = soup.find('div', class_='mItv1')
     for div in divs:
         links = div.find_all('img')
         for link in links:
-            fotos = link.get('srcset')
-            pictures_links_list = []
-            for foto in fotos.split():
-                if foto[:5] == 'https':
-                    pictures_links_list.append(foto)
-
-            for picture in pictures_links_list:
+            # получаем название
+            name = (link.get('srcset').split()[-2])[28:].split('?')[0]
+            names.append(name)
+            link_list.append(link.get('srcset').split()[-2])
 
 
-                list_names = []
-
-                for i in range(len(pictures_links_list) + 1):
-                    list_names.append(f'photo{i}')
-
-                    print(pictures_links_list)
-                    print('*' * 150)
-                    print(list_names)
-                    for link, name in zip(pictures_links_list, list_names):
-                        urllib.request.urlretrieve(link, f'H:\Python\myProjects\pictures\{name}.jpg')
-
-
-# def collect_names_links():
-#     req = requests.get(url, verify=False)
-#     soup = BeautifulSoup(req.text, 'lxml')
-#     divs = soup.find('div', class_='mItv1')
-#     for div in divs:
-#         links = div.find_all('img')
-#         for link in links:
-#             # получаем название
-#             name = (link.get('srcset').split()[-2])[28:].split('?')[0]
-#             names.append(name)
-#             link_list.append(link.get('srcset').split()[-2])
-#
-#
 # # path - 'H:\Python\myProjects'    folder_name - 'pictures'
 # def make_folder(path, folder_name):
 #     full_path = os.path.join(path, folder_name)
 #     os.mkdir(full_path)
 #
 #
-# def save_names_links():
-#     for link, name in zip(link_list, names):
-#         urllib.request.urlretrieve(link, f'H:\Python\myProjects\pictures\{name}.jpg')
-#
-#
+def save_names_links():
+    # http = urllib3.PoolManager(
+    #     cert_reqs='CERT_REQUIRED',
+    #     ca_certs=certifi.where()
+    # )
+    for link, name in zip(link_list, names):
+        urllib.request.urlretrieve(link, f'H:\Python\myProjects\pictures\{name}.jpg')
+
+
+def scrolling_webpage(pixels):
+    # скролим в самый конец странички
+    browser.execute_script("window.scrollTo(0,document.body.scrollHeight)")
+    time.sleep(2)
+    # скролим наверх
+    browser.execute_script("window.scrollTo(0,document.head.scrollHeight)")
+    time.sleep(1)
+    # скролим примерно в середину
+    browser.execute_script(f"window.scrollTo(0, {pixels})")
+    time.sleep(1)
+    pixels *= 2
+
+
 topic_selection('woman')
 time.sleep(1)
-# скролим в самый конец странички
-browser.execute_script("window.scrollTo(0,document.body.scrollHeight)")
-time.sleep(2)
-# скролим наверх
-browser.execute_script("window.scrollTo(0,document.head.scrollHeight)")
-time.sleep(1)
+for _ in range(6):
+    time.sleep(2)
+    pix = 5000
+    scrolling_webpage(pix)
+    pix += 5000
 collect_names_links()
 # make_folder('H:\Python\myProjects', 'pictures')
 time.sleep(1)
-# save_names_links()
+save_names_links()
 time.sleep(500)
 browser.close()
 
