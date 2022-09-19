@@ -99,8 +99,8 @@ def collect_names_links():
         links = div.find_all('img')
         for link in links:
             fotos = link.get('srcset')
-            for foto in fotos:
-                print(foto)
+            print(fotos.split())
+
             # for foto in fotos:
             #     urllib.request.urlretrieve(foto, f'H:\Python\myProjects\pictures\{foto}.jpg')
 
