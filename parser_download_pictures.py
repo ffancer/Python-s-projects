@@ -105,6 +105,10 @@ def collect_names_links():
                     pictures_links_list.append(foto)
 
             for picture in pictures_links_list:
+                for i in picture:
+                    if i in '&?.=':
+                        picture = picture.replace(i, '')
+
                 name = picture[28:]
                 urllib.request.urlretrieve(picture, f'H:\Python\myProjects\pictures\{name}.jpg')
 
