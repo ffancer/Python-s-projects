@@ -13,7 +13,6 @@ from selenium.webdriver.common.by import By
 import time
 import urllib.request
 import os
-import ssl
 
 
 url = 'https://unsplash.com/'
@@ -59,15 +58,19 @@ def collect_names_links():
                     pictures_links_list.append(foto)
 
             for picture in pictures_links_list:
-                ssl_create_default_context = ssl.create_default_context()
 
 
-                # name = picture[28:]
-                for i in picture:
-                    if i in '&?.=':
-                        picture_name = picture.replace(i, '')
-                urllib.request.urlopen('https://unsplash.com/s/photos/woman')
-                urllib.request.urlretrieve(picture, f'H:\Python\myProjects\pictures\{1}.jpg')
+                list_names = []
+
+                for i in range(len(pictures_links_list) + 1):
+                    list_names.append(f'photo{i}')
+
+                    print(pictures_links_list)
+                    print('*' * 150)
+                    print(list_names)
+                    for link, name in zip(pictures_links_list, list_names):
+                        urllib.request.urlretrieve(link, f'H:\Python\myProjects\pictures\{name}.jpg')
+
 
 # def collect_names_links():
 #     req = requests.get(url, verify=False)
