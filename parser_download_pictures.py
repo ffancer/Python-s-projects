@@ -99,11 +99,14 @@ def collect_names_links():
         links = div.find_all('img')
         for link in links:
             fotos = link.get('srcset')
-            print(fotos.split())
+            pictures_links_list = []
+            for foto in fotos.split():
+                if foto[:5] == 'https':
+                    pictures_links_list.append(foto)
+            print(pictures_links_list)
 
             # for foto in fotos:
             #     urllib.request.urlretrieve(foto, f'H:\Python\myProjects\pictures\{foto}.jpg')
 
 
 collect_names_links()
-
