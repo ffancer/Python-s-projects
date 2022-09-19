@@ -94,15 +94,16 @@ link_list, names = [], []
 def collect_names_links():
     # req = requests.get(src, verify=False)
     soup = BeautifulSoup(src, 'lxml')
-    divs = soup.find('div', class_='mItv1')
+    divs = soup.find('div', class_='mItv1').find_all('div')
     for div in divs:
         links = div.find_all('img')
         for link in links:
-            # получаем название
-            name = (link.get('srcset').split()[-2])[28:].split('?')[0]
-            names.append(name)
-            link_list.append(link.get('srcset').split()[-2])
+            fotos = link.get('srcset')
+            for foto in fotos:
+                print(foto)
+            # for foto in fotos:
+            #     urllib.request.urlretrieve(foto, f'H:\Python\myProjects\pictures\{foto}.jpg')
 
 
 collect_names_links()
-print(link_list, names)
+
