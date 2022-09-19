@@ -103,10 +103,9 @@ def collect_names_links():
             for foto in fotos.split():
                 if foto[:5] == 'https':
                     pictures_links_list.append(foto)
-            print(pictures_links_list)
 
-            # for foto in fotos:
-            #     urllib.request.urlretrieve(foto, f'H:\Python\myProjects\pictures\{foto}.jpg')
+            for picture in pictures_links_list:
+                urllib.request.urlretrieve(picture, f'H:\Python\myProjects\pictures\{picture}.jpg')
 
 
 collect_names_links()
