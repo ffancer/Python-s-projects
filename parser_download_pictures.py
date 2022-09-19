@@ -1,7 +1,11 @@
-# """
-# We visit website and download pictures in folder. Let's try
-# 'https://unsplash.com/'
-# """
+"""
+We visit website and download pictures in folder. Let's try
+'https://unsplash.com/'
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+upd. for ver 1.1:
+- want direct download to folder (without list) (хочу грузить картинки сразу в папку, минуя их сохр. в список)
+- modify the script so that all pictures are saved (бустануть так что бы сохранялись ВСЕ картинки, в 1.00 не все)
+"""
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
