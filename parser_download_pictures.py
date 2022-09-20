@@ -64,6 +64,9 @@ def collect_names_links():
             for image in nested_images.get('srcset').split():
                 if image[:3] == 'htt':
                     link_list.append(image)
+                    # надо дать имена файлам или найти способ сохранения без этого
+                    # name = (image.get('srcset').split()[-2])[28:].split('?')[0]
+                    # names_list.append(name)
         except AttributeError:
             continue
 
