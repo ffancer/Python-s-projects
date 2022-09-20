@@ -61,12 +61,13 @@ def collect_names_links():
     select_images = soup.select("img")
     for nested_images in select_images:
         try:
-            for image in nested_images.get('srcset').split():
+            for num, image in enumerate(nested_images.get('srcset').split()):
                 if image[:3] == 'htt':
                     link_list.append(image)
                     # надо дать имена файлам или найти способ сохранения без этого
                     # name = (image.get('srcset').split()[-2])[28:].split('?')[0]
                     # names_list.append(name)
+                    names_list.append(num)
         except AttributeError:
             continue
 
