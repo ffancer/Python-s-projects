@@ -26,7 +26,8 @@ headers = {
     'Accept': '*/*',
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
 }
-link_list, names = [], []
+link_list, names_list = [], []
+scrolling_pixels = 5000
 
 
 def topic_selection(topic_name):
@@ -55,7 +56,7 @@ def collect_names_links():
         for link in links:
             # получаем название
             name = (link.get('srcset').split()[-2])[28:].split('?')[0]
-            names.append(name)
+            names_list.append(name)
             link_list.append(link.get('srcset').split()[-2])
 
 
@@ -70,11 +71,11 @@ def save_names_links():
     #     cert_reqs='CERT_REQUIRED',
     #     ca_certs=certifi.where()
     # )
-    for link, name in zip(link_list, names):
+    for link, name in zip(link_list, names_list):
         urllib.request.urlretrieve(link, f'H:\Python\myProjects\pictures\{name}.jpg')
 
 
-def scrolling_webpage(pixels):
+def scrolling_webpage(scrolling_pixels):
     # скролим в самый конец странички
     browser.execute_script("window.scrollTo(0,document.body.scrollHeight)")
     time.sleep(2)
@@ -82,18 +83,18 @@ def scrolling_webpage(pixels):
     browser.execute_script("window.scrollTo(0,document.head.scrollHeight)")
     time.sleep(1)
     # скролим примерно в середину
-    browser.execute_script(f"window.scrollTo(0, {pixels})")
+    browser.execute_script(f"window.scrollTo(0, {scrolling_pixels})")
     time.sleep(1)
-    pixels *= 2
+
 
 
 topic_selection('woman')
 time.sleep(1)
+
 for _ in range(6):
-    time.sleep(2)
-    pix = 5000
-    scrolling_webpage(pix)
-    pix += 5000
+    scrolling_pixels *= 2
+    scrolling_webpage(scrolling_pixels)
+
 collect_names_links()
 # make_folder('H:\Python\myProjects', 'pictures')
 time.sleep(1)
