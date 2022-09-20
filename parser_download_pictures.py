@@ -50,14 +50,22 @@ def collect_names_links():
     # req = requests.get(url, verify=False)
     # req = requests.get(url, headers=headers)
     soup = BeautifulSoup(req.text, 'lxml')
-    divs = soup.find('div', class_='mItv1')
-    for div in divs:
-        links = div.find_all('img')
-        for link in links:
-            # получаем название
-            name = (link.get('srcset').split()[-2])[28:].split('?')[0]
-            names_list.append(name)
-            link_list.append(link.get('srcset').split()[-2])
+    # divs = soup.find('div', class_='mItv1')
+    # for div in divs:
+    #     links = div.find_all('img')
+    #     for link in links:
+    #         # получаем название
+    #         name = (link.get('srcset').split()[-2])[28:].split('?')[0]
+    #         names_list.append(name)
+    #         link_list.append(link.get('srcset').split()[-2])
+    select_images = soup.select("img")
+    for nested_images in select_images:
+        try:
+            for image in nested_images.get('srcset').split():
+                if image[:3] == 'htt':
+                    link_list.append(image)
+        except AttributeError:
+            continue
 
 
 # # path - 'H:\Python\myProjects'    folder_name - 'pictures'
@@ -100,4 +108,4 @@ time.sleep(500)
 browser.close()
 
 
--
+
