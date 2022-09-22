@@ -72,7 +72,7 @@ def collect_names_links():
 
 def make_folder(path, folder_name):
     full_path = os.path.join(path, folder_name)
-    os.makedirs(full_path, exist_ok=True)
+    return os.makedirs(full_path, exist_ok=True)
 
 
 # def save_names_links():
@@ -82,9 +82,10 @@ def make_folder(path, folder_name):
 
 def save_names_links():
     for link, name in zip(links_list, names_list):
-        # path = make_folder('H:\Python\myProjects', 'pictures')
+        path = make_folder('H:\Python\myProjects', 'pictures')
         backslash_char = '\\'
-        urllib.request.urlretrieve(link, f"{make_folder('H:\Python\myProjects', 'pictures')}{name}.jpg")
+        dir_path = os.path.dirname(os.path.realpath(__file__)) ++++
+        urllib.request.urlretrieve(link, f"{path}{backslash_char}{name}.jpg")
 
 
 def scrolling_webpage(scrolling_pixels):
