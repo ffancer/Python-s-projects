@@ -81,7 +81,6 @@ def collect_names_links():
                         continue
             except AttributeError or None:
                 continue
-    names_list = [i for i in range(len(links_list))]
 
 
 # # path - 'H:\Python\myProjects'    folder_name - 'pictures'
@@ -116,6 +115,7 @@ for _ in range(6):
     scrolling_webpage(scrolling_pixels)
 
 collect_names_links()
+names_list = [i for i in range(len(links_list))]
 print(names_list, len(links_list))
 # make_folder('H:\Python\myProjects', 'pictures')
 time.sleep(1)
