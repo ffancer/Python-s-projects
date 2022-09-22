@@ -82,8 +82,9 @@ def make_folder(path, folder_name):
 
 def save_names_links():
     for link, name in zip(links_list, names_list):
-        path = make_folder('H:\Python\myProjects', 'pictures')
-        urllib.request.urlretrieve(link, f'{path}{name}.jpg')
+        # path = make_folder('H:\Python\myProjects', 'pictures')
+        backslash_char = '\\'
+        urllib.request.urlretrieve(link, f"{make_folder('H:\Python\myProjects', 'pictures')}{name}.jpg")
 
 
 def scrolling_webpage(scrolling_pixels):
