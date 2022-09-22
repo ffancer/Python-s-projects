@@ -15,6 +15,7 @@ import urllib.request
 import os
 import certifi
 import urllib3
+from re import sub
 
 
 url = 'https://unsplash.com/'
@@ -26,7 +27,7 @@ headers = {
     'Accept': '*/*',
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
 }
-link_list, names_list = [], []
+links_list, names_list = [], []
 scrolling_pixels = 2500
 
 
@@ -60,16 +61,27 @@ def collect_names_links():
     #         link_list.append(link.get('srcset').split()[-2])
     select_images = soup.select("img")
     for nested_images in select_images:
-        try:
-            for num, image in enumerate(nested_images.get('srcset').split()):
-                if image[:3] == 'htt':
-                    link_list.append(image)
-                    # надо дать имена файлам или найти способ сохранения без этого
-                    # name = (image.get('srcset').split()[-2])[28:].split('?')[0]
-                    # names_list.append(name)
-                    names_list.append(num)
-        except AttributeError:
-            continue
+    #     try:
+    #         for num, image in enumerate(nested_images.get('srcset').split()):
+    #             if image[:3] == 'htt':
+    #                 link_list.append(image)
+    #                 # надо дать имена файлам или найти способ сохранения без этого
+    #                 # name = (image.get('srcset').split()[-2])[28:].split('?')[0]
+    #                 # names_list.append(name)
+    #                 names_list.append(num)
+    #     except AttributeError:
+    #         continue
+        for nested_images in select_images:
+            try:
+                for i, j in enumerate(nested_images.get('srcset').split()):
+                    try:
+                        if int(sub('\D', '', j[-9:-3])) > 2000:
+                            links_list.append(j)
+                            names_list.append(f'photo-{i}')
+                    except ValueError:
+                        continue
+            except AttributeError or None:
+                continue
 
 
 # # path - 'H:\Python\myProjects'    folder_name - 'pictures'
@@ -79,7 +91,7 @@ def collect_names_links():
 #
 #
 def save_names_links():
-    for link, name in zip(link_list, names_list):
+    for link, name in zip(links_list, names_list):
         urllib.request.urlretrieve(link, f'H:\Python\myProjects\pictures\{name}.jpg')
 
 
@@ -104,7 +116,7 @@ for _ in range(6):
     scrolling_webpage(scrolling_pixels)
 
 collect_names_links()
-print(names_list, len(link_list))
+print(names_list, len(links_list))
 # make_folder('H:\Python\myProjects', 'pictures')
 time.sleep(1)
 save_names_links()
@@ -112,4 +124,4 @@ time.sleep(500)
 browser.close()
 
 
--
+
