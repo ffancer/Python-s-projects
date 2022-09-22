@@ -77,11 +77,11 @@ def collect_names_links():
                     try:
                         if int(sub('\D', '', j[-9:-3])) > 2000:
                             links_list.append(j)
-                            names_list.append(i)-
                     except ValueError:
                         continue
             except AttributeError or None:
                 continue
+    names_list = [i for i in range(len(links_list))]
 
 
 # # path - 'H:\Python\myProjects'    folder_name - 'pictures'
