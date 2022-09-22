@@ -77,7 +77,7 @@ def collect_names_links():
                     try:
                         if int(sub('\D', '', j[-9:-3])) > 2000:
                             links_list.append(j)
-                            names_list.append(f'photo-{i}')
+                            names_list.append(i)-
                     except ValueError:
                         continue
             except AttributeError or None:
