@@ -10,6 +10,7 @@ interesting:
 - from re import sub  -- чтобы удалить буквы из строк типа 'b456G541gh6j' и занимало минимум места в коде
 - button.send_keys(u'\ue007')  -- нажимает [ENTER]
 - os.makedirs(full_path, exist_ok=True) -- exist_ok позволяет или создать папку, а если она создана, то ошибок не возникнет
+- dir_path = os.path.dirname(os.path.realpath(__file__))  -- возвращает корневой каталог, откуда запускается скрипт
 """
 import requests
 from bs4 import BeautifulSoup
@@ -18,9 +19,7 @@ from selenium.webdriver.common.by import By
 import time
 import urllib.request
 import os
-import certifi
-import urllib3
-from re import sub  # чтобы удалить буквы из строк типа 'b456G541gh6j' и занимало минимум места в коде
+from re import sub
 
 
 url = 'https://unsplash.com/'
@@ -44,48 +43,33 @@ def topic_selection(topic_name):
     button.send_keys(u'\ue007')
 
 
-def take_href():
-    req = requests.get(url, headers=headers)
-    soup = BeautifulSoup(req.text, 'lxml')
-    divs = soup.find('div', class_='search-photos-route')
-    print(divs)
-
-
 def collect_names_links():
     req = requests.get(url)
-
     soup = BeautifulSoup(req.text, 'lxml')
-
     select_images = soup.select("img")
+
     for nested_images in select_images:
-        for nested_images in select_images:
-            try:
-                for i, j in enumerate(nested_images.get('srcset').split()):
-                    try:
-                        if int(sub('\D', '', j[-9:-3])) > 2000:
-                            links_list.append(j)
-                    except ValueError:
-                        continue
-            except AttributeError or None:
-                continue
+        try:
+            for i, j in enumerate(nested_images.get('srcset').split()):
+                try:
+                    if int(sub('\D', '', j[-9:-3])) > 2000:
+                        links_list.append(j)
+                except ValueError:
+                    continue
+        except AttributeError or None:
+            continue
 
 
 def make_folder(path, folder_name):
-    full_path = os.path.join(path, folder_name)
-    return os.makedirs(full_path, exist_ok=True)
-
-
-# def save_names_links():
-#     for link, name in zip(links_list, names_list):
-#         urllib.request.urlretrieve(link, f'H:\Python\myProjects\pictures\{name}.jpg')
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    # создаем путь к папке:
+    return dir_path + '\\' + folder_name + '\\'
 
 
 def save_names_links():
     for link, name in zip(links_list, names_list):
         path = make_folder('H:\Python\myProjects', 'pictures')
-        backslash_char = '\\'
-        dir_path = os.path.dirname(os.path.realpath(__file__)) ++++
-        urllib.request.urlretrieve(link, f"{path}{backslash_char}{name}.jpg")
+        urllib.request.urlretrieve(link, f"{path}{name}.jpg")
 
 
 def scrolling_webpage(scrolling_pixels):
@@ -95,10 +79,9 @@ def scrolling_webpage(scrolling_pixels):
     # скролим наверх
     browser.execute_script("window.scrollTo(0,document.head.scrollHeight)")
     time.sleep(1)
-    # скролим примерно в середину
+    # скролим примерно в середину, с последующим добавлением пикселей на 2500
     browser.execute_script(f"window.scrollTo(0, {scrolling_pixels})")
     time.sleep(1)
-
 
 
 topic_selection('woman')
@@ -111,7 +94,6 @@ for _ in range(6):
 collect_names_links()
 names_list = [i for i in range(len(links_list))]
 print(names_list, len(links_list))
-# make_folder('H:\Python\myProjects', 'pictures')
 time.sleep(1)
 save_names_links()
 time.sleep(500)
