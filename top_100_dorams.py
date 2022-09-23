@@ -1,5 +1,8 @@
 """
 top 100 dorams from https://vsedoramy.net/top100korean.html
+upd. for version 1.02:
+- need more sites (2-3 or more)
+- no duplicates
 """
 import requests
 from bs4 import BeautifulSoup
