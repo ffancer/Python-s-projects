@@ -52,49 +52,45 @@ headers = {
 
 # ++++++++++++++++++++++++++++++++++  site number 2  ++++++++++++++++++++++++++++++++++++++++++++++++
 
-url_2 = 'https://doramy.club/top/page/2'
-
-
+count = 1
+url_2 = f'https://doramy.club/top/page/{count}'
 browser = webdriver.Chrome()
 browser.maximize_window()
 browser.get(url_2)
+data_list = [[], [], [], [], []]
 
 
-# def take_data():
-    # req = requests.get(url_2, headers=headers)
-    # soup = BeautifulSoup(req.text, 'lxml')
-    # with open(url_2, 'w', encoding='utf-8') as file:
-    #     file.write(req.text)
+def take_data():
+    req = requests.get(url_2, headers=headers)
+    soup = BeautifulSoup(req.text, 'lxml')
+    cards = soup.find_all('div', class_='post-home')
 
-    # with open('topdorams2.html', encoding='utf-8') as file:
-    #     src = file.read()
-    # soup = BeautifulSoup(src, 'lxml')
-    # cards = soup.find_all('div', class_='post-home')
-    # for card in cards:
-        # name = card.find('img', alt=True)['alt']
-        # score = card.find('div', class_='average').text
+    for card in cards:
+        name = card.find('img', alt=True)['alt']
+        data_list[0].append(name)
+        score = card.find('div', class_='average').text
+        data_list[4].append(score)
         # работа с <td>
-        # columns = card.find_all('td')
-        # columns = [i.text.strip() for i in columns]
-        # print(columns)
-        # genres = columns[columns.index('Жанр:') + 1]
+        columns = card.find_all('td')
+        columns = [i.text.strip() for i in columns]
 
-        # episodes_count = 1
-        # if columns[1][0].isdigit():
-        #     episodes_count = columns[1]
+        genres = columns[columns.index('Жанр:') + 1]
+
+        episodes_count = 1
+        if columns[1][0].isdigit():
+            episodes_count = columns[1]
 
         # выясняем сериал или фильм
-        # film_or_serial = 'Сериал'
-        # if columns[0] == 'Страна:':
-        #     film_or_serial = 'Фильм'
+        film_or_serial = 'Сериал'
+        if columns[0] == 'Страна:':
+            film_or_serial = 'Фильм'
 
 
+for count in range(4):
+    url_2 = f'https://doramy.club/top/page/{count}'
+    time.sleep(10)
+    take_data()
 
-# take_data()
-browser.find_element(By.XPATH, '/html/body/div/div[1]/div/div/div[13]/div/a[4]').click()
-time.sleep(5)
-browser.find_element(By.XPATH, '/html/body/div/div[1]/div/div/div[13]/div/a[4]').click()
-time.sleep(5)
-browser.find_element(By.XPATH, '/html/body/div/div[1]/div/div/div[13]/div/a[4]').click()
-time.sleep(100)
+print(data_list)
+time.sleep(1000)
 browser.close()
