@@ -71,9 +71,14 @@ def take_data():
     cards = soup.find_all('div', class_='post-home')
     for card in cards:
         # name = card.find('img', alt=True)['alt']
-        score = card.find('div', class_='average').text
-        print(score)
-        # genre =
+        # score = card.find('div', class_='average').text
+        # работа с <td>
+        columns = card.find_all('td')
+        columns = [i.text.strip() for i in columns]
+        print(columns)
+        genres = columns.index('Жанр:')
+        print(genres)
+        # print(genres)
         # episodes_count (film or serial)
 
 
