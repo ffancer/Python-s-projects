@@ -8,43 +8,57 @@ upd. for version 1.02:
 - need more sites (2-3 or more)
 - no duplicates
 """
+# import requests
+# from bs4 import BeautifulSoup
+# import pandas as pd
+#
+#
+# url = 'https://vsedoramy.net/top100korean.html'
+# headers = {
+#     'Accept': '*/*',
+#     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
+# }
+#
+# req = requests.get(url, headers=headers)
+# soup = BeautifulSoup(req.text, 'lxml')
+# # сделал нумерование от 1 до 100 в первом вложенном списке
+# data_list = [[i for i in range(1, 101)], [], [], []]
+#
+#
+# # ищем и записываем данные в список
+# def data_search():
+#     cards = soup.find('ol', class_='clearfix').find_all('li', class_='top100-item')
+#     for card in cards:
+#         title = card.find('img', alt=True)
+#         data_list[1].append(title['alt'])
+#         img = card.find('img', src=True)
+#         data_list[2].append('https://vsedoramy.net' + img['src'])
+#         link = card.find('a').get('href')
+#         data_list[3].append(link)
+#
+#
+# # записываем данные из списка в Excel файл
+# def list_to_excel():
+#     df = pd.DataFrame.from_dict({'Место: ': data_list[0], 'Название: ': data_list[1], 'Картинка: ': data_list[2], 'Ссылка: ': data_list[3]})
+#     df.to_excel('top_100_dorams.xlsx', header=True, index=False)
+#
+#
+# data_search()
+# list_to_excel()
+
 import requests
 from bs4 import BeautifulSoup
-import pandas as pd
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
 
 
-url = 'https://vsedoramy.net/top100korean.html'
-headers = {
-    'Accept': '*/*',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
-}
+url_2 = 'https://doramy.club/top'
+browser = webdriver.Chrome()
+browser.maximize_window()
+browser.get(url_2)
 
-req = requests.get(url, headers=headers)
-soup = BeautifulSoup(req.text, 'lxml')
-# сделал нумерование от 1 до 100 в первом вложенном списке
-data_list = [[i for i in range(1, 101)], [], [], []]
+print(f'hello {url_2}')
 
-
-# ищем и записываем данные в список
-def data_search():
-    cards = soup.find('ol', class_='clearfix').find_all('li', class_='top100-item')
-    for card in cards:
-        title = card.find('img', alt=True)
-        data_list[1].append(title['alt'])
-        img = card.find('img', src=True)
-        data_list[2].append('https://vsedoramy.net' + img['src'])
-        link = card.find('a').get('href')
-        data_list[3].append(link)
-
-
-# записываем данные из списка в Excel файл
-def list_to_excel():
-    df = pd.DataFrame.from_dict({'Место: ': data_list[0], 'Название: ': data_list[1], 'Картинка: ': data_list[2], 'Ссылка: ': data_list[3]})
-    df.to_excel('top_100_dorams.xlsx', header=True, index=False)
-
-
-data_search()
-list_to_excel()
-
-
-# https://doramy.club/top
+time.sleep(10)
+browser.close()
