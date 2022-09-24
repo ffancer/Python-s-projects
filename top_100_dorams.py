@@ -11,7 +11,9 @@ upd. for version 1.02:
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
 #
 #
 # url = 'https://vsedoramy.net/top100korean.html'
@@ -47,44 +49,40 @@ headers = {
 # data_search()
 # list_to_excel()
 
-import requests
-from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-import time
 
-url_2 = 'https://doramy.club/top'
+# ++++++++++++++++++++++++++++++++++  site number 2  ++++++++++++++++++++++++++++++++++++++++++++++++
+
+url_2 = 'https://doramy.club/top/page/2'
 
 
-# browser = webdriver.Chrome()
-# browser.maximize_window()
-# browser.get(url_2)
+browser = webdriver.Chrome()
+browser.maximize_window()
+browser.get(url_2)
 
 
-def take_data():
-    req = requests.get(url_2, headers=headers)
+# def take_data():
+    # req = requests.get(url_2, headers=headers)
     # soup = BeautifulSoup(req.text, 'lxml')
     # with open(url_2, 'w', encoding='utf-8') as file:
     #     file.write(req.text)
 
-    with open('topdorams2.html', encoding='utf-8') as file:
-        src = file.read()
-    soup = BeautifulSoup(src, 'lxml')
-    cards = soup.find_all('div', class_='post-home')
-    for card in cards:
+    # with open('topdorams2.html', encoding='utf-8') as file:
+    #     src = file.read()
+    # soup = BeautifulSoup(src, 'lxml')
+    # cards = soup.find_all('div', class_='post-home')
+    # for card in cards:
         # name = card.find('img', alt=True)['alt']
         # score = card.find('div', class_='average').text
         # работа с <td>
-        columns = card.find_all('td')
-        columns = [i.text.strip() for i in columns]
+        # columns = card.find_all('td')
+        # columns = [i.text.strip() for i in columns]
         # print(columns)
         # genres = columns[columns.index('Жанр:') + 1]
 
-        episodes_count = 1
-        if columns[1][0].isdigit():
-            episodes_count = columns[1]
+        # episodes_count = 1
+        # if columns[1][0].isdigit():
+        #     episodes_count = columns[1]
 
-        print(episodes_count)
         # выясняем сериал или фильм
         # film_or_serial = 'Сериал'
         # if columns[0] == 'Страна:':
@@ -92,6 +90,11 @@ def take_data():
 
 
 
-take_data()
-# time.sleep(10)
-# browser.close()
+# take_data()
+browser.find_element(By.XPATH, '/html/body/div/div[1]/div/div/div[13]/div/a[4]').click()
+time.sleep(5)
+browser.find_element(By.XPATH, '/html/body/div/div[1]/div/div/div[13]/div/a[4]').click()
+time.sleep(5)
+browser.find_element(By.XPATH, '/html/body/div/div[1]/div/div/div[13]/div/a[4]').click()
+time.sleep(100)
+browser.close()
