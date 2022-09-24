@@ -54,9 +54,9 @@ import time
 
 
 url_2 = 'https://doramy.club/top'
-browser = webdriver.Chrome()
-browser.maximize_window()
-browser.get(url_2)
+# browser = webdriver.Chrome()
+# browser.maximize_window()
+# browser.get(url_2)
 
 
 def take_data():
@@ -67,11 +67,12 @@ def take_data():
 
     with open('topdorams2.html', encoding='utf-8') as file:
         src = file.read()
-    print(src)
-    # cards = soup.find_all('div', class_='post-home')
-    # print(cards)
+    soup = BeautifulSoup(src, 'lxml')
+    cards = soup.find_all('div', class_='post-home')
+    for card in cards:
+        print(card, sep='\n\n\n\n\n\n\n\n\n')
 
 
 take_data()
-time.sleep(10)
-browser.close()
+# time.sleep(10)
+# browser.close()
