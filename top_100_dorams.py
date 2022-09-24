@@ -8,16 +8,16 @@ upd. for version 1.02:
 - need more sites (2-3 or more)
 - no duplicates
 """
-# import requests
-# from bs4 import BeautifulSoup
-# import pandas as pd
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
 #
 #
 # url = 'https://vsedoramy.net/top100korean.html'
-# headers = {
-#     'Accept': '*/*',
-#     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
-# }
+headers = {
+    'Accept': '*/*',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
+}
 #
 # req = requests.get(url, headers=headers)
 # soup = BeautifulSoup(req.text, 'lxml')
@@ -58,7 +58,14 @@ browser = webdriver.Chrome()
 browser.maximize_window()
 browser.get(url_2)
 
-print(f'hello {url_2}')
 
+def take_data():
+    req = requests.get(url_2, headers=headers)
+    soup = BeautifulSoup(req.text, 'lxml')
+    cards = soup.find_all('div', class_='post-home')
+    print(cards)
+
+
+take_data()
 time.sleep(10)
 browser.close()
