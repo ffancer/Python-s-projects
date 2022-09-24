@@ -61,9 +61,15 @@ browser.get(url_2)
 
 def take_data():
     req = requests.get(url_2, headers=headers)
-    soup = BeautifulSoup(req.text, 'lxml')
-    cards = soup.find_all('div', class_='post-home')
-    print(cards)
+    # soup = BeautifulSoup(req.text, 'lxml')
+    # with open(url_2, 'w', encoding='utf-8') as file:
+    #     file.write(req.text)
+
+    with open('topdorams2.html', encoding='utf-8') as file:
+        src = file.read()
+    print(src)
+    # cards = soup.find_all('div', class_='post-home')
+    # print(cards)
 
 
 take_data()
