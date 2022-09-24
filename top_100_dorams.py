@@ -82,8 +82,11 @@ def take_data():
             film_or_serial = 'Фильм'
         data_list_2[2].append(film_or_serial)
 
-        genres = columns[columns.index('Жанр:') + 1]
-        data_list_2[3].append(genres)
+        try:
+            genres = columns[columns.index('Жанр:') + 1]
+            data_list_2[3].append(genres)
+        except ValueError:
+            data_list_2[3].append(' ')
 
         episodes_count = 1
         if columns[1][0].isdigit():
@@ -96,12 +99,12 @@ def list_to_excel():
     df = pd.DataFrame.from_dict({'Рейтинг: ': data_list_2[0], 'Название: ': data_list_2[1], 'Фильм или сериал: ': data_list_2[2], 'Жанр: ': data_list_2[3], 'Кол-во эпизодов: ': data_list_2[4]})
     df.to_excel('top_100_dorams_2.xlsx', header=True, index=False)
 
-cnt=1
-for count in range(238):
+cnt=0
+for count in range(239):
     cnt +=10
     url_2 = f'https://doramy.club/top/page/{count}'
     time.sleep(1)
-    print(data_list_2[1], cnt)
+    print(cnt)
     take_data()
 
 list_to_excel()
