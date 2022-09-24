@@ -11,6 +11,7 @@ upd. for version 1.02:
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+
 #
 #
 # url = 'https://vsedoramy.net/top100korean.html'
@@ -52,8 +53,9 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 
-
 url_2 = 'https://doramy.club/top'
+
+
 # browser = webdriver.Chrome()
 # browser.maximize_window()
 # browser.get(url_2)
@@ -76,10 +78,18 @@ def take_data():
         columns = card.find_all('td')
         columns = [i.text.strip() for i in columns]
         # print(columns)
-        genres = columns[columns.index('Жанр:')+1]
-        print(genres)
-        # print(genres)
-        # episodes_count (film or serial)
+        # genres = columns[columns.index('Жанр:') + 1]
+
+        episodes_count = 1
+        if columns[1][0].isdigit():
+            episodes_count = columns[1]
+
+        print(episodes_count)
+        # выясняем сериал или фильм
+        # film_or_serial = 'Сериал'
+        # if columns[0] == 'Страна:':
+        #     film_or_serial = 'Фильм'
+
 
 
 take_data()
