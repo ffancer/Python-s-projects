@@ -75,8 +75,8 @@ def take_data():
         # работа с <td>
         columns = card.find_all('td')
         columns = [i.text.strip() for i in columns]
-        print(columns)
-        genres = columns.index('Жанр:')
+        # print(columns)
+        genres = columns[columns.index('Жанр:')+1]
         print(genres)
         # print(genres)
         # episodes_count (film or serial)
