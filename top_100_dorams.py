@@ -51,12 +51,8 @@ headers = {
 
 
 # ++++++++++++++++++++++++++++++++++  site number 2  ++++++++++++++++++++++++++++++++++++++++++++++++
-
 count = 1
 url_2 = f'https://doramy.club/top/page/{count}'
-# browser = webdriver.Chrome()
-# browser.maximize_window()
-# browser.get(url_2)
 data_list_2 = [[], [], [], [], []]
 
 
@@ -94,19 +90,17 @@ def take_data():
         data_list_2[4].append(episodes_count)
 
 
-
 def list_to_excel():
     df = pd.DataFrame.from_dict({'Рейтинг: ': data_list_2[0], 'Название: ': data_list_2[1], 'Фильм или сериал: ': data_list_2[2], 'Жанр: ': data_list_2[3], 'Кол-во эпизодов: ': data_list_2[4]})
     df.to_excel('top_100_dorams_2.xlsx', header=True, index=False)
 
-cnt=0
+
 for count in range(239):
-    cnt +=10
     url_2 = f'https://doramy.club/top/page/{count}'
     time.sleep(1)
-    print(cnt)
     take_data()
 
 list_to_excel()
-# time.sleep(1000)
-# browser.close()
+"""
+https://docs.google.com/spreadsheets/d/1fxWDW7y5kF3itNztAsY9T12vh6-_EyLpyM2mbe_Qc0k/edit#gid=867375299
+"""
