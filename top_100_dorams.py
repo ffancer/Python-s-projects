@@ -70,9 +70,9 @@ def take_data():
     soup = BeautifulSoup(src, 'lxml')
     cards = soup.find_all('div', class_='post-home')
     for card in cards:
-        name = card.find('img', alt=True)['alt']
-        print(name)
-        # score =
+        # name = card.find('img', alt=True)['alt']
+        score = card.find('div', class_='average').text
+        print(score)
         # genre =
         # episodes_count (film or serial)
 
