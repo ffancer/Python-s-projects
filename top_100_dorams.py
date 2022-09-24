@@ -68,7 +68,8 @@ def take_data():
     for card in cards:
         score = card.find('div', class_='average').text
         data_list_2[0].append(score)
-        name = card.find('img', alt=True)['alt']
+        # name = card.find('img', alt=True)['alt']
+        name = card.find('a').find('span').text
         data_list_2[1].append(name)
 
         # работа с <td>
@@ -95,10 +96,12 @@ def list_to_excel():
     df = pd.DataFrame.from_dict({'Рейтинг: ': data_list_2[0], 'Название: ': data_list_2[1], 'Фильм или сериал: ': data_list_2[2], 'Жанр: ': data_list_2[3], 'Кол-во эпизодов: ': data_list_2[4]})
     df.to_excel('top_100_dorams_2.xlsx', header=True, index=False)
 
-
-for count in range(11):
+cnt=1
+for count in range(238):
+    cnt +=10
     url_2 = f'https://doramy.club/top/page/{count}'
-    time.sleep(5)
+    time.sleep(1)
+    print(data_list_2[1], cnt)
     take_data()
 
 list_to_excel()
