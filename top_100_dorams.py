@@ -54,10 +54,10 @@ headers = {
 
 count = 1
 url_2 = f'https://doramy.club/top/page/{count}'
-browser = webdriver.Chrome()
-browser.maximize_window()
-browser.get(url_2)
-data_list = [[], [], [], [], []]
+# browser = webdriver.Chrome()
+# browser.maximize_window()
+# browser.get(url_2)
+data_list_2 = [[], [], [], [], []]
 
 
 def take_data():
@@ -66,31 +66,41 @@ def take_data():
     cards = soup.find_all('div', class_='post-home')
 
     for card in cards:
-        name = card.find('img', alt=True)['alt']
-        data_list[0].append(name)
         score = card.find('div', class_='average').text
-        data_list[4].append(score)
+        data_list_2[0].append(score)
+        name = card.find('img', alt=True)['alt']
+        data_list_2[1].append(name)
+
         # работа с <td>
         columns = card.find_all('td')
         columns = [i.text.strip() for i in columns]
-
-        genres = columns[columns.index('Жанр:') + 1]
-
-        episodes_count = 1
-        if columns[1][0].isdigit():
-            episodes_count = columns[1]
 
         # выясняем сериал или фильм
         film_or_serial = 'Сериал'
         if columns[0] == 'Страна:':
             film_or_serial = 'Фильм'
+        data_list_2[2].append(film_or_serial)
+
+        genres = columns[columns.index('Жанр:') + 1]
+        data_list_2[3].append(genres)
+
+        episodes_count = 1
+        if columns[1][0].isdigit():
+            episodes_count = columns[1]
+        data_list_2[4].append(episodes_count)
 
 
-for count in range(4):
+
+def list_to_excel():
+    df = pd.DataFrame.from_dict({'Рейтинг: ': data_list_2[0], 'Название: ': data_list_2[1], 'Фильм или сериал: ': data_list_2[2], 'Жанр: ': data_list_2[3], 'Кол-во эпизодов: ': data_list_2[4]})
+    df.to_excel('top_100_dorams_2.xlsx', header=True, index=False)
+
+
+for count in range(11):
     url_2 = f'https://doramy.club/top/page/{count}'
-    time.sleep(10)
+    time.sleep(5)
     take_data()
 
-print(data_list)
-time.sleep(1000)
-browser.close()
+list_to_excel()
+# time.sleep(1000)
+# browser.close()
