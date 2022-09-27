@@ -16,4 +16,10 @@ headers = {
 req = requests.get(url, headers=headers)
 soup = BeautifulSoup(req.text, 'lxml')
 tables = soup.find_all('table')
-print(tables)
+# print(tables)
+for table in tables:
+    # for item in table.find_all('a'):
+        # link = 'https://www.skiddle.com/festivals' + item.get('href')
+        # name = item.text
+    for item in table.find_all('td', class_='hide-mobile hide-tablet show-desktop'):
+        date = item.text
