@@ -5,7 +5,9 @@ requests, beautifulsoup, lxml, json
 """
 import requests
 from bs4 import BeautifulSoup
-
+import time
+from selenium import webdriver
+from selenium.webdriver.common.by import By
 
 url = 'https://www.skiddle.com/festivals/'
 headers = {
@@ -26,13 +28,16 @@ for table in tables:
     # for item in table.find_all('td', class_='hide-mobile hide-tablet show-desktop'):
     #     date = item.text
 
-for url in links_list:
+for url in links_list[:2]:
     req = requests.get(url=url, headers=headers)
-
+    browser = webdriver.Chrome()
+    browser.maximize_window()
+    browser.get(url)
     try:
         soup = BeautifulSoup(req.text, 'lxml')
-        # name = soup.find_all('div', class_='MuiBox-root css-1tglkrx').find('h1', class_='MuiTypography-root MuiTypography-body1 css-r2lffm')
-        # print(name)
+        name = soup.find_all('div', class_='MuiBox-root css-1tglkrx').find('h1', class_='MuiTypography-root MuiTypography-body1 css-r2lffm')
+        print(name)
         print(soup)
     except:
         print('error')
+    browser.close()
