@@ -29,9 +29,12 @@ for url in links_list[:2]:
     req = requests.get(url=url, headers=headers)
     try:
         soup = BeautifulSoup(req.text, 'lxml')
-        name = soup.find('h1', class_='MuiTypography-root MuiTypography-body1 css-r2lffm').text
-        date = soup.find('div', class_='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-11 css-twt0ol').text
-        print(date)
+        # name = soup.find('h1', class_='MuiTypography-root MuiTypography-body1 css-r2lffm').text
+        # date = soup.find('div', class_='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-11 css-twt0ol').text
+        info_links = soup.find_all('div', class_='MuiBox-root css-1l1xyxp')
+        print(info_links)
+        for link in info_links:
+            print(link)
         time.sleep(1)
     except:
         print('error')
