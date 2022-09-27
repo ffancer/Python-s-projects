@@ -23,8 +23,11 @@ links_list = []
 for table in tables:
     for item in table.find_all('a'):
         # link = 'https://www.skiddle.com/festivals' + str(item.get('href'))
-        link = item.get('href')
-        print(link)
+
+        # collect urls in list
+        if item.get('href') is not None:
+            links_list.append('https://www.skiddle.com' + item.get('href'))
+
         # links_list.append(link)
         # name = item.text
     # for item in table.find_all('td', class_='hide-mobile hide-tablet show-desktop'):
