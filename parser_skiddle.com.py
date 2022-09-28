@@ -39,6 +39,14 @@ for url in links_list[:1]:
         # browser.execute_script("window.scrollTo(0,document.body.scrollHeight)")
         # time.sleep(2)
         browser.find_element(By.XPATH, '//*[@id="panel2873bh-header"]/div[2]').click()
+        time.sleep(3)
+        # info = soup.find(class_='MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-c4sutr')
+        soup = BeautifulSoup(req.text, 'lxml')
+        # info = soup.find('div', class_='MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered')
+        info = soup.find('div', class_='MuiTypography-root MuiTypography-body1 css-lkmy1y')
+        print(info)
+        for i in info:
+            print(i)
         time.sleep(500)
         browser.close()
         # browser.maximize_window()
@@ -50,4 +58,3 @@ for url in links_list[:1]:
     except:
         print('error')
 
-# MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-c4sutr
