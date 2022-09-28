@@ -26,7 +26,7 @@ for table in tables:
         if item.get('href') is not None:
             links_list.append('https://www.skiddle.com' + item.get('href'))
 
-for url in links_list[:2]:
+for url in links_list[:1]:
     req = requests.get(url=url, headers=headers)
     try:
         soup = BeautifulSoup(req.text, 'lxml')
@@ -35,14 +35,18 @@ for url in links_list[:2]:
         # place = soup.find('div', class_='MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-c4sutr').text
         browser = webdriver.Chrome()
         browser.get(url)
-        browser.find_element(By.LINK_TEXT, 'Where').click()
+        # browser.find_element(By.LINK_TEXT, 'Where').click()
+        browser.execute_script("window.scrollTo(0,document.body.scrollHeight)")
+        time.sleep(2)
+        browser.find_element(By.XPATH, '//*[@id="panel2873bh-header"]/div[2]/svg/path').click()
 
         # browser.maximize_window()
         # info_links = soup.find_all('div', class_='MuiBox-root css-1l1xyxp')
         # print(info_links)
         # for link in info_links:
         #     print(link)
-        time.sleep(1)
-        browser.close()
+        time.sleep(100)
     except:
         print('error')
+    time.sleep(500)
+    browser.close()
