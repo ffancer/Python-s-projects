@@ -44,7 +44,10 @@ for url in links_list[:1]:
         # soup = BeautifulSoup(req.text, 'lxml')
         # # info = soup.find('div', class_='MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered')
         # info = soup.find('div', class_='MuiTypography-root MuiTypography-body1 css-lkmy1y')
-        print(browser.find_element(By.XPATH, '//*[@id="panel2873bh-content"]/div/div/div').text)
+        lst = []
+        # print(browser.find_element(By.XPATH, '//*[@id="panel2873bh-content"]/div/div/div').text)
+        lst.append(browser.find_element(By.XPATH, '//*[@id="panel2873bh-content"]/div/div/div').text.split('\n'))
+        print(lst)
         time.sleep(500)
         browser.close()
         # browser.maximize_window()
