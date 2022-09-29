@@ -28,7 +28,7 @@ for table in tables:
         if item.get('href') is not None:
             links_list.append('https://www.skiddle.com' + item.get('href'))
 
-for url in links_list[:6]:
+for url in links_list[:4]:
     print(url)
     req = requests.get(url=url, headers=headers)
     try:
@@ -41,15 +41,34 @@ for url in links_list[:6]:
         # browser.get(url)
         # browser.find_element(By.XPATH, '//*[@id="panel2873bh-header"]/div[2]').click()
         # location = browser.find_element(By.XPATH, '//*[@id="panel2873bh-content"]/div/div/div').text
+        cards = soup.find('div',
+                          class_='MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-ckmrqz')
+        for card in cards:
+            try:
+                image = card.get('data')
+                if image[:5] != 'https':
+                    image = 'mo image'
 
-        lst.append(
-            {
-                'name': name,
-                'date': date,
-                'description': description,
+                place = card.find_all('span')
+                data = [i.text.strip() for i in place]
+                place = data[2]
+                price = data[-2]
+                if '£' not in price:
+                    price = 'Free'
+            except IndexError:
+                continue
 
-            }
-        )
+            lst.append(
+                {
+                    # 'url': url,
+                    # 'name': name,
+                    'image url': image,
+                    # 'date': date,
+                    # 'description': description,
+                    # 'place': place,
+                    # 'price': price
+                }
+            )
         print(lst)
         # browser.close()
 
