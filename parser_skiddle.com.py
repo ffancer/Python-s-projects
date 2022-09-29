@@ -47,6 +47,7 @@ for url in links_list[:4]:
     cards = soup.find('div', class_='MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-ckmrqz')
     for card in cards:
         try:
+
             place = card.find_all('span')
             data = [i.text.strip() for i in place]
             place = data[2]
