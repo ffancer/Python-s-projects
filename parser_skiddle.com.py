@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+import json
 
 
 url = 'https://www.skiddle.com/festivals/'
@@ -19,36 +20,41 @@ req = requests.get(url, headers=headers)
 soup = BeautifulSoup(req.text, 'lxml')
 tables = soup.find_all('table')
 links_list = []
-
+lst = []
 for table in tables:
     for item in table.find_all('a'):
         # collect urls in list
         if item.get('href') is not None:
             links_list.append('https://www.skiddle.com' + item.get('href'))
 
-for url in links_list[:2]:
+for url in links_list[:1]:
     req = requests.get(url=url, headers=headers)
     try:
         soup = BeautifulSoup(req.text, 'lxml')
-        # name = soup.find('h1', class_='MuiTypography-root MuiTypography-body1 css-r2lffm').text
-        # date = soup.find('div', class_='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-11 css-twt0ol').text
-        # place = soup.find('div', class_='MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-c4sutr').text
+        name = soup.find('h1', class_='MuiTypography-root MuiTypography-body1 css-r2lffm').text
+        date = soup.find('div', class_='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-11 css-twt0ol').text
+        print(name, date)
         browser = webdriver.Chrome()
         browser.get(url)
 
         browser.find_element(By.XPATH, '//*[@id="panel2873bh-header"]/div[2]').click()
-        time.sleep(3)
         # more detailed location
-        location = browser.find_element(By.XPATH, '//*[@id="panel2873bh-content"]/div/div/div').text.split('\n')
-        name = browser.find_element(By.XPATH, '//*[@id="__next"]/div/div[3]/h1').text
-        time.sleep(1)
-        # place = browser.find_element(By.XPATH, '//*[@id="panel2872bh-content"]/div/div/div/p').text
-        place = browser.find_element(By.XPATH, '//*[@id="panel2872bh-content"]/div/div').text
-        print(name, place, location)
+        # location = browser.find_element(By.XPATH, '//*[@id="panel2873bh-content"]/div/div/div').text.split('\n')
+        location = browser.find_element(By.XPATH, '//*[@id="panel2873bh-content"]/div/div/div').text
+        # name = browser.find_element(By.XPATH, '//*[@id="__next"]/div/div[3]/h1').text
 
-        time.sleep(5)
+        print(location)
+
         browser.close()
-
+        lst.append(
+            {
+                'name': name,
+                'date': date,
+                'location': location
+            }
+        )
     except:
         print('error')
 
+with open('festival.json', 'a', encoding='utf-8') as file:
+    json.dump(lst, file, indent=4, ensure_ascii=False)
