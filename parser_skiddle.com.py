@@ -9,24 +9,24 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
+
 url = 'https://www.skiddle.com/festivals/'
 headers = {
     'Accept': '*/*',
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
 }
-
 req = requests.get(url, headers=headers)
 soup = BeautifulSoup(req.text, 'lxml')
 tables = soup.find_all('table')
-
 links_list = []
+
 for table in tables:
     for item in table.find_all('a'):
         # collect urls in list
         if item.get('href') is not None:
             links_list.append('https://www.skiddle.com' + item.get('href'))
 
-for url in links_list[:3]:
+for url in links_list[:2]:
     req = requests.get(url=url, headers=headers)
     try:
         soup = BeautifulSoup(req.text, 'lxml')
@@ -42,7 +42,8 @@ for url in links_list[:3]:
         location = browser.find_element(By.XPATH, '//*[@id="panel2873bh-content"]/div/div/div').text.split('\n')
         name = browser.find_element(By.XPATH, '//*[@id="__next"]/div/div[3]/h1').text
         time.sleep(1)
-        place = browser.find_element(By.XPATH, '//*[@id="panel2872bh-content"]/div/div/div/p').text
+        # place = browser.find_element(By.XPATH, '//*[@id="panel2872bh-content"]/div/div/div/p').text
+        place = browser.find_element(By.XPATH, '//*[@id="panel2872bh-content"]/div/div').text
         print(name, place, location)
 
         time.sleep(5)
