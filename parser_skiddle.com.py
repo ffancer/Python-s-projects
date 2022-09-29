@@ -35,8 +35,8 @@ for url in links_list[:4]:
     name = soup.find('h1', class_='MuiTypography-root MuiTypography-body1 css-r2lffm').text
     date = soup.find('div', class_='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-11 css-twt0ol').text
     description = soup.find('div', class_='MuiBox-root css-1ebprri').text[:-10]
-    print(name, date, description)
-    # try:
+    # print(name, date, description)
+
     #     # soup = BeautifulSoup(req.text, 'lxml')
     #
     #
@@ -44,34 +44,33 @@ for url in links_list[:4]:
     #     # browser.get(url)
     #     # browser.find_element(By.XPATH, '//*[@id="panel2873bh-header"]/div[2]').click()
     #     # location = browser.find_element(By.XPATH, '//*[@id="panel2873bh-content"]/div/div/div').text
-    #     cards = soup.find('div',
-    #                       class_='MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-ckmrqz')
-    #     for card in cards:
-    #         try:
-    #             place = card.find_all('span')
-    #             data = [i.text.strip() for i in place]
-    #             place = data[2]
-    #             price = data[-2]
-    #             image = card.get('data')
-    #             if '£' not in price:
-    #                 price = 'Free'
-    #             if image is None:
-    #                 continue
-    #
-    #             print(image, place, price)
-    #             lst.append(
-    #                 {
-    #                     'url': url,
-    #                     'name': name,
-    #                     'image url': image,
-    #                     'date': date,
-    #                     'description': description,
-    #                     'place': place,
-    #                     'price': price
-    #                 }
-    #             )
-    #         except IndexError:
-    #             continue
+    cards = soup.find('div', class_='MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-ckmrqz')
+    for card in cards:
+        try:
+            place = card.find_all('span')
+            data = [i.text.strip() for i in place]
+            place = data[2]
+            price = data[-2]
+            image = card.get('data')
+            if '£' not in price:
+                price = 'Free'
+            if image is None:
+                continue
+
+            print(image, place, price)
+            # lst.append(
+            #     {
+            #         'url': url,
+            #         'name': name,
+            #         'image url': image,
+            #         'date': date,
+            #         'description': description,
+            #         'place': place,
+            #         'price': price
+            #     }
+            # )
+        except IndexError:
+            continue
 
 
 
