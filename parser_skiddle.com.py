@@ -27,7 +27,7 @@ for table in tables:
         # collect urls in list
         if item.get('href') is not None:
             links_list.append('https://www.skiddle.com' + item.get('href'))
-print(links_list)
+
 for url in links_list[:6]:
     print(url)
     req = requests.get(url=url, headers=headers)
@@ -36,25 +36,22 @@ for url in links_list[:6]:
         name = soup.find('h1', class_='MuiTypography-root MuiTypography-body1 css-r2lffm').text
         date = soup.find('div', class_='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-11 css-twt0ol').text
         description = soup.find('div', class_='MuiBox-root css-1ebprri').text[:-10]
-        print(name, date)
-        browser = webdriver.Chrome()
-        browser.get(url)
-        browser.find_element(By.XPATH, '//*[@id="panel2873bh-header"]/div[2]').click()
-        # more detailed location
-        # location = browser.find_element(By.XPATH, '//*[@id="panel2873bh-content"]/div/div/div').text.split('\n')
-        location = browser.find_element(By.XPATH, '//*[@id="panel2873bh-content"]/div/div/div').text
-        # name = browser.find_element(By.XPATH, '//*[@id="__next"]/div/div[3]/h1').text
-        print(location)
+
+        # browser = webdriver.Chrome()
+        # browser.get(url)
+        # browser.find_element(By.XPATH, '//*[@id="panel2873bh-header"]/div[2]').click()
+        # location = browser.find_element(By.XPATH, '//*[@id="panel2873bh-content"]/div/div/div').text
+
         lst.append(
             {
                 'name': name,
                 'date': date,
                 'description': description,
-                'location': location
+
             }
         )
         print(lst)
-        browser.close()
+        # browser.close()
 
     except:
         print('error')
