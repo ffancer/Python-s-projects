@@ -45,31 +45,32 @@ for url in links_list[:4]:
                           class_='MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-ckmrqz')
         for card in cards:
             try:
-                image = card.get('data')
-                if image[:5] != 'https':
-                    image = 'mo image'
-
                 place = card.find_all('span')
                 data = [i.text.strip() for i in place]
                 place = data[2]
                 price = data[-2]
+                image = card.get('data')
                 if '£' not in price:
                     price = 'Free'
+                if image is None:
+                    continue
+
+                print(image, place, price)
             except IndexError:
                 continue
 
             lst.append(
                 {
-                    # 'url': url,
-                    # 'name': name,
+                    'url': url,
+                    'name': name,
                     'image url': image,
-                    # 'date': date,
-                    # 'description': description,
-                    # 'place': place,
-                    # 'price': price
+                    'date': date,
+                    'description': description,
+                    'place': place,
+                    'price': price
                 }
             )
-        print(lst)
+
         # browser.close()
 
     except:
