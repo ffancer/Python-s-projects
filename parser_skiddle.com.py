@@ -35,6 +35,7 @@ for url in links_list[:4]:
     name = soup.find('h1', class_='MuiTypography-root MuiTypography-body1 css-r2lffm').text
     date = soup.find('div', class_='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-11 css-twt0ol').text
     description = soup.find('div', class_='MuiBox-root css-1ebprri').text[:-10]
+    image = soup.find(class_='css-1x26sxc')['data']
     # print(name, date, description)
 
     #     # soup = BeautifulSoup(req.text, 'lxml')
