@@ -2,6 +2,10 @@
 requests, beautifulsoup, lxml, json
 
 собираем карточки фестивалей который будет джсон файлом
+upd. for version 1.1:
+-работа с карточкой фестиваля (плохо парсится не понятна причина)
+-место проведения
+-мб че еще
 """
 import requests
 from bs4 import BeautifulSoup
