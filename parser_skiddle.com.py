@@ -70,7 +70,11 @@ headers = {
 
 req = requests.get(test_url, headers=headers)
 soup = BeautifulSoup(req.text, 'html.parser')
-print(soup)
 
-divs = soup.find('div', class_='MuiContainer-root MuiContainer-maxWidthLg css-zd1mrw')
-print(divs)
+
+
+# основа карточки:
+# divs = soup.find('div', class_='MuiContainer-root MuiContainer-maxWidthLg css-zd1mrw')
+
+card = soup.find('div', class_='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1ik2gjq')
+print(card.text)
