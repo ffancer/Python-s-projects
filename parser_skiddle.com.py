@@ -19,7 +19,7 @@ headers = {
     'Accept': '*/*',
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
 }
-
+dates = ["Friday 2 - Saturday 3 June, 2023", "Friday 26 - Sunday 28 May, 2023", "Saturday 8 - Sunday 9 April, 2023"]
 
 # def collect_links():
 #     req = requests.get(url, headers=headers)
@@ -79,4 +79,6 @@ for url in test_url_list:
 # divs = soup.find('div', class_='MuiContainer-root MuiContainer-maxWidthLg css-zd1mrw')
 
     card = soup.find('div', class_='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1ik2gjq')
-    print(card.text)
+    for i in card.text.split('£'):
+        if i in ['23', '22', '24']:
+            print('+')
