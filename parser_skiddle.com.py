@@ -19,7 +19,6 @@ headers = {
 }
 
 
-
 def collect_links():
     req = requests.get(url, headers=headers)
     soup = BeautifulSoup(req.text, 'lxml')
@@ -38,7 +37,7 @@ def collect_links():
 def collect_infomation():
     json_list = []
 
-    for url in collect_links()[:2]:
+    for url in collect_links():
         req = requests.get(url=url, headers=headers)
         soup = BeautifulSoup(req.text, 'lxml')
         name = soup.find('h1', class_='MuiTypography-root MuiTypography-body1 css-r2lffm').text
@@ -59,11 +58,11 @@ def collect_infomation():
         )
 
     return json_list
-    #
-    # with open('festivals.json', 'a', encoding='utf-8') as file:
-    #     json.dump(json_list, file, indent=4, ensure_ascii=False)
 
 
-# collect_links()
+def save_json_file():
+    with open('festivals.json', 'a', encoding='utf-8') as file:
+        json.dump(collect_infomation(), file, indent=4, ensure_ascii=False)
 
-collect_infomation()
+
+save_json_file()
