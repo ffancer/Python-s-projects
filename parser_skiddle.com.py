@@ -82,4 +82,15 @@ for url in test_url_list:
     card = soup.find('div', class_='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1ik2gjq')
     # for i in card.text.split('£'):
     #     print(i)
-    print(card.text)
+    # print(card.text)
+    first = card.text.split(',')
+    second = first[1].split('From £')
+    price = 'No Info'
+    if len(second) >= 2:
+        price = '£' + second[1].split('/')[0].strip()
+        location = second[0].strip()[4:]
+        print(price)
+        print(location)
+    else:
+        location = second[0].strip()[4:]
+        print(location)
