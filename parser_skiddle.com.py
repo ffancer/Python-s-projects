@@ -71,7 +71,8 @@ dates = ["Friday 2 - Saturday 3 June, 2023", "Friday 26 - Sunday 28 May, 2023", 
 
 for url in test_url_list:
     req = requests.get(url, headers=headers)
-    soup = BeautifulSoup(req.text, 'html.parser')
+    # soup = BeautifulSoup(req.text, 'html.parser')
+    soup = BeautifulSoup(req.text, 'lxml')
 
 
 
@@ -79,6 +80,6 @@ for url in test_url_list:
 # divs = soup.find('div', class_='MuiContainer-root MuiContainer-maxWidthLg css-zd1mrw')
 
     card = soup.find('div', class_='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1ik2gjq')
-    for i in card.text.split('£'):
-        if i in ['23', '22', '24']:
-            print('+')
+    # for i in card.text.split('£'):
+    #     print(i)
+    print(card.text)
