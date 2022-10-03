@@ -34,31 +34,36 @@ def collect_links():
 
     return links_list
 
-# json_list = []
-# for url in links_list:
-#     print(url)
-#     req = requests.get(url=url, headers=headers)
-#     soup = BeautifulSoup(req.text, 'lxml')
-#
-#     name = soup.find('h1', class_='MuiTypography-root MuiTypography-body1 css-r2lffm').text
-#     date = soup.find('div', class_='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-11 css-twt0ol').text
-#     description = soup.find('div', class_='MuiBox-root css-1ebprri').text[:-10]
-#     image = soup.find(class_='css-1x26sxc')['data']
-#     ticket = url + '#tickets'
-#
-#     json_list.append(
-#         {
-#             'Url': url,
-#             'Name': name,
-#             'Date': date,
-#             'Description': description,
-#             "Festival's image": image,
-#             'Buy ticket': ticket
-#         }
-#     )
-#
-# with open('festivals.json', 'a', encoding='utf-8') as file:
-#     json.dump(json_list, file, indent=4, ensure_ascii=False)
+
+def collect_infomation():
+    json_list = []
+
+    for url in collect_links()[:2]:
+        req = requests.get(url=url, headers=headers)
+        soup = BeautifulSoup(req.text, 'lxml')
+        name = soup.find('h1', class_='MuiTypography-root MuiTypography-body1 css-r2lffm').text
+        date = soup.find('div', class_='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-11 css-twt0ol').text
+        description = soup.find('div', class_='MuiBox-root css-1ebprri').text[:-10]
+        image = soup.find(class_='css-1x26sxc')['data']
+        ticket = url + '#tickets'
+
+        json_list.append(
+            {
+                'Url': url,
+                'Name': name,
+                'Date': date,
+                'Description': description,
+                "Festival's image": image,
+                'Buy ticket': ticket
+            }
+        )
+
+    return json_list
+    #
+    # with open('festivals.json', 'a', encoding='utf-8') as file:
+    #     json.dump(json_list, file, indent=4, ensure_ascii=False)
 
 
-print(collect_links())
+# collect_links()
+
+collect_infomation()
