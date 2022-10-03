@@ -13,7 +13,8 @@ import json
 
 
 # url = 'https://www.skiddle.com/festivals/'
-test_url = 'https://www.skiddle.com/festivals/Baltic-Weekender/'
+test_url_list = ['https://www.skiddle.com/festivals/Baltic-Weekender/', 'https://www.skiddle.com/festivals/Creamfields-South/',
+                 'https://www.skiddle.com/festivals/terminal-v-festival/']
 headers = {
     'Accept': '*/*',
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
@@ -68,13 +69,14 @@ headers = {
 #
 # save_json_file()
 
-req = requests.get(test_url, headers=headers)
-soup = BeautifulSoup(req.text, 'html.parser')
+for url in test_url_list:
+    req = requests.get(url, headers=headers)
+    soup = BeautifulSoup(req.text, 'html.parser')
 
 
 
 # основа карточки:
 # divs = soup.find('div', class_='MuiContainer-root MuiContainer-maxWidthLg css-zd1mrw')
 
-card = soup.find('div', class_='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1ik2gjq')
-print(card.text)
+    card = soup.find('div', class_='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1ik2gjq')
+    print(card.text)
