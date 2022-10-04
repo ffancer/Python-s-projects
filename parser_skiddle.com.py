@@ -70,21 +70,20 @@ def collect_infomation():
                 'Buy ticket': ticket
             }
         )
-    # json_list.append({parsing_date()})
+    json_list.append(parsing_date())
     return json_list
 
 
 def save_json_file():
     with open('festivals.json', 'a', encoding='utf-8') as file:
         json.dump(collect_infomation(), file, indent=4, ensure_ascii=False)
-        json.dump({parsing_date()}, file, indent=4, ensure_ascii=False)
 
 
 def parsing_date():
     now = datetime.now()
     date_time = date.today().strftime("%d.%m.%Y")
     current_time = now.strftime("%H часов %M минут")
-    return 'Работа произведена в ' + current_time + ' ' + date_time + ' числа'
+    return {'Работа произведена в ': current_time + ' ' + date_time + ' числа'}
 
 
 save_json_file()
