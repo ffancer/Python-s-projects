@@ -51,58 +51,66 @@ headers = {
 
 
 # ++++++++++++++++++++++++++++++++++  site number 2  ++++++++++++++++++++++++++++++++++++++++++++++++
-count = 1
-url_2 = f'https://doramy.club/top/page/{count}'
-data_list_2 = [[], [], [], [], []]
-
-
-def take_data():
-    req = requests.get(url_2, headers=headers)
-    soup = BeautifulSoup(req.text, 'lxml')
-    cards = soup.find_all('div', class_='post-home')
-
-    for card in cards:
-        score = card.find('div', class_='average').text
-        data_list_2[0].append(score)
-        # name = card.find('img', alt=True)['alt']
-        name = card.find('a').find('span').text
-        data_list_2[1].append(name)
-
-        # работа с <td>
-        columns = card.find_all('td')
-        columns = [i.text.strip() for i in columns]
-
-        # выясняем сериал или фильм
-        film_or_serial = 'Сериал'
-        if columns[0] == 'Страна:':
-            film_or_serial = 'Фильм'
-        data_list_2[2].append(film_or_serial)
-
-        try:
-            genres = columns[columns.index('Жанр:') + 1]
-            data_list_2[3].append(genres)
-        except ValueError:
-            data_list_2[3].append(' ')
-
-        episodes_count = 1
-        if columns[1][0].isdigit():
-            episodes_count = columns[1]
-        data_list_2[4].append(episodes_count)
-
-
-def list_to_excel():
-    df = pd.DataFrame.from_dict({'Рейтинг: ': data_list_2[0], 'Название: ': data_list_2[1], 'Фильм или сериал: ': data_list_2[2], 'Жанр: ': data_list_2[3], 'Кол-во эпизодов: ': data_list_2[4]})
-    df.to_excel('top_100_dorams_2.xlsx', header=True, index=False)
-
-
-for count in range(239):
-    url_2 = f'https://doramy.club/top/page/{count}'
-    time.sleep(1)
-    take_data()
-
-list_to_excel()
+# count = 1
+# url_2 = f'https://doramy.club/top/page/{count}'
+# data_list_2 = [[], [], [], [], []]
+#
+#
+# def take_data():
+#     req = requests.get(url_2, headers=headers)
+#     soup = BeautifulSoup(req.text, 'lxml')
+#     cards = soup.find_all('div', class_='post-home')
+#
+#     for card in cards:
+#         score = card.find('div', class_='average').text
+#         data_list_2[0].append(score)
+#         # name = card.find('img', alt=True)['alt']
+#         name = card.find('a').find('span').text
+#         data_list_2[1].append(name)
+#
+#         # работа с <td>
+#         columns = card.find_all('td')
+#         columns = [i.text.strip() for i in columns]
+#
+#         # выясняем сериал или фильм
+#         film_or_serial = 'Сериал'
+#         if columns[0] == 'Страна:':
+#             film_or_serial = 'Фильм'
+#         data_list_2[2].append(film_or_serial)
+#
+#         try:
+#             genres = columns[columns.index('Жанр:') + 1]
+#             data_list_2[3].append(genres)
+#         except ValueError:
+#             data_list_2[3].append(' ')
+#
+#         episodes_count = 1
+#         if columns[1][0].isdigit():
+#             episodes_count = columns[1]
+#         data_list_2[4].append(episodes_count)
+#
+#
+# def list_to_excel():
+#     df = pd.DataFrame.from_dict({'Рейтинг: ': data_list_2[0], 'Название: ': data_list_2[1], 'Фильм или сериал: ': data_list_2[2], 'Жанр: ': data_list_2[3], 'Кол-во эпизодов: ': data_list_2[4]})
+#     df.to_excel('top_100_dorams_2.xlsx', header=True, index=False)
+#
+#
+# for count in range(239):
+#     url_2 = f'https://doramy.club/top/page/{count}'
+#     time.sleep(1)
+#     take_data()
+#
+# list_to_excel()
 """
 https://docs.google.com/spreadsheets/d/1fxWDW7y5kF3itNztAsY9T12vh6-_EyLpyM2mbe_Qc0k/edit#gid=867375299
 """
 
--
+
+import pandas as pd
+file_df = pd.read_excel('remove.xlsx')
+
+file_df_first_record = file_df.drop_duplicates(subset=["Название:"], keep="first")
+file_df_first_record.to_excel("Duplicates_First_Record.xlsx", index=False)
+
+file_df_last_record = file_df.drop_duplicates(subset=["Название:"], keep="last")
+file_df_last_record.to_excel("Duplicates_Last_Record.xlsx", index=False)
