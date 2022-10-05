@@ -105,12 +105,33 @@ headers = {
 https://docs.google.com/spreadsheets/d/1fxWDW7y5kF3itNztAsY9T12vh6-_EyLpyM2mbe_Qc0k/edit#gid=867375299
 """
 
+# import pandas as pd
+# file_df = pd.read_excel('remove.xlsx')
+#
+# file_df_first_record = file_df.drop_duplicates(subset=["Название:"], keep="first")
+# file_df_first_record.to_excel("Duplicates_First_Record.xlsx", index=False)
+#
+# file_df_last_record = file_df.drop_duplicates(subset=["Название:"], keep="last")
+# file_df_last_record.to_excel("Duplicates_Last_Record.xlsx", index=False)
+#
+# file_df_remove_all = file_df.drop_duplicates(subset=["Название:"], keep=False)
+# file_df_remove_all.to_excel("Duplicates_All_Removed.xlsx", index=False)
+#
+# duplicate_row_index = file_df.duplicated(subset=["Название:"], keep="first")
+# all_duplicate_rows = file_df[duplicate_row_index]
+# duplicate_rows = all_duplicate_rows.drop_duplicates(subset=["Название:"], keep="first")
+# duplicate_rows.to_excel("Duplicate_Rows.xlsx", index=False)
+
+
 
 import pandas as pd
-file_df = pd.read_excel('remove.xlsx')
 
-file_df_first_record = file_df.drop_duplicates(subset=["Название:"], keep="first")
-file_df_first_record.to_excel("Duplicates_First_Record.xlsx", index=False)
+# making data frame from csv file
+data = pd.read_csv("remove.xlsx", encoding='utf-8')
 
-file_df_last_record = file_df.drop_duplicates(subset=["Название:"], keep="last")
-file_df_last_record.to_excel("Duplicates_Last_Record.xlsx", index=False)
+# sorting by first name
+data.sort_values("Название: ", inplace=True, encoding='utf-8')
+
+# dropping ALL duplicate values
+data.drop_duplicates(subset="Название: ", keep=False, inplace=True, encoding='utf-8')
+
