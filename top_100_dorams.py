@@ -8,15 +8,11 @@ upd. for version 1.02:
 - need more sites (2-3 or more)
 - no duplicates
 """
-import requests
-from bs4 import BeautifulSoup
-import pandas as pd
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-import time
 #
 #
 # url = 'https://vsedoramy.net/top100korean.html'
+import pandas as pd
+
 headers = {
     'Accept': '*/*',
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
@@ -124,14 +120,20 @@ https://docs.google.com/spreadsheets/d/1fxWDW7y5kF3itNztAsY9T12vh6-_EyLpyM2mbe_Q
 
 
 
-import pandas as pd
+# import pandas as pd
+#
+# # making data frame from csv file
+# data = pd.read_csv("remove.xlsx", encoding='utf-8')
+#
+# # sorting by first name
+# data.sort_values("Название: ", inplace=True, encoding='utf-8')
+#
+# # dropping ALL duplicate values
+# data.drop_duplicates(subset="Название: ", keep=False, inplace=True, encoding='utf-8')
 
-# making data frame from csv file
-data = pd.read_csv("remove.xlsx", encoding='utf-8')
+# 2389
+data = pd.read_excel("remove.xlsx")
 
-# sorting by first name
-data.sort_values("Название: ", inplace=True, encoding='utf-8')
-
-# dropping ALL duplicate values
-data.drop_duplicates(subset="Название: ", keep=False, inplace=True, encoding='utf-8')
-
+data.drop_duplicates(subset='Название: ', encoding='utf-8', inplace=True)
+df = data
+df.to_excel('output.xlsx')
