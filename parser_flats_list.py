@@ -1,5 +1,9 @@
+from selenium import webdriver
+import time
+from selenium.webdriver.common.by import By
 import requests
 from bs4 import BeautifulSoup
+
 
 URL = 'https://spb.domclick.ru/'
 headers = {
@@ -7,7 +11,8 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
 }
 
-req = requests.get(url=URL, headers=headers)
-soup = BeautifulSoup(req.text, 'lxml')
-
-print(soup)
+browser = webdriver.Chrome()
+browser.maximize_window()
+browser.get(URL)
+time.sleep(60)
+browser.close()
