@@ -48,10 +48,20 @@ URL = 'https://domclick.ru'
 # chrome_driver.get(URL)
 # chrome_driver.close()
 
+# firefox
 # driver = webdriver.Firefox(executable_path=r'H:\Python\myProjects\geckodriver.exe')
-options = Options()
-options.binary_location = r'E:\Programs\Mozilla Firefox\firefox.exe'
-driver = webdriver.Firefox(options=options)
-driver.get(URL)
-time.sleep(10)
-driver.close()
+# options = Options()
+# options.binary_location = r'E:\Programs\Mozilla Firefox\firefox.exe'
+# driver = webdriver.Firefox(options=options)
+# driver.get(URL)
+# driver.implicitly_wait(10)
+# time.sleep(10)
+# driver.close()
+
+
+options = webdriver.ChromeOptions()
+options.add_experimental_option("excludeSwitches", ["enable-automation"])
+options.add_experimental_option('useAutomationExtension', False)
+options.add_argument("--disable-blink-features=AutomationControlled")
+driver = webdriver.Chrome(options=options)
+driver.get('https://domclick.ru')
