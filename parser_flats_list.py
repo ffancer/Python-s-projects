@@ -59,9 +59,19 @@ URL = 'https://domclick.ru'
 # driver.close()
 
 
-options = webdriver.ChromeOptions()
-options.add_experimental_option("excludeSwitches", ["enable-automation"])
-options.add_experimental_option('useAutomationExtension', False)
-options.add_argument("--disable-blink-features=AutomationControlled")
-driver = webdriver.Chrome(options=options)
-driver.get('https://domclick.ru')
+# options = webdriver.ChromeOptions()
+# options.add_experimental_option("excludeSwitches", ["enable-automation"])
+# options.add_experimental_option('useAutomationExtension', False)
+# options.add_argument("--disable-blink-features=AutomationControlled")
+# driver = webdriver.Chrome(options=options)
+# driver.get('https://spb.domclick.ru/search?deal_type=sale&category=living&offer_type=flat&offer_type=layout&utm_referrer=https%3A%2F%2Fspb.domclick.ru%2F&offset=0')
+# time.sleep(100)
+# driver.close()
+
+
+# try to use cfscrape
+import cfscrape
+
+scraper = cfscrape.create_scraper()  # returns a CloudflareScraper instance
+# Or: scraper = cfscrape.CloudflareScraper()  # CloudflareScraper inherits from requests.Session
+print(scraper.get('https://spb.domclick.ru/').content)
