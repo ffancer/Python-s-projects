@@ -52,6 +52,6 @@ URL = 'https://domclick.ru'
 options = Options()
 options.binary_location = r'E:\Programs\Mozilla Firefox\firefox.exe'
 driver = webdriver.Firefox(options=options)
-driver.get('https://github.com/')
+driver.get(URL)
 time.sleep(10)
 driver.close()
