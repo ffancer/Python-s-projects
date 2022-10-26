@@ -71,14 +71,10 @@ URL = 'https://domclick.ru'
 
 # try to use cfscrape
 import cfscrape
-
 # scraper = cfscrape.create_scraper()  # returns a CloudflareScraper instance
 # Or: scraper = cfscrape.CloudflareScraper()  # CloudflareScraper inherits from requests.Session
 # print(scraper.get('https://spb.domclick.ru/').content)
-
-
 request = "GET / HTTP/1.1\r\n"
-cookie_value, user_agent = cfscrape.get_cookie_string("https://spb.domclick.ru/")
+cookie_value, user_agent = cfscrape.get_cookie_string("https://spb.domclick.ru/search?deal_type=sale&category=living&offer_type=flat&offer_type=layout&utm_referrer=https%3A%2F%2Fspb.domclick.ru%2F&offset=0")
 request += "Cookie: %s\r\nUser-Agent: %s\r\n" % (cookie_value, user_agent)
-
 print(request)
