@@ -128,17 +128,28 @@ from selenium.webdriver.common.proxy import Proxy, ProxyType
 # prox.add_to_capabilities(capabilities)
 # driver = webdriver.Chrome(desired_capabilities=capabilities)
 
+# PROXY = "110.34.3.229"
+# webdriver.DesiredCapabilities.FIREFOX['proxy'] = {
+#     "httpProxy": PROXY,
+#     "ftpProxy": PROXY,
+#     "sslProxy": PROXY,
+#     "noProxy": None,
+#     "proxyType": "MANUAL",
+#     "class": "org.openqa.selenium.Proxy",
+#     "autodetect": False
+# }
+# driver = webdriver.Remote('https://domclick.ru', webdriver.DesiredCapabilities.FIREFOX)
 
-PROXY = "110.34.3.229"
-webdriver.DesiredCapabilities.FIREFOX['proxy'] = {
-    "httpProxy": PROXY,
-    "ftpProxy": PROXY,
-    "sslProxy": PROXY,
-    "noProxy": None,
-    "proxyType": "MANUAL",
-    "class": "org.openqa.selenium.Proxy",
-    "autodetect": False
-}
+def my_proxy(PROXY_HOST='44.204.198.120', PROXY_PORT=80):
+    fp = webdriver.FirefoxProfile()
+    # Direct = 0, Manual = 1, PAC = 2, AUTODETECT = 4, SYSTEM = 5
+    print(PROXY_PORT)
+    print(PROXY_HOST)
+    fp.set_preference("network.proxy.type", 1)
+    fp.set_preference("network.proxy.http", PROXY_HOST)
+    fp.set_preference("network.proxy.http_port", int(PROXY_PORT))
+    fp.set_preference("general.useragent.override", "whater_useragent")
+    fp.update_preferences()
+    return webdriver.Firefox(firefox_profile=fp)
 
-# you have to use remote, otherwise you'll have to code it yourself in python to
-driver = webdriver.Remote('https://domclick.ru', webdriver.DesiredCapabilities.FIREFOX)
+print(my_proxy())
