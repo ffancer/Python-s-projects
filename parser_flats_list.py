@@ -90,38 +90,55 @@ URL = 'https://domclick.ru'
 # browser.close()
 
 
-# try collect free proxy-s
-from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
+# =====================================================================================================================
+# try collect free proxy-s ///////////  рабочий код, собирает прокси с сайта в виде словаря
+# from selenium import webdriver
+# from selenium.webdriver.common.by import By
+# driver = webdriver.Chrome()
+# def get_free_proxies(driver):
+#     driver.get('https://sslproxies.org')
+#     table = driver.find_element(By.TAG_NAME, 'table')
+#     thead = table.find_element(By.TAG_NAME, 'thead').find_elements(By.TAG_NAME, 'th')
+#     tbody = table.find_element(By.TAG_NAME, 'tbody').find_elements(By.TAG_NAME, 'tr')
+#     headers = []
+#     for th in thead:
+#         headers.append(th.text.strip())
+#     proxies = []
+#     for tr in tbody:
+#         proxy_data = {}
+#         tds = tr.find_elements(By.TAG_NAME, 'td')
+#         for i in range(len(headers)):
+#             proxy_data[headers[i]] = tds[i].text.strip()
+#         proxies.append(proxy_data)
+#     return proxies
+# free_proxies = get_free_proxies(driver)
+# print(free_proxies)
 
-options = webdriver.ChromeOptions()
-options.add_argument("start-maximized")
-options.add_experimental_option("excludeSwitches", ["enable-automation"])
-options.add_experimental_option('useAutomationExtension', False)
-# driver = webdriver.Chrome(chrome_options=options, executable_path=r'C:\WebDrivers\chromedriver.exe')
-driver = webdriver.Chrome(chrome_options=options, executable_path=r'H:\Python\myProjects\chromedriver.exe')
-driver.get("https://sslproxies.org/")
-# driver.get('https://domclick.ru')
-driver.execute_script("return arguments[0].scrollIntoView(true);", WebDriverWait(driver, 20).until(EC.visibility_of_element_located((By.XPATH, "//table[@class='table table-striped table-bordered dataTable']//th[contains(., 'IP Address')]"))))
-ips = [my_elem.get_attribute("innerHTML") for my_elem in WebDriverWait(driver, 5).until(EC.visibility_of_all_elements_located((By.XPATH, "//table[@class='table table-striped table-bordered dataTable']//tbody//tr[@role='row']/td[position() = 1]")))]
-ports = [my_elem.get_attribute("innerHTML") for my_elem in WebDriverWait(driver, 5).until(EC.visibility_of_all_elements_located((By.XPATH, "//table[@class='table table-striped table-bordered dataTable']//tbody//tr[@role='row']/td[position() = 2]")))]
-driver.quit()
-proxies = []
-for i in range(0, len(ips)):
-    proxies.append(ips[i]+':'+ports[i])
-print(proxies)
-for i in range(0, len(proxies)):
-    try:
-        print("Proxy selected: {}".format(proxies[i]))
-        options = webdriver.ChromeOptions()
-        options.add_argument('--proxy-server={}'.format(proxies[i]))
-        driver = webdriver.Chrome(options=options, executable_path=r'C:\WebDrivers\chromedriver.exe')
-        driver.get("https://www.whatismyip.com/proxy-check/?iref=home")
-        if "Proxy Type" in WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.CSS_SELECTOR, "p.card-text"))):
-            break
-    except Exception:
-        driver.quit()
-print("Proxy Invoked")
+
+# try to use proxy
+from selenium import webdriver
+from selenium.webdriver.common.proxy import Proxy, ProxyType
+
+# prox = Proxy()
+# prox.proxy_type = ProxyType.MANUAL
+# prox.http_proxy = "ip_addr:port"
+# prox.socks_proxy = "ip_addr:port"
+# prox.ssl_proxy = "ip_addr:port"
+# capabilities = webdriver.DesiredCapabilities.CHROME
+# prox.add_to_capabilities(capabilities)
+# driver = webdriver.Chrome(desired_capabilities=capabilities)
+
+
+PROXY = "110.34.3.229"
+webdriver.DesiredCapabilities.FIREFOX['proxy'] = {
+    "httpProxy": PROXY,
+    "ftpProxy": PROXY,
+    "sslProxy": PROXY,
+    "noProxy": None,
+    "proxyType": "MANUAL",
+    "class": "org.openqa.selenium.Proxy",
+    "autodetect": False
+}
+
+# you have to use remote, otherwise you'll have to code it yourself in python to
+driver = webdriver.Remote('https://domclick.ru', webdriver.DesiredCapabilities.FIREFOX)
