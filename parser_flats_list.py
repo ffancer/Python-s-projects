@@ -140,16 +140,29 @@ from selenium.webdriver.common.proxy import Proxy, ProxyType
 # }
 # driver = webdriver.Remote('https://domclick.ru', webdriver.DesiredCapabilities.FIREFOX)
 
-def my_proxy(PROXY_HOST='44.204.198.120', PROXY_PORT=80):
-    fp = webdriver.FirefoxProfile()
-    # Direct = 0, Manual = 1, PAC = 2, AUTODETECT = 4, SYSTEM = 5
-    print(PROXY_PORT)
-    print(PROXY_HOST)
-    fp.set_preference("network.proxy.type", 1)
-    fp.set_preference("network.proxy.http", PROXY_HOST)
-    fp.set_preference("network.proxy.http_port", int(PROXY_PORT))
-    fp.set_preference("general.useragent.override", "whater_useragent")
-    fp.update_preferences()
-    return webdriver.Firefox(firefox_profile=fp)
+# def my_proxy(PROXY_HOST='44.204.198.120', PROXY_PORT=80):
+#     fp = webdriver.FirefoxProfile()
+#     # Direct = 0, Manual = 1, PAC = 2, AUTODETECT = 4, SYSTEM = 5
+#     print(PROXY_PORT)
+#     print(PROXY_HOST)
+#     fp.set_preference("network.proxy.type", 1)
+#     fp.set_preference("network.proxy.http", PROXY_HOST)
+#     fp.set_preference("network.proxy.http_port", int(PROXY_PORT))
+#     fp.set_preference("general.useragent.override", "whater_useragent")
+#     fp.update_preferences()
+#     return webdriver.Firefox(firefox_profile=fp)
+# print(my_proxy())
 
-print(my_proxy())
+from selenium import webdriver
+from selenium.webdriver.common.proxy import *
+from selenium.webdriver.firefox.options import Options
+myProxy = "149.215.113.110:70"
+proxy = Proxy({
+    'proxyType': ProxyType.MANUAL,
+    'httpProxy': myProxy,
+    'sslProxy': myProxy,
+    'noProxy': ''})
+options = Options()
+options.proxy = proxy
+driver = webdriver.Firefox(options=options, executable_path=r'E:\Programs\Mozilla Firefox\firefox.exe')
+driver.get("https://www.google.com")
