@@ -168,64 +168,79 @@ from selenium.webdriver.common.proxy import Proxy, ProxyType
 # driver.get("https://www.google.com")
 
 
-import random
-import logging
-from selenium import webdriver
-from selenium.webdriver.common.proxy import Proxy
-from selenium.webdriver.firefox.options import Options
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.firefox.options import FirefoxProfile
-from selenium.webdriver.firefox.options import DesiredCapabilities
-# from http_request_randomizer.requests.proxy.ProxyObject import Protocol
-# from http_request_randomizer.requests.proxy.requestProxy import RequestProxy
-
-# Obtain a list of HTTPS proxies
-# Suppress the console debugging output by setting the log level
-# req_proxy = RequestProxy(log_level=logging.ERROR, protocol=Protocol.HTTPS)
-
-# Obtain a random single proxy from the list of proxy addresses
-# random_proxy = random.sample(req_proxy.get_proxy_list(), 1)
-
-firefox_options = Options()
-firefox_options.add_argument("--disable-infobars")
-firefox_options.add_argument("--disable-extensions")
-firefox_options.add_argument("--disable-popup-blocking")
-
-profile_options = FirefoxProfile()
-user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11.5; rv:90.0) Gecko/20100101 Firefox/90.0'
-firefox_options.set_preference('profile_options = FirefoxProfile()', user_agent)
-
-firefox_capabilities = DesiredCapabilities().FIREFOX
-
-# add the random proxy to firefox_capabilities
-firefox_proxies = Proxy()
-firefox_proxies.ssl_proxy = random_proxy[0].get_address()
-firefox_proxies.add_to_capabilities(firefox_capabilities)
-
-driver = webdriver.Firefox(executable_path='/usr/local/bin/geckodriver', options=firefox_options,
-                           desired_capabilities=firefox_capabilities)
-
-# you can either do this
-try:
-    # print proxy IP for testing
-    print(random_proxy[0].get_address())
-    # output
-    # 46.151
-    # .145
-    # .4: 53281
-
-    URL = 'http://www.expressvpn.com/what-is-my-ip'
-    driver.get(URL)
-
-# Some of the proxies pulled from http_request_randomizer will timeout
-# for various reasons, so this exception is used to catch these timeouts
-except TimeoutException as e:
-    print("A Page load Timeout Occurred.")
-    driver.quit()
-
-# or this.  You can also put this in a try/except block and
-# increase the timeout as needed.
+# import random
+# import logging
+# from selenium import webdriver
+# from selenium.webdriver.common.proxy import Proxy
+# from selenium.webdriver.firefox.options import Options
+# from selenium.common.exceptions import TimeoutException
+# from selenium.webdriver.firefox.options import FirefoxProfile
+# from selenium.webdriver.firefox.options import DesiredCapabilities
+# # from http_request_randomizer.requests.proxy.ProxyObject import Protocol
+# # from http_request_randomizer.requests.proxy.requestProxy import RequestProxy
+# # Obtain a list of HTTPS proxies
+# # Suppress the console debugging output by setting the log level
+# # req_proxy = RequestProxy(log_level=logging.ERROR, protocol=Protocol.HTTPS)
+# # Obtain a random single proxy from the list of proxy addresses
+# # random_proxy = random.sample(req_proxy.get_proxy_list(), 1)
+# firefox_options = Options()
+# firefox_options.add_argument("--disable-infobars")
+# firefox_options.add_argument("--disable-extensions")
+# firefox_options.add_argument("--disable-popup-blocking")
+# profile_options = FirefoxProfile()
+# user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11.5; rv:90.0) Gecko/20100101 Firefox/90.0'
+# firefox_options.set_preference('profile_options = FirefoxProfile()', user_agent)
+# firefox_capabilities = DesiredCapabilities().FIREFOX
+# # add the random proxy to firefox_capabilities
+# firefox_proxies = Proxy()
+# firefox_proxies.ssl_proxy = random_proxy[0].get_address()
+# firefox_proxies.add_to_capabilities(firefox_capabilities)
+# driver = webdriver.Firefox(executable_path='/usr/local/bin/geckodriver', options=firefox_options,
+#                            desired_capabilities=firefox_capabilities)
+# # you can either do this
+# try:
+#     # print proxy IP for testing
+#     print(random_proxy[0].get_address())
+#     # output
+#     # 46.151
+#     # .145
+#     # .4: 53281
 #
-# driver.set_page_load_timeout(120)
-# URL = 'http://www.expressvpn.com/what-is-my-ip'
-# driver.get(URL)
+#     URL = 'http://www.expressvpn.com/what-is-my-ip'
+#     driver.get(URL)
+# # Some of the proxies pulled from http_request_randomizer will timeout
+# # for various reasons, so this exception is used to catch these timeouts
+# except TimeoutException as e:
+#     print("A Page load Timeout Occurred.")
+#     driver.quit()
+# # or this.  You can also put this in a try/except block and
+# # increase the timeout as needed.
+# # driver.set_page_load_timeout(120)
+# # URL = 'http://www.expressvpn.com/what-is-my-ip'
+# # driver.get(URL)
+
+
+proxy_list = [
+    '151.181.91.10',
+    '68.183.242.248',
+    '161.97.126.37'
+]
+url = 'https://www.whatismyip.com/es/'
+PROXY = proxy_list[0]
+options = Options()
+options.headless = False
+
+firefox_capabilities = webdriver.DesiredCapabilities.FIREFOX
+firefox_capabilities['marionette'] = True
+firefox_capabilities['proxy'] = {
+    'proxyType': "MANUAL",
+    'httpProxy': PROXY,
+    'ftpProxy': PROXY,
+    'sslProxy': PROXY
+}
+driver = webdriver.Firefox(options=options, executable_path=r'geckodriver.exe', capabilities=firefox_capabilities)
+# Set the interceptor on the driver
+# driver.request_interceptor = Interceptor
+driver.get(url)
+time.sleep(50)
+driver.quit()
