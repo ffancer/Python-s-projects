@@ -220,27 +220,61 @@ from selenium.webdriver.common.proxy import Proxy, ProxyType
 # # driver.get(URL)
 
 
-proxy_list = [
-    '151.181.91.10',
-    '68.183.242.248',
-    '161.97.126.37'
-]
-url = 'https://www.whatismyip.com/es/'
-PROXY = proxy_list[0]
-options = Options()
-options.headless = False
+# proxy_list = [
+#     '151.181.91.10',
+#     '68.183.242.248',
+#     '161.97.126.37'
+# ]
+# url = 'https://www.whatismyip.com/es/'
+# PROXY = proxy_list[0]
+# options = Options()
+# options.headless = False
+#
+# firefox_capabilities = webdriver.DesiredCapabilities.FIREFOX
+# firefox_capabilities['marionette'] = True
+# firefox_capabilities['proxy'] = {
+#     'proxyType': "MANUAL",
+#     'httpProxy': PROXY,
+#     'ftpProxy': PROXY,
+#     'sslProxy': PROXY
+# }
+# driver = webdriver.Firefox(options=options, executable_path=r'geckodriver.exe', capabilities=firefox_capabilities)
+# # Set the interceptor on the driver
+# # driver.request_interceptor = Interceptor
+# driver.get(url)
+# time.sleep(50)
+# driver.quit()
 
-firefox_capabilities = webdriver.DesiredCapabilities.FIREFOX
-firefox_capabilities['marionette'] = True
-firefox_capabilities['proxy'] = {
-    'proxyType': "MANUAL",
-    'httpProxy': PROXY,
-    'ftpProxy': PROXY,
-    'sslProxy': PROXY
-}
-driver = webdriver.Firefox(options=options, executable_path=r'geckodriver.exe', capabilities=firefox_capabilities)
-# Set the interceptor on the driver
-# driver.request_interceptor = Interceptor
-driver.get(url)
-time.sleep(50)
+
+
+# =====================================================================================================================
+# показывает твой ип + делает скриншот этого
+import time
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from bs4 import BeautifulSoup
+userAgent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
+options = Options()
+options.add_argument('--headless')
+options.add_experimental_option ('excludeSwitches', ['enable-logging'])
+options.add_argument("start-maximized")
+options.add_argument('window-size=1920x1080')
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-gpu')
+options.add_argument(f'user-agent={userAgent}')
+driver = webdriver.Chrome(options=options)
+waitWebDriver = WebDriverWait(driver, 10)
+link = "https://whatismyipaddress.com/"
+driver.get(link)
+driver.save_screenshot("whatismyipaddress.png")
+time.sleep(5)
+soup = BeautifulSoup (driver.page_source, 'html.parser')
+tmpIP = soup.find("span", {"id": "ipv4"})
+tmpP = soup.find_all("p", {"class": "information"})
+for e in tmpP:
+    tmpSPAN = e.find_all("span")
+    for e2 in tmpSPAN:
+        print(e2.text)
+print(tmpIP.text)
 driver.quit()
