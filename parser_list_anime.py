@@ -10,4 +10,5 @@ headers = {
 
 req = requests.get(url, headers=headers)
 soup = BeautifulSoup(req.text, 'lxml')
-print(soup)
+tbody = soup.find_all('table')[0].find_all('tr')
+print(tbody)
