@@ -14,4 +14,4 @@ tbody = soup.find_all('table')[0].find_all('tr')
 # for i in tbody:
 #     print(i)
 td = [i.text.replace('\n', '').strip() for i in tbody]
-print(td[2])
+print(td[2].split('        '))
