@@ -11,5 +11,7 @@ headers = {
 req = requests.get(url, headers=headers)
 soup = BeautifulSoup(req.text, 'lxml')
 tbody = soup.find_all('table')[0].find_all('tr')
-for i, j in enumerate(tbody):
-    print(i, j)
+# for i in tbody:
+#     print(i)
+td = [i.text.replace('\n', '').strip() for i in tbody]
+print(td[2])
