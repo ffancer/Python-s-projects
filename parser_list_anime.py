@@ -56,6 +56,9 @@ soup = BeautifulSoup(req.text, 'lxml')
 all_cards = soup.find_all(class_='ranking-list')
 for card in all_cards:
     rank = card.find(class_='rank ac').text.strip()
-    name = card.find(class_='title al va-t word-break')
+    anime_description = card.find(class_='title al va-t word-break').text.split('\n')[7:]
+    name = anime_description[0]
     score = card.find(class_='score ac fs14')
-    print(rank)
+    print(name)
+    # ['Fullmetal Alchemist: Brotherhood', '        TV (64 eps)', '        Apr 2009 - Jul 2010',
+    #  '        3,018,336 members', '      ', '', ' Manga Store', 'Volume 1', '$6.99 Preview', '']
