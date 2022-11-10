@@ -10,8 +10,20 @@ headers = {
 
 req = requests.get(url, headers=headers)
 soup = BeautifulSoup(req.text, 'lxml')
-tbody = soup.find_all('table')[0].find_all('tr')
-# for i in tbody:
-#     print(i)
-td = [i.text.replace('\n', '').strip() for i in tbody]
-print(td[2].split('      '))
+all_info_cards = soup.find_all('table')[0].find_all('tr')
+info_card = [i.text.replace('\n', '').strip() for i in all_info_cards]
+json_list = []
+
+for card in info_card:
+    if len(card.split('      ')) < 2:
+        continue
+    else:
+        json_list.append(
+            {
+                'name': card[0],
+                'how many episodes': card[1]
+            }
+        )
+
+
+print(json_list)
