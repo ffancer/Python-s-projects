@@ -59,7 +59,8 @@ for card in all_cards:
     anime_description = card.find(class_='title al va-t word-break').text.split('\n')[7:]
     name = anime_description[0]
     number_of_episodes = anime_description[1].strip()
+    release_date = anime_description[2].strip()
     score = card.find(class_='score ac fs14')
-    print(number_of_episodes)
+    print(release_date)
     # ['Fullmetal Alchemist: Brotherhood', '        TV (64 eps)', '        Apr 2009 - Jul 2010',
     #  '        3,018,336 members', '      ', '', ' Manga Store', 'Volume 1', '$6.99 Preview', '']
