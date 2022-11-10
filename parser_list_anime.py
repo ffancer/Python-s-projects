@@ -32,14 +32,17 @@ soup = BeautifulSoup(req.text, 'lxml')
 
 
 # second
-# all_info = soup.find_all('div', class_='di-ib clearfix')
-# for i,j in enumerate(all_info):
-#     print(i, j.h3)
-
+lst = []
+all_info = soup.find_all(class_='di-ib clearfix')
+for i, j in enumerate(all_info):
+    # print(i, j.h3)
+    a = j.get('href')
+#     lst.append(a)
+# print(lst)
 
 # third
-all_info = soup.find_all('tr', class_='ranking-list')
+# all_info = soup.find_all('tr', class_='ranking-list')
 # for info in all_info:
 #     print(info)
-info = [i.text.replace('\n', '').strip() for i in all_info]
-print(info)
+# info = [i.text.replace('\n', '').strip() for i in all_info]
+# print(info)
