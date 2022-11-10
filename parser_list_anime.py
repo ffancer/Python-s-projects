@@ -15,13 +15,16 @@ info_card = [i.text.replace('\n', '').strip() for i in all_info_cards]
 json_list = []
 
 for card in info_card:
-    if len(card.split('      ')) < 2:
+    card = card.split('      ')
+    if len(card) < 2:
         continue
     else:
         json_list.append(
             {
                 'name': card[0],
-                'how many episodes': card[1]
+                'how many episodes': card[1],
+                'when come out': card[2],
+                'score': card[4]
             }
         )
 
