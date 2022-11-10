@@ -32,11 +32,15 @@ soup = BeautifulSoup(req.text, 'lxml')
 
 
 # second
-lst = []
-all_info = soup.find_all(class_='di-ib clearfix')
-for i, j in enumerate(all_info):
-    # print(i, j.h3)
-    a = j.get('href')
+# lst = []
+# # all_info = soup.find_all(class_='di-ib clearfix')
+# all_info = soup.find_all(id="#area5114")
+# print(all_info)
+
+# for i in all_info:
+#     # print(i, j.h3)
+#     a = i
+#     print(a)
 #     lst.append(a)
 # print(lst)
 
@@ -46,3 +50,12 @@ for i, j in enumerate(all_info):
 #     print(info)
 # info = [i.text.replace('\n', '').strip() for i in all_info]
 # print(info)
+
+
+# fourth
+all_cards = soup.find_all(class_='ranking-list')
+for card in all_cards:
+    rank = card.find(class_='rank ac').text.strip()
+    name = card.find(class_='title al va-t word-break')
+    score = card.find(class_='score ac fs14')
+    print(rank)
