@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-
+import json
 
 headers = {
     'Accept': '*/*',
@@ -39,4 +39,9 @@ def collect_data():
     return json_list
 
 
+def save_json_file():
+    with open('top 1000 anime.json', 'a', encoding='utf-8') as file:
+        json.dump(collect_data(), file, indent=4, ensure_ascii=False)
 
+
+save_json_file()
