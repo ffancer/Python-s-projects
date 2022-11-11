@@ -30,7 +30,6 @@ def collect_data():
                     'Anime rank': rank,
                     'Name of the title': name,
                     'Release': release_date,
-                    'Description': anime_description,
                     'Number of episodes': number_of_episodes,
                     'Score': score
                 }
