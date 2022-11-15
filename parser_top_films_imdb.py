@@ -12,6 +12,7 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
 }
 
+json_list = []
 req = requests.get(URL, headers=headers)
 soup = BeautifulSoup(req.text, 'lxml')
 
@@ -20,4 +21,4 @@ all_about_film = soup.find_all(class_='lister-list')
 for film in all_about_film:
     film_name = film.find_all(class_='titleColumn')
     for i in film_name:
-        print(i.text)
+        print(i.text.split())
