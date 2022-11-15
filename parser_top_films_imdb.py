@@ -11,4 +11,7 @@ headers = {
 req = requests.get(URL, headers=headers)
 soup = BeautifulSoup(req.text, 'lxml')
 
-print(soup)
+all_about_film = soup.find(class_='lister-list')
+
+for i, film in enumerate(all_about_film):
+    print(i, film)
