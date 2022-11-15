@@ -22,3 +22,12 @@ for film in all_about_film:
     film_name = film.find_all(class_='titleColumn')
     for i in film_name:
         print(i.text.split())
+        json_list.append(
+            {
+                'Place': i.text.split()[0],
+                'Name': ' '.join(i.text.split()[1:-1]),
+                'Year': i.text.split()[-1],
+            }
+        )
+
+print(json_list)
