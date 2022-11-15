@@ -1,3 +1,7 @@
+"""
+IMDb Top 250 Movies
+"""
+
 import requests
 from bs4 import BeautifulSoup
 
@@ -11,7 +15,9 @@ headers = {
 req = requests.get(URL, headers=headers)
 soup = BeautifulSoup(req.text, 'lxml')
 
-all_about_film = soup.find(class_='lister-list')
+all_about_film = soup.find_all(class_='lister-list')
 
-for i, film in enumerate(all_about_film):
-    print(i, film)
+for film in all_about_film:
+    film_name = film.find_all(class_='titleColumn')
+    for i in film_name:
+        print(i.text)
