@@ -16,7 +16,7 @@ json_list = []
 req = requests.get(URL, headers=headers)
 soup = BeautifulSoup(req.text, 'lxml')
 
-all_about_film = soup.find_all(class_='lister-list')
+# all_about_film = soup.find_all(class_='lister-list')
 
 # for film in all_about_film:
 #     film_name = film.find_all(class_='titleColumn')
@@ -59,4 +59,9 @@ all_about_film = soup.find_all(class_='lister-list')
 # for (x, y) in zip(json_list, take_rating()):
 #     print(x, y)
 
-print(soup.find_all('tr'))
+all_info = soup.find_all('tr')
+for i in all_info:
+    print(i)
+    # all_about_film = i.find_all(class_='lister-list')
+    # rating = i.find_all(class_='ratingColumn imdbRating')
+    # print(all_about_film, '|||||||||||||||||||||||', rating)
