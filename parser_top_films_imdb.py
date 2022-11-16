@@ -5,6 +5,7 @@ IMDb Top 250 Movies
 import requests
 from bs4 import BeautifulSoup
 import json
+import pandas as pd
 
 
 URL = 'https://www.imdb.com/chart/top/'
@@ -70,4 +71,13 @@ def save_json_file():
         json.dump(lst, file, indent=4, ensure_ascii=False)
 
 
+def from_json_to_excel():
+    with open('top 250 films.json', encoding='utf-8') as json_file:
+        data = json.load(json_file)
+
+    df = pd.DataFrame(data)
+    return df.to_excel('top 250 films.xlsx')
+
+
 save_json_file()
+from_json_to_excel()
