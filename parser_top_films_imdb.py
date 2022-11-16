@@ -49,16 +49,23 @@ all_about_film = soup.find_all(class_='lister-list')
 #     return lst
 
 
-for film in all_about_film:
-    film_name = film.find_all(class_='titleColumn')
-    for i in film_name:
-        dct = {
-                'Place': i.text.split()[0],
-                'Name': ' '.join(i.text.split()[1:-1]),
-                'Year': i.text.split()[-1],
-            }
 
-print(dct)
+film_info = soup.find_all(class_='titleColumn')
+for i in film_info:
+    print(i.text.split()[0])
+# for film in all_about_film:
+#     film_name = film.find_all(class_='titleColumn')
+#     for i in film_name:
+#         dct = {
+#                 'Place': i.text.split()[0],
+#                 'Name': ' '.join(i.text.split()[1:-1]),
+#                 'Year': i.text.split()[-1],
+#             }
+#
+# print(dct)
+
+
+
 # lst = []
 # for (x, y) in zip(json_list, take_rating()):
 #     lst.append(x)
