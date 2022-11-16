@@ -21,10 +21,11 @@ soup = BeautifulSoup(req.text, 'lxml')
 
 all_about_film = soup.find_all(class_='lister-list')
 
+
 # for film in all_about_film:
 #     film_name = film.find_all(class_='titleColumn')
 #     for i in film_name:
-#         # print(i.text.split())
+#
 #         json_list.append(
 #             {
 #                 'Place': i.text.split()[0],
@@ -35,34 +36,12 @@ all_about_film = soup.find_all(class_='lister-list')
 #
 # print(json_list)
 
+scores_list = []
+rating = soup.find_all(class_='ratingColumn imdbRating')
+for place in rating:
+    scores_list.append(place.text.strip())
 
-# rating = soup.find_all(class_='ratingColumn imdbRating')
-# for place in rating:
-#     print(place.text.strip())
-
-
-# def take_rating():
-#     lst = []
-#     rating = soup.find_all(class_='ratingColumn imdbRating')
-#     for j in rating:
-#         lst.append(j.text.strip())
-#     return lst
-
-
-def place_name_year_score():
-    lst = []
-    film_info = soup.find_all(class_='titleColumn')
-    scores = soup.find_all(class_='ratingColumn imdbRating')
-    for i in film_info:
-        lst.append(i.text.split()[0])
-        lst.append(' '.join(i.text.split()[1:-1]))
-        lst.append(i.text.split()[-1])
-    for score in scores:
-        lst.append(score.text.strip())
-    return lst
-
-
-print(place_name_year_score())
+print(scores_list)
 
 # lst = []
 # for (x, y) in zip(json_list, take_rating()):
