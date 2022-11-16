@@ -28,9 +28,6 @@ for place in rating:
     lst.append(place.text.strip())
 
 
-
-
-
 for film in all_about_film:
     film_name = film.find_all(class_='titleColumn')
     for i in film_name:
@@ -40,7 +37,7 @@ for film in all_about_film:
                 'Place': i.text.split()[0],
                 'Name': ' '.join(i.text.split()[1:-1]),
                 'Year': i.text.split()[-1],
-                'Score': [i for i in lst]
+                'Score': [print(i) for i in lst]
             }
         )
 
