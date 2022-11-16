@@ -46,17 +46,20 @@ def take_rating():
     return lst
 
 
-# for film in all_about_film:
-#     film_name = film.find_all(class_='titleColumn')
-#     for i in film_name:
-#         json_list.append(
-#             {
-#                 'Place': i.text.split()[0],
-#                 'Name': ' '.join(i.text.split()[1:-1]),
-#                 'Year': i.text.split()[-1],
-#             }
-#         )
-#
-# print(json_list)
+for film in all_about_film:
+    film_name = film.find_all(class_='titleColumn')
+    for i in film_name:
+        json_list.append(
+            {
+                'Place': i.text.split()[0],
+                'Name': ' '.join(i.text.split()[1:-1]),
+                'Year': i.text.split()[-1],
+            }
+        )
 
-print(take_rating())
+# print(json_list)
+# print(take_rating())
+
+for (x, y) in zip(json_list, take_rating()):
+    print(x, y)
+
