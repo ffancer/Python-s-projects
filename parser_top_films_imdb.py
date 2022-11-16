@@ -32,6 +32,31 @@ all_about_film = soup.find_all(class_='lister-list')
 #
 # print(json_list)
 
-rating = soup.find_all(class_='ratingColumn imdbRating')
-for i in rating:
-    print(i.text.strip())
+
+# rating = soup.find_all(class_='ratingColumn imdbRating')
+# for place in rating:
+#     print(place.text.strip())
+
+
+def take_rating():
+    lst = []
+    rating = soup.find_all(class_='ratingColumn imdbRating')
+    for j in rating:
+        lst.append(j.text.strip())
+    return lst
+
+
+# for film in all_about_film:
+#     film_name = film.find_all(class_='titleColumn')
+#     for i in film_name:
+#         json_list.append(
+#             {
+#                 'Place': i.text.split()[0],
+#                 'Name': ' '.join(i.text.split()[1:-1]),
+#                 'Year': i.text.split()[-1],
+#             }
+#         )
+#
+# print(json_list)
+
+print(take_rating())
