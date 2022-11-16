@@ -4,6 +4,7 @@ IMDb Top 250 Movies
 
 import requests
 from bs4 import BeautifulSoup
+import json
 
 
 URL = 'https://www.imdb.com/chart/top/'
@@ -16,7 +17,7 @@ json_list = []
 req = requests.get(URL, headers=headers)
 soup = BeautifulSoup(req.text, 'lxml')
 
-# all_about_film = soup.find_all(class_='lister-list')
+all_about_film = soup.find_all(class_='lister-list')
 
 # for film in all_about_film:
 #     film_name = film.find_all(class_='titleColumn')
@@ -33,35 +34,40 @@ soup = BeautifulSoup(req.text, 'lxml')
 # print(json_list)
 
 
-# rating = soup.find_all(class_='ratingColumn imdbRating')
-# for place in rating:
-#     print(place.text.strip())
+rating = soup.find_all(class_='ratingColumn imdbRating')
+for place in rating:
+    print(place.text.strip())
 
 
-# def take_rating():
-#     lst = []
-#     rating = soup.find_all(class_='ratingColumn imdbRating')
-#     for j in rating:
-#         lst.append(j.text.strip())
-#     return lst
-#
-#
-# for film in all_about_film:
-#     film_name = film.find_all(class_='titleColumn')
-#     for i in film_name:
-#         json_list.append(
-#             {
-#                 'Place': i.text.split()[0],
-#                 'Name': ' '.join(i.text.split()[1:-1]),
-#                 'Year': i.text.split()[-1],
-#             }
-#         )
-# for (x, y) in zip(json_list, take_rating()):
-#     print(x, y)
+def take_rating():
+    lst = []
+    rating = soup.find_all(class_='ratingColumn imdbRating')
+    for j in rating:
+        lst.append(j.text.strip())
+    return lst
 
-all_info = soup.find_all('tr')
-for i in all_info:
-    print(i)
-    # all_about_film = i.find_all(class_='lister-list')
-    # rating = i.find_all(class_='ratingColumn imdbRating')
-    # print(all_about_film, '|||||||||||||||||||||||', rating)
+
+for film in all_about_film:
+    film_name = film.find_all(class_='titleColumn')
+    for i in film_name:
+        json_list.append(
+            {
+                'Place': i.text.split()[0],
+                'Name': ' '.join(i.text.split()[1:-1]),
+                'Year': i.text.split()[-1],
+            }
+        )
+
+lst = []
+for (x, y) in zip(json_list, take_rating()):
+    lst.append(x)
+    lst.append(y)
+
+
+
+def save_json_file():
+    with open('top 250 films.json', 'a', encoding='utf-8') as file:
+        json.dump(lst, file, indent=4, ensure_ascii=False)
+
+
+save_json_file()
