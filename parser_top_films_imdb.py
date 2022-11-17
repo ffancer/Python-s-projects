@@ -24,7 +24,8 @@ for film in films:
     name = film.find('td', class_='titleColumn').a.text
     rank = film.find('td', class_='titleColumn').text.strip().split('.')[0]
     year = film.find('td', class_='titleColumn').span.text.replace('(', '').replace(')', '')
-    print(year)
+    rating = film.find('td', class_='ratingColumn imdbRating').strong.text
+    print(rating)
 
 
 
