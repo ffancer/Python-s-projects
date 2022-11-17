@@ -18,8 +18,11 @@ json_list = []
 req = requests.get(URL, headers=headers)
 soup = BeautifulSoup(req.text, 'lxml')
 
-all_about_film = soup.find(class_='lister-list').find_all('tr')
-print(all_about_film)
+films = soup.find(class_='lister-list').find_all('tr')
+
+for film in films:
+    name = film.find('td', class_='titleColumn').a.text
+    print(name)
 
 
 
