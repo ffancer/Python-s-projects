@@ -23,7 +23,8 @@ films = soup.find(class_='lister-list').find_all('tr')
 for film in films:
     name = film.find('td', class_='titleColumn').a.text
     rank = film.find('td', class_='titleColumn').text.strip().split('.')[0]
-    print(rank)
+    year = film.find('td', class_='titleColumn').span.text.replace('(', '').replace(')', '')
+    print(year)
 
 
 
