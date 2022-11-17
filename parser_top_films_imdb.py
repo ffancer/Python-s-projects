@@ -22,7 +22,8 @@ films = soup.find(class_='lister-list').find_all('tr')
 
 for film in films:
     name = film.find('td', class_='titleColumn').a.text
-    print(name)
+    rank = film.find('td', class_='titleColumn').text.strip().split('.')[0]
+    print(rank)
 
 
 
