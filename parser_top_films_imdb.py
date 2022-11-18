@@ -40,13 +40,15 @@ soup = BeautifulSoup(req.text, 'lxml')
 def collecting_info():
     films = soup.find(class_='lister-list').find_all('tr')
     for film in films:
-        place
-        name
-        year
-        rating
+        place = film.find(class_='titleColumn').text.split('.')[0].strip()
+        # name = film.find(class_='titleColumn').a.text
+        # year = film.find(class_='titleColumn').span.text
+        # rating = film.find(class_='ratingColumn imdbRating').strong.text
+        # return place, name, year, rating
+        return place
 
 
-collecting_info()
+print(collecting_info())
 
 # def save_json_file():
 #     with open('top 250 films.json', 'a', encoding='utf-8') as file:
