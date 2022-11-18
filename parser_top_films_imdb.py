@@ -40,12 +40,12 @@ soup = BeautifulSoup(req.text, 'lxml')
 def collecting_info():
     films = soup.find(class_='lister-list').find_all('tr')
     for film in films:
-        place = film.find(class_='titleColumn').text.split('.')[0].strip()
+        # place = film.find(class_='titleColumn').text.split('.')[0].strip()
         # name = film.find(class_='titleColumn').a.text
-        # year = film.find(class_='titleColumn').span.text
-        # rating = film.find(class_='ratingColumn imdbRating').strong.text
+        # year = film.find(class_='titleColumn').span.text.strip('()')
+        rating = film.find(class_='ratingColumn imdbRating').strong.text
         # return place, name, year, rating
-        return place
+        return rating
 
 
 print(collecting_info())
