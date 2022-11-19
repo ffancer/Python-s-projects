@@ -12,14 +12,12 @@ headers = {
     'Accept': '*/*',
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
 }
-
-dct = {}
 json_list = []
 req = requests.get(URL, headers=headers)
 soup = BeautifulSoup(req.text, 'lxml')
 
 # films = soup.find(class_='lister-list').find_all('tr')
-#
+# #
 # for film in films:
 #     name = film.find('td', class_='titleColumn').a.text
 #     rank = film.find('td', class_='titleColumn').text.strip().split('.')[0]
@@ -39,13 +37,22 @@ soup = BeautifulSoup(req.text, 'lxml')
 
 def collecting_info():
     films = soup.find(class_='lister-list').find_all('tr')
+
     for film in films:
-        # place = film.find(class_='titleColumn').text.split('.')[0].strip()
-        # name = film.find(class_='titleColumn').a.text
-        # year = film.find(class_='titleColumn').span.text.strip('()')
+        place = film.find(class_='titleColumn').text.split('.')[0].strip()
+        name = film.find(class_='titleColumn').a.text
+        year = film.find(class_='titleColumn').span.text.strip('()')
         rating = film.find(class_='ratingColumn imdbRating').strong.text
-        # return place, name, year, rating
-        return rating
+        json_list.append(
+            {
+                'Place': place,
+                'Name': name,
+                'Year': year,
+                'IMDb Rating': rating
+            }
+        )
+
+    return json_list
 
 
 print(collecting_info())
