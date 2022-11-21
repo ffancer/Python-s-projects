@@ -67,5 +67,6 @@ soup = BeautifulSoup(req.text, 'lxml')
 films = soup.find(class_='lister-list').find_all('tr')
 
 for film in films:
-    link = film.find(class_='titleColumn').get('a href')
+    # link = film.find(class_='titleColumn')
+    link = film.find(class_='titleColumn').a['href']
     print(link)
