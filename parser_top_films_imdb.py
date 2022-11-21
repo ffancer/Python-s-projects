@@ -69,4 +69,4 @@ films = soup.find(class_='lister-list').find_all('tr')
 for film in films:
     # link = film.find(class_='titleColumn')
     link = film.find(class_='titleColumn').a['href']
-    print(link)
+    print('https://www.imdb.com' + link)
