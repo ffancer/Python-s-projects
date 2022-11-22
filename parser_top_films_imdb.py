@@ -79,15 +79,15 @@ soup = BeautifulSoup(req.text, 'lxml')
 
 
 # работает с 1 режиссером, но если 2 то склеивает
-# url = 'https://www.imdb.com/title/tt0111161/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=1a264172-ae11-42e4-8ef7-7fed1973bb8f&pf_rd_r=FMVM880531CC0974AN6R&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_1'
-# req = requests.get(url, headers=headers)
-# soup2 = BeautifulSoup(req.text, 'lxml')
-# director = soup2.find(class_='ipc-metadata-list__item').div.text
-# print(director)
-
-
-url = 'https://www.imdb.com/title/tt0045152/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=1a264172-ae11-42e4-8ef7-7fed1973bb8f&pf_rd_r=8YNJ8E2EZBKAB83A94PD&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_85'
+url = 'https://www.imdb.com/title/tt0111161/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=1a264172-ae11-42e4-8ef7-7fed1973bb8f&pf_rd_r=FMVM880531CC0974AN6R&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_1'
 req = requests.get(url, headers=headers)
 soup2 = BeautifulSoup(req.text, 'lxml')
-director = soup2.find(class_='ipc-inline-list ipc-inline-list--show-dividers ipc-inline-list--inline ipc-metadata-list-item__list-content baseAlt').get_text(', ')
+director = soup2.find(class_='ipc-metadata-list__item').div.get_text(', ')
 print(director)
+
+
+# url = 'https://www.imdb.com/title/tt0045152/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=1a264172-ae11-42e4-8ef7-7fed1973bb8f&pf_rd_r=8YNJ8E2EZBKAB83A94PD&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_85'
+# req = requests.get(url, headers=headers)
+# soup2 = BeautifulSoup(req.text, 'lxml')
+# director = soup2.find(class_='ipc-inline-list ipc-inline-list--show-dividers ipc-inline-list--inline ipc-metadata-list-item__list-content baseAlt').get_text(', ')
+# print(director)
