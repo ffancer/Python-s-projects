@@ -64,6 +64,24 @@ soup = BeautifulSoup(req.text, 'lxml')
 
 
 
+# films = soup.find(class_='lister-list').find_all('tr')
+#
+# for film in films:
+#     link = film.find(class_='titleColumn').a['href']
+#     href = 'https://www.imdb.com' + link
+#     req = requests.get(href, headers=headers)
+#     soup = BeautifulSoup(req.text, 'lxml')
+#     director = soup.find(class_='ipc-metadata-list__item').div.get_text(', ')
+#     print(director)
+
+
+
+
+
+
+
+
+
 films = soup.find(class_='lister-list').find_all('tr')
 
 for film in films:
@@ -71,8 +89,9 @@ for film in films:
     href = 'https://www.imdb.com' + link
     req = requests.get(href, headers=headers)
     soup = BeautifulSoup(req.text, 'lxml')
-    director = soup.find(class_='ipc-metadata-list__item').div.get_text(', ')
-    print(director)
+    actors = soup.find(class_='ipc-sub-grid ipc-sub-grid--page-span-2 ipc-sub-grid--wraps-at-above-l ipc-shoveler__grid').get_text(', ')
+    print(actors)
+
 
 
 
