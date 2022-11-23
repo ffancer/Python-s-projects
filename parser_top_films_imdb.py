@@ -89,7 +89,8 @@ for film in films:
     href = 'https://www.imdb.com' + link
     req = requests.get(href, headers=headers)
     soup = BeautifulSoup(req.text, 'lxml')
-    actors = soup.find(class_='ipc-sub-grid ipc-sub-grid--page-span-2 ipc-sub-grid--wraps-at-above-l ipc-shoveler__grid').get_text(', ')
+    # actors = soup.find(class_='ipc-metadata-list__item ipc-metadata-list-item--link').div.get_text(', ')
+    actors = soup.find(class_='ipc-metadata-list-item__icon-link').text
     print(actors)
 
 
