@@ -83,15 +83,16 @@ soup = BeautifulSoup(req.text, 'lxml')
 
 
 films = soup.find(class_='lister-list').find_all('tr')
-
-for film in films:
-    link = film.find(class_='titleColumn').a['href']
-    href = 'https://www.imdb.com' + link
-    req = requests.get(href, headers=headers)
-    soup = BeautifulSoup(req.text, 'lxml')
-    # actors = soup.find(class_='ipc-metadata-list__item ipc-metadata-list-item--link').div.get_text(', ')
-    actors = soup.find(class_='ipc-metadata-list-item__icon-link').text
-    print(actors)
+crew = [a.attrs.get('title') for a in soup.select('td.titleColumn a')]
+print(crew)
+# for film in films:
+#     link = film.find(class_='titleColumn').a['href']
+#     href = 'https://www.imdb.com' + link
+#     req = requests.get(href, headers=headers)
+#     soup = BeautifulSoup(req.text, 'lxml')
+#     # actors = soup.find(class_='ipc-metadata-list__item ipc-metadata-list-item--link').div.get_text(', ')
+#     actors = soup.find(class_='ipc-metadata-list-item__icon-link').text
+#     print(actors)
 
 
 
