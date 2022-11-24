@@ -89,7 +89,8 @@ actor_list = []
 for i in crew:
     if '(dir.)' in i:
         i = i.split(',')
-        director_list.append(i[0])
+
+        director_list.append(j.replace(['(dir.)', '') for j in i[0])]
         actor_list.append(i[1:])
 
 print(director_list)
