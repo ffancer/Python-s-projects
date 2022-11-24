@@ -82,9 +82,12 @@ soup = BeautifulSoup(req.text, 'lxml')
 
 
 
-films = soup.find(class_='lister-list').find_all('tr')
-crew = [a.attrs.get('title') for a in soup.select('td.titleColumn a')]
-print(crew)
+# films = soup.find(class_='lister-list').find_all('tr')
+# crew = [a.attrs.get('title') for a in soup.select('td.titleColumn a')]
+# print(crew)
+
+
+
 # for film in films:
 #     link = film.find(class_='titleColumn').a['href']
 #     href = 'https://www.imdb.com' + link
@@ -95,6 +98,11 @@ print(crew)
 #     print(actors)
 
 
+lst = ['Frank Darabont (dir.), Tim Robbins, Morgan Freeman', 'Francis Ford Coppola (dir.), Marlon Brando, Al Pacino', 'Christopher Nolan (dir.), Christian Bale, Heath Ledger', 'Francis Ford Coppola (dir.), Al Pacino, Robert De Niro']
 
+for i in lst:
+    if '(dir.)' in i:
+        i = i.split(',')
+        print(i[0])
 
 
