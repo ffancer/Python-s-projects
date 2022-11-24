@@ -82,9 +82,18 @@ soup = BeautifulSoup(req.text, 'lxml')
 
 
 
-# films = soup.find(class_='lister-list').find_all('tr')
-# crew = [a.attrs.get('title') for a in soup.select('td.titleColumn a')]
-# print(crew)
+films = soup.find(class_='lister-list').find_all('tr')
+crew = [a.attrs.get('title') for a in soup.select('td.titleColumn a')]
+director_list = []
+actor_list = []
+for i in crew:
+    if '(dir.)' in i:
+        i = i.split(',')
+        director_list.append(i[0])
+        actor_list.append(i[1:])
+
+print(director_list)
+print(actor_list)
 
 
 
@@ -98,11 +107,5 @@ soup = BeautifulSoup(req.text, 'lxml')
 #     print(actors)
 
 
-lst = ['Frank Darabont (dir.), Tim Robbins, Morgan Freeman', 'Francis Ford Coppola (dir.), Marlon Brando, Al Pacino', 'Christopher Nolan (dir.), Christian Bale, Heath Ledger', 'Francis Ford Coppola (dir.), Al Pacino, Robert De Niro']
-
-for i in lst:
-    if '(dir.)' in i:
-        i = i.split(',')
-        print(i[0])
 
 
