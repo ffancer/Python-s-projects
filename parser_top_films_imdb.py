@@ -54,7 +54,17 @@ def director_and_actor():
     return director_list, actor_list
 
 
+def add_new_json():
+    with open('top 250 films.json', "r", encoding='utf-8') as file:
+        data = json.load(file)
 
+    data.append(director_and_actor()[0])
+    data.append(director_and_actor()[1])
+    # 3. Write json file
+    with open('top 250 films.json', "w", encoding='utf-8') as file:
+        json.dump(data, file)
+
+add_new_json()
 
 
 #
