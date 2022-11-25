@@ -20,24 +20,39 @@ req = requests.get(URL, headers=headers)
 soup = BeautifulSoup(req.text, 'lxml')
 
 
-# def collecting_info():
-#     films = soup.find(class_='lister-list').find_all('tr')
-#
-#     for film in films:
-#         place = film.find(class_='titleColumn').text.split('.')[0].strip()
-#         name = film.find(class_='titleColumn').a.text
-#         year = film.find(class_='titleColumn').span.text.strip('()')
-#         rating = film.find(class_='ratingColumn imdbRating').strong.text
-#         json_list.append(
-#             {
-#                 'Place': place,
-#                 'Name': name,
-#                 'Year': year,
-#                 'IMDb Rating': rating
-#             }
-#         )
-#
-#     return json_list
+def collecting_info():
+    films = soup.find(class_='lister-list').find_all('tr')
+
+    # films = soup.find(class_='lister-list').find_all('tr')
+    # director_list = []
+    # actor_list = []
+
+
+            # director_list.append(i[0].replace('(dir.)', '').strip())
+            # actor_list.append()
+
+    for film in films:
+        crew = [a.attrs.get('title') for a in soup.select('td.titleColumn a')]
+        director_actor = [i.split(',') for i in crew if '(dir.)' in i]
+        print(director_actor)
+        place = film.find(class_='titleColumn').text.split('.')[0].strip()
+        name = film.find(class_='titleColumn').a.text
+        year = film.find(class_='titleColumn').span.text.strip('()')
+        rating = film.find(class_='ratingColumn imdbRating').strong.text
+        json_list.append(
+            {
+                'Place': place,
+                'Name': name,
+                'Year': year,
+                'IMDb Rating': rating,
+                'Director': director_actor.replace('(dir.)', '').strip(),
+                'Actors': director_actor[1:]
+            }
+        )
+
+    return json_list
+
+print(collecting_info())
 #
 #
 # def save_json_file():
@@ -82,19 +97,21 @@ soup = BeautifulSoup(req.text, 'lxml')
 
 
 
-films = soup.find(class_='lister-list').find_all('tr')
-crew = [a.attrs.get('title') for a in soup.select('td.titleColumn a')]
-director_list = []
-actor_list = []
-for i in crew:
-    if '(dir.)' in i:
-        i = i.split(',')
+# films = soup.find(class_='lister-list').find_all('tr')
+# crew = [a.attrs.get('title') for a in soup.select('td.titleColumn a')]
+# director_list = []
+# actor_list = []
+# for i in crew:
+#     if '(dir.)' in i:
+#         i = i.split(',')
+#
+#         director_list.append(i[0].replace('(dir.)', '').strip())
+#         actor_list.append(i[1:])
+#
+# print(director_list)
+# print(actor_list)
 
-        director_list.append(i[0].replace('(dir.)', '').strip())
-        actor_list.append(i[1:])
 
-print(director_list)
-print(actor_list)
 
 
 
