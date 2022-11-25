@@ -8,6 +8,8 @@ from bs4 import BeautifulSoup
 import json
 import pandas as pd
 import time
+import xlsxwriter
+
 
 
 URL = 'https://www.imdb.com/chart/top/'
@@ -48,23 +50,34 @@ def director_and_actor():
     for i in crew:
         if '(dir.)' in i:
             i = i.split(',')
-            director_list.append(i[0].replace('(dir.)', '').strip())
+            director_list.append([i[0].replace('(dir.)', '').strip()])
             actor_list.append(i[1:])
 
+    with xlsxwriter.Workbook('director.xlsx') as workbook:
+        worksheet = workbook.add_worksheet()
+        for row_num, data in enumerate(director_list):
+            worksheet.write_row(row_num, 0, data)
+    with xlsxwriter.Workbook('actors.xlsx') as workbook:
+        worksheet = workbook.add_worksheet()
+        for row_num, data in enumerate(actor_list):
+            worksheet.write_row(row_num, 0, data)
     return director_list, actor_list
 
 
-def add_new_json():
-    with open('top 250 films.json', "r", encoding='utf-8') as file:
-        data = json.load(file)
+print(director_and_actor())
 
-    data.append(director_and_actor()[0])
-    data.append(director_and_actor()[1])
-    # 3. Write json file
-    with open('top 250 films.json', "w", encoding='utf-8') as file:
-        json.dump(data, file)
-
-add_new_json()
+# def add_new_json():
+#     with open('top 250 films.json', "r", encoding='utf-8') as file:
+#         data = json.load(file)
+#
+#     data.append(director_and_actor()[0])
+#     data.append(director_and_actor()[1])
+#
+#     with open('top 250 films.json', "w", encoding='utf-8') as file:
+#         json.dump(data, file)
+#
+#
+# add_new_json()
 
 
 #
@@ -85,6 +98,8 @@ add_new_json()
 # save_json_file()
 # time.sleep(1)
 # from_json_to_excel()
+
+
 
 
 
