@@ -41,8 +41,9 @@ soup = BeautifulSoup(req.text, 'lxml')
 #
 #     return json_list
 
+
+# make 2 excel files with directors\main actors
 def director_and_actor():
-    films = soup.find(class_='lister-list').find_all('tr')
     crew = [a.attrs.get('title') for a in soup.select('td.titleColumn a')]
     director_list = []
     actor_list = []
@@ -61,10 +62,11 @@ def director_and_actor():
         worksheet = workbook.add_worksheet()
         for row_num, data in enumerate(actor_list):
             worksheet.write_row(row_num, 0, data)
+
     return director_list, actor_list
 
 
-print(director_and_actor())
+director_and_actor()
 
 # def add_new_json():
 #     with open('top 250 films.json', "r", encoding='utf-8') as file:
