@@ -1,6 +1,7 @@
 """
 IMDb Top 250 Movies
-for ver 1.1: 1)wanna add directors
+for ver 1.1: 1)add directors 2)add actors
+https://docs.google.com/spreadsheets/d/1KIcpSg-5FTDbq6snHtnHFs1Rm3qhL8mm/edit#gid=778844044
 """
 
 import requests
@@ -119,6 +120,9 @@ print(director_and_actor())
 #     soup = BeautifulSoup(req.text, 'lxml')
 #     director = soup.find(class_='ipc-metadata-list__item').div.get_text(', ')
 #     print(director)
+
+
+
 
 
 
