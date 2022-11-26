@@ -52,12 +52,12 @@ def director_and_actor():
         if '(dir.)' in i:
             i = i.split(',')
             director_list.append([i[0].replace('(dir.)', '').strip()])
-            actor_list.append(i[1:])
+            actor_list.append([j.strip() for j in i[1:]])
 
-    with xlsxwriter.Workbook('director.xlsx') as workbook:
-        worksheet = workbook.add_worksheet()
-        for row_num, data in enumerate(director_list):
-            worksheet.write_row(row_num, 0, data)
+    # with xlsxwriter.Workbook('director.xlsx') as workbook:
+    #     worksheet = workbook.add_worksheet()
+    #     for row_num, data in enumerate(director_list):
+    #         worksheet.write_row(row_num, 0, data)
     with xlsxwriter.Workbook('actors.xlsx') as workbook:
         worksheet = workbook.add_worksheet()
         for row_num, data in enumerate(actor_list):
@@ -66,7 +66,7 @@ def director_and_actor():
     return director_list, actor_list
 
 
-director_and_actor()
+print(director_and_actor())
 
 # def add_new_json():
 #     with open('top 250 films.json', "r", encoding='utf-8') as file:
