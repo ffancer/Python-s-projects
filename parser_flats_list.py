@@ -249,32 +249,46 @@ from selenium.webdriver.common.proxy import Proxy, ProxyType
 
 # =====================================================================================================================
 # показывает твой ип + делает скриншот этого
-import time
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from bs4 import BeautifulSoup
-userAgent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
-options = Options()
-options.add_argument('--headless')
-options.add_experimental_option ('excludeSwitches', ['enable-logging'])
-options.add_argument("start-maximized")
-options.add_argument('window-size=1920x1080')
-options.add_argument('--no-sandbox')
-options.add_argument('--disable-gpu')
-options.add_argument(f'user-agent={userAgent}')
-driver = webdriver.Chrome(options=options)
-waitWebDriver = WebDriverWait(driver, 10)
-link = "https://whatismyipaddress.com/"
-driver.get(link)
-driver.save_screenshot("whatismyipaddress.png")
-time.sleep(5)
-soup = BeautifulSoup (driver.page_source, 'html.parser')
-tmpIP = soup.find("span", {"id": "ipv4"})
-tmpP = soup.find_all("p", {"class": "information"})
-for e in tmpP:
-    tmpSPAN = e.find_all("span")
-    for e2 in tmpSPAN:
-        print(e2.text)
-print(tmpIP.text)
-driver.quit()
+# import time
+# from selenium import webdriver
+# from selenium.webdriver.chrome.options import Options
+# from selenium.webdriver.support.ui import WebDriverWait
+# from bs4 import BeautifulSoup
+# userAgent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
+# options = Options()
+# options.add_argument('--headless')
+# options.add_experimental_option ('excludeSwitches', ['enable-logging'])
+# options.add_argument("start-maximized")
+# options.add_argument('window-size=1920x1080')
+# options.add_argument('--no-sandbox')
+# options.add_argument('--disable-gpu')
+# options.add_argument(f'user-agent={userAgent}')
+# driver = webdriver.Chrome(options=options)
+# waitWebDriver = WebDriverWait(driver, 10)
+# link = "https://whatismyipaddress.com/"
+# driver.get(link)
+# driver.save_screenshot("whatismyipaddress.png")
+# time.sleep(5)
+# soup = BeautifulSoup (driver.page_source, 'html.parser')
+# tmpIP = soup.find("span", {"id": "ipv4"})
+# tmpP = soup.find_all("p", {"class": "information"})
+# for e in tmpP:
+#     tmpSPAN = e.find_all("span")
+#     for e2 in tmpSPAN:
+#         print(e2.text)
+# print(tmpIP.text)
+# driver.quit()
+# ==============================================================================================================
+
+
+
+headers = {
+    'Accept': '*/*',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36',
+    'Referer': '',
+}
+json_list = []
+req = requests.get(URL, headers=headers)
+print(req.status_code)
+# soup = BeautifulSoup(req.text, 'lxml')
+# print(soup)
