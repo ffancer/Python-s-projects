@@ -284,15 +284,23 @@ from selenium.webdriver.common.proxy import Proxy, ProxyType
 # URL = 'https://opendata.domclick.ru/?utm_source=footer' # work
 # URL = 'https://opendata.domclick.ru/?utm_source=footer'   # work
 # URL = 'https://spb.domclick.ru/pokupka/kvartiry'   # not work
-URL = 'https://spb.domclick.ru/'   # not work
-headers = {
-    'Accept': '*/*',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36',
-    'Referer': '',
-}
-json_list = []
-req = requests.get(URL, headers=headers)
-print(req.status_code)
-print(req.text)
+# URL = 'https://spb.domclick.ru/'   # not work
+# headers = {
+#     'Accept': '*/*',
+#     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36',
+#     'Referer': '',
+# }
+# json_list = []
+# req = requests.get(URL, headers=headers)
+# print(req.status_code)
+# print(req.text)
+
 # soup = BeautifulSoup(req.text, 'lxml')
 # print(soup)
+
+
+from urllib.request import urlopen
+# with urlopen("https://spb.domclick.ru/") as response:
+with urlopen("https://opendata.domclick.ru/?utm_source=footer") as response:
+    body = response.read()
+    print(body)
