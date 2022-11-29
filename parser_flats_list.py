@@ -5,12 +5,16 @@ import requests
 from bs4 import BeautifulSoup
 from selenium.webdriver.firefox.options import Options
 
-URL = 'https://domclick.ru'
+# URL = 'https://domclick.ru'
+URL = 'https://spb.domclick.ru/'
 # URL = 'https://magnit.ru'
-# headers = {
-#     'Accept': '*/*',
-#     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
-# }
+headers = {
+    'Accept': '*/*',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36'
+}
+
+req = requests.post(url=URL, headers=headers, json={"name":"Gerry"})
+print(req.status_code)
 # headers = {
 #     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0',
 #     'Accept': 'image/avif,image/webp,*/*',
@@ -299,8 +303,28 @@ from selenium.webdriver.common.proxy import Proxy, ProxyType
 # print(soup)
 
 
-from urllib.request import urlopen
-# with urlopen("https://spb.domclick.ru/") as response:
-with urlopen("https://spb.domclick.ru/search?category=living&deal_type=sale&offer_type=flat&from=topline2020") as response:
-    body = response.read()
-    print(body)
+# from urllib.request import urlopen
+# # with urlopen("https://spb.domclick.ru/") as response:
+# with urlopen("https://spb.domclick.ru/search?category=living&deal_type=sale&offer_type=flat&from=topline2020") as response:
+#     body = response.read()
+#     print(body)
+
+
+# import requests
+# import json
+#
+# url = "https://spb.domclick.ru/pokupka/kvartiry"
+#
+# headers = {"Content-Type": "application/json; charset=utf-8"}
+#
+# data = {
+# 	"id": 1001,
+# 	"name": "geek",
+# 	"passion": "coding",
+# }
+#
+# response = requests.post(url, headers=headers, json=data)
+#
+# print("Status Code", response.status_code)
+# print("JSON Response ", response.json())
+
