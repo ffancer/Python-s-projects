@@ -301,6 +301,6 @@ from selenium.webdriver.common.proxy import Proxy, ProxyType
 
 from urllib.request import urlopen
 # with urlopen("https://spb.domclick.ru/") as response:
-with urlopen("https://opendata.domclick.ru/?utm_source=footer") as response:
+with urlopen("https://spb.domclick.ru/search?category=living&deal_type=sale&offer_type=flat&from=topline2020") as response:
     body = response.read()
     print(body)
