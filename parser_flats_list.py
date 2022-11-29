@@ -10,11 +10,27 @@ URL = 'https://spb.domclick.ru/'
 # URL = 'https://magnit.ru'
 headers = {
     'Accept': '*/*',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36'
+    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
+    'Server' :  'QRATOR',
+    'Date' :  'Tue, 29 Nov 2022 06:32:24 GMT',
+    'Content-Type' :  'text/html',
+    'Content-Length' :  '181',
+    'Connection' :  'keep-alive',
+    'Keep-Alive' :  'timeout=15',
+    'ETag' :  "6165a974-b5",
+    'Cache-Control' :  'no-cache, no-store, must-revalidate',
+    'Pragma': 'no-cache',
+    'Expires' :  "0",
+    'Set-Cookie': 'qrator_jsr=1669703544.911.kqJqNIot1R4XAY5D-668km4qavvhqkas19alknskuainta6kn-00; Max-Age=300;  Domain=.domclick.ru; Path=/'
 }
+#
+# req = requests.post(url=URL, headers=headers, json={"name":"Gerry"})
+# print(req.status_code)
+r = requests.get(URL, allow_redirects=False)
 
-req = requests.post(url=URL, headers=headers, json={"name":"Gerry"})
-print(req.status_code)
+for key in r.headers:
+    print(key, ": ", r.headers[key])
+
 # headers = {
 #     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0',
 #     'Accept': 'image/avif,image/webp,*/*',
