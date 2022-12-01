@@ -4,9 +4,11 @@ from selenium.webdriver.common.by import By
 import requests
 from bs4 import BeautifulSoup
 from selenium.webdriver.firefox.options import Options
+import json
+
 
 # URL = 'https://domclick.ru'
-URL = 'https://spb.domclick.ru/'
+# URL = 'https://spb.domclick.ru/'
 # URL = 'https://magnit.ru'
 # headers = {
 #     'Accept': '*/*',
@@ -23,27 +25,27 @@ URL = 'https://spb.domclick.ru/'
 #     'Expires': "0",
 #     'Set-Cookie': 'qrator_jsr=1669703544.911.kqJqNIot1R4XAY5D-668km4qavvhqkas19alknskuainta6kn-00; Max-Age=300;  Domain=.domclick.ru; Path=/'
 # }
-headers = {
-    'Accept': 'application/json, text/plain, */*',
-    'Accept-Encoding': 'gzip, deflate, br',
-    'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
-    'Connection': 'keep-alive',
-    'Content-Length': '1022',
-    'Content-Type': 'application/json',
-    'Cookie': 'ns_session=4ac26fda-815f-5d8b-a3a1-637d767683f2; ftgl_cookie_id=38389745a1b3af7c4eb91fe6e4e1665c; _ym_uid=16665945791017964448; _ym_d=1666594579; RETENTION_COOKIES_NAME=e5625f8a84234a6aa33e68177d0ed150:sMpSW8BBcYQjhjbABnZcJ7sqisY; sessionId=602fa55fe3994612852b6b44793022f2:-sBvWvOXVg5bNS9QJViQE5Eb4dw; UNIQ_SESSION_ID=8502a08263de4ddf998010e31ca6b8c2:klrxZ-sQ-HhA_JRYT1jGbrVDRTo; _gcl_au=1.1.1541237707.1666594579; iap.uid=30eaaa4424b142548b89b947e82024b1; region={%22data%22:{%22name%22:%22%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%22%2C%22kladr%22:%2277%22%2C%22guid%22:%221d1463ae-c80f-4d19-9331-a1b68a85b553%22}%2C%22isAutoResolved%22:true}; tmr_lvid=0a76e88b69c8bf5310367f86657ed783; tmr_lvidTS=1666594580002; adtech_uid=1fefd621-3622-4c49-bdb9-de0ec4464d25%3Adomclick.ru; top100_id=t1.4513750.1057063155.1666594580075; dtCookie=v_4_srv_6_sn_9BEFF8791C32DB726BF991A90713C790_perc_100000_ol_0_mul_1_app-3Aca312da39d5a5d07_1_app-3A37d82a95eb231749_1_app-3Aa90421fc39b1dbac_1_rcs-3Acss_0; regionAlert=1; auto-definition-region=false; currentRegionGuid=7b4698a7-f8b8-424c-9195-e24f3ddb88f3; currentSubDomain=spb; regionName=7b4698a7-f8b8-424c-9195-e24f3ddb88f3:%D0%A1%D0%B0%D0%BD%D0%BA%D1%82-%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B1%D1%83%D1%80%D0%B3; currentLocalityGuid=7b4698a7-f8b8-424c-9195-e24f3ddb88f3; rxVisitor=1669700107701094VFLO1K8BB4N4JFIJ3M6LVI5DHMG4G; rxvt=1669703378318|1669700107703; dtPC=6$501578003_615h-vTIHSWJPRMKMRPLAAEQOHHKJFAAFTFNML-0e0; dtLatC=2; dtSa=true%7CC%7C-1%7C%D0%9A%D0%B2%D0%B0%D1%80%D1%82%D0%B8%D1%80%D0%B048%20776%20%D0%BF%D1%80%D0%B5%D0%B4%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9%7C-%7C1669701588762%7C501578003_615%7Chttps%3A%2F%2Fblog.domclick.ru%2Fpost%2Fdomklik-stal-liderom-po-kolichestvu-obyavlenij-o-prodazhe-kvartir-issledovanie-ekspert-ra%7C%7C%7C%7C; qrator_ssid=1669873613.482.Lbai9zrpsrfnPc3N-j5oqha1afeaiilhbsqvu6en2pbcb229m; _visitId=22a0bd5a-958c-4c95-b474-5b65bc36b77f-89b4dea43c228e2d; _ym_isad=1; _gid=GA1.2.1333216557.1669873609; _ga=GA1.2.854978833.1666594579; last_visit=1669863472440%3A%3A1669874272440; tmr_reqNum=110; _ga_NP4EQL89WF=GS1.1.1669873609.12.1.1669874372.60.0.0; t3_sid_4513750=s1.44580410.1669873611299.1669874445521.3.11',
-    'Host': 'metrics.domclick.ru',
-    'Origin': 'https://spb.domclick.ru',
-    'Referer': 'https://spb.domclick.ru/',
-    'sec-ch-ua': '"Google Chrome";v="107", "Chromium";v="107", "Not=A?Brand";v="24"',
-    'sec-ch-ua-mobile': '?0',
-    'sec-ch-ua-platform': "Windows",
-    'Sec-Fetch-Dest': 'empty',
-    'Sec-Fetch-Mode': 'cors',
-    'Sec-Fetch-Site': 'same-site',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36'
-}
-req = requests.post(url=URL, headers=headers)
-print(req.status_code)
+# headers = {
+#     'Accept': 'application/json, text/plain, */*',
+#     'Accept-Encoding': 'gzip, deflate, br',
+#     'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+#     'Connection': 'keep-alive',
+#     'Content-Length': '1022',
+#     'Content-Type': 'application/json',
+#     'Cookie': 'ns_session=4ac26fda-815f-5d8b-a3a1-637d767683f2; ftgl_cookie_id=38389745a1b3af7c4eb91fe6e4e1665c; _ym_uid=16665945791017964448; _ym_d=1666594579; RETENTION_COOKIES_NAME=e5625f8a84234a6aa33e68177d0ed150:sMpSW8BBcYQjhjbABnZcJ7sqisY; sessionId=602fa55fe3994612852b6b44793022f2:-sBvWvOXVg5bNS9QJViQE5Eb4dw; UNIQ_SESSION_ID=8502a08263de4ddf998010e31ca6b8c2:klrxZ-sQ-HhA_JRYT1jGbrVDRTo; _gcl_au=1.1.1541237707.1666594579; iap.uid=30eaaa4424b142548b89b947e82024b1; region={%22data%22:{%22name%22:%22%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%22%2C%22kladr%22:%2277%22%2C%22guid%22:%221d1463ae-c80f-4d19-9331-a1b68a85b553%22}%2C%22isAutoResolved%22:true}; tmr_lvid=0a76e88b69c8bf5310367f86657ed783; tmr_lvidTS=1666594580002; adtech_uid=1fefd621-3622-4c49-bdb9-de0ec4464d25%3Adomclick.ru; top100_id=t1.4513750.1057063155.1666594580075; dtCookie=v_4_srv_6_sn_9BEFF8791C32DB726BF991A90713C790_perc_100000_ol_0_mul_1_app-3Aca312da39d5a5d07_1_app-3A37d82a95eb231749_1_app-3Aa90421fc39b1dbac_1_rcs-3Acss_0; regionAlert=1; auto-definition-region=false; currentRegionGuid=7b4698a7-f8b8-424c-9195-e24f3ddb88f3; currentSubDomain=spb; regionName=7b4698a7-f8b8-424c-9195-e24f3ddb88f3:%D0%A1%D0%B0%D0%BD%D0%BA%D1%82-%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B1%D1%83%D1%80%D0%B3; currentLocalityGuid=7b4698a7-f8b8-424c-9195-e24f3ddb88f3; rxVisitor=1669700107701094VFLO1K8BB4N4JFIJ3M6LVI5DHMG4G; rxvt=1669703378318|1669700107703; dtPC=6$501578003_615h-vTIHSWJPRMKMRPLAAEQOHHKJFAAFTFNML-0e0; dtLatC=2; dtSa=true%7CC%7C-1%7C%D0%9A%D0%B2%D0%B0%D1%80%D1%82%D0%B8%D1%80%D0%B048%20776%20%D0%BF%D1%80%D0%B5%D0%B4%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9%7C-%7C1669701588762%7C501578003_615%7Chttps%3A%2F%2Fblog.domclick.ru%2Fpost%2Fdomklik-stal-liderom-po-kolichestvu-obyavlenij-o-prodazhe-kvartir-issledovanie-ekspert-ra%7C%7C%7C%7C; qrator_ssid=1669873613.482.Lbai9zrpsrfnPc3N-j5oqha1afeaiilhbsqvu6en2pbcb229m; _visitId=22a0bd5a-958c-4c95-b474-5b65bc36b77f-89b4dea43c228e2d; _ym_isad=1; _gid=GA1.2.1333216557.1669873609; _ga=GA1.2.854978833.1666594579; last_visit=1669863472440%3A%3A1669874272440; tmr_reqNum=110; _ga_NP4EQL89WF=GS1.1.1669873609.12.1.1669874372.60.0.0; t3_sid_4513750=s1.44580410.1669873611299.1669874445521.3.11',
+#     'Host': 'metrics.domclick.ru',
+#     'Origin': 'https://spb.domclick.ru',
+#     'Referer': 'https://spb.domclick.ru/',
+#     'sec-ch-ua': '"Google Chrome";v="107", "Chromium";v="107", "Not=A?Brand";v="24"',
+#     'sec-ch-ua-mobile': '?0',
+#     'sec-ch-ua-platform': "Windows",
+#     'Sec-Fetch-Dest': 'empty',
+#     'Sec-Fetch-Mode': 'cors',
+#     'Sec-Fetch-Site': 'same-site',
+#     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36'
+# }
+# req = requests.post(url=URL, headers=headers)
+# print(req.status_code)
 
 # r = requests.get(URL, allow_redirects=False)
 #
@@ -320,14 +322,18 @@ from selenium.webdriver.common.proxy import Proxy, ProxyType
 
 
 # URL = 'https://opendata.domclick.ru/?utm_source=footer' # work
-# URL = 'https://opendata.domclick.ru/?utm_source=footer'   # work
+URL = 'https://opendata.domclick.ru/?utm_source=footer'   # work
 # URL = 'https://spb.domclick.ru/pokupka/kvartiry'   # not work
 # URL = 'https://spb.domclick.ru/'   # not work
-# headers = {
-#     'Accept': '*/*',
-#     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36',
-#     'Referer': '',
-# }
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
+}
+with requests.session() as s:
+    s.get(URL, headers=headers)
+    data = s.get(URL, headers=headers)
+    print(data)
+    # print(data)
+    print(json.dumps(data, indent=4))
 # json_list = []
 # req = requests.get(URL, headers=headers)
 # print(req.status_code)
