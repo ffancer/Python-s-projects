@@ -323,15 +323,16 @@ from selenium.webdriver.common.proxy import Proxy, ProxyType
 
 # URL = 'https://opendata.domclick.ru/?utm_source=footer' # work
 # URL = 'https://opendata.domclick.ru/?utm_source=footer'   # work
-URL = 'https://myanimelist.net/topanime.php?limit=1'   # work
+# URL = 'https://myanimelist.net/topanime.php?limit=1'   # work session + text
 # URL = 'https://spb.domclick.ru/pokupka/kvartiry'   # not work
-# URL = 'https://spb.domclick.ru/'   # not work
+URL = 'https://spb.domclick.ru/'   # not work
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
 }
 # print(requests.session())
 with requests.session() as s:
     resp = s.get(URL, headers=headers)
+    print(resp)
     print(resp.text)
     # s.get(URL, headers=headers)
     # data = s.get(URL, headers=headers)
