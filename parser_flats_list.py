@@ -329,15 +329,21 @@ URL = 'https://spb.domclick.ru/'   # not work
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
 }
-# print(requests.session())
-with requests.session() as s:
-    resp = s.get(URL, headers=headers)
-    print(resp)
-    print(resp.text)
+r = requests.get(URL)
+print(r.cookies)
+
+
+# with requests.session() as s:
+    # cookie = s.cookies
+    # print(cookie)
+    # print(resp.text)
+    # print(json.dumps(resp))
     # s.get(URL, headers=headers)
     # data = s.get(URL, headers=headers)
     # print(data)
     # print(json.dumps(data, indent=4, ensure_ascii=False))
+
+
 
 # json_list = []
 # req = requests.get(URL, headers=headers)
