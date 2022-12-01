@@ -26,6 +26,7 @@ headers = {
 #
 req = requests.post(url=URL, headers=headers)
 print(req.status_code)
+
 # r = requests.get(URL, allow_redirects=False)
 #
 # for key in r.headers:
