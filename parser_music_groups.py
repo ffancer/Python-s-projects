@@ -14,11 +14,13 @@ headers = {
 
 req = requests.get(url, headers=headers)
 soup = BeautifulSoup(req.text, 'lxml')
-all_cards = soup.find_all(class_='big-artist-list')
-cnt = 0
+all_cards = soup.find(class_='big-artist-list')
+print(all_cards.li)
+# cnt = 0
+# while cnt < 10:
+#     for card in all_cards:
+#         print(card.find(class_='big-artist-list-title').text)
+#     cnt += 1
 
-while cnt < 10:
-    for card in all_cards:
-        print(card.find(class_='big-artist-list-title').text)
-    cnt += 1
-
+# for card in all_cards:
+#     print(card.li)
