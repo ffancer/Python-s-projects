@@ -17,14 +17,22 @@ all_cards = soup.find_all(class_='big-artist-list')
 # print(all_cards.li.div)
 
 for card in all_cards:
-    json_list.append(
-        {
-            'group_name': card.find(class_='big-artist-list-wrap').find(class_='big-artist-list-title').text,
-            'listeners_count': card.find(class_='big-artist-list-wrap').find(
-                class_='big-artist-list-listeners').text.replace(
-                'слушателей', '').strip(),
-            'short_description': card.find(class_='big-artist-list-wrap').find(class_='big-artist-list-bio').p.text
-        }
-    )
-
-print(json_list)
+    lst = []
+    a = card.find(class_='big-artist-list-wrap').find(class_='big-artist-list-listeners').text.strip().replace('слушателей', '')
+    dig = ''
+    for i in a:
+        if i.isdigit():
+            dig += i
+    print(int(dig))
+#     json_list.append(
+#         {
+#             'group_name': card.find(class_='big-artist-list-wrap').find(class_='big-artist-list-title').text,
+#             'listeners_count': card.find(class_='big-artist-list-wrap').find(
+#                 class_='big-artist-list-listeners').text.replace(
+#                 'слушателей', '').strip(),
+#             'short_description': card.find(class_='big-artist-list-wrap').find(class_='big-artist-list-bio').p.text
+#         }
+#     )
+#
+# print(json_list)
+print(lst)
