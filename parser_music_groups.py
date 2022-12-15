@@ -19,4 +19,4 @@ all_cards = soup.find_all(class_='big-artist-list')
 
 for card in all_cards:
     # print(card.find(class_='big-artist-list-wrap').find(class_='big-artist-list-title').text)
-    print(card.find(class_='big-artist-list-wrap').find(class_='big-artist-list-listeners').text.strip())
+    print(card.find(class_='big-artist-list-wrap').find(class_='big-artist-list-listeners').text.replace('слушателей', '').strip())
