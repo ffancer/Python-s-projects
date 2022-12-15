@@ -14,8 +14,8 @@ headers = {
 
 req = requests.get(url, headers=headers)
 soup = BeautifulSoup(req.text, 'lxml')
-all_cards = soup.find(class_='big-artist-list')
+all_cards = soup.find_all(class_='big-artist-list')
 # print(all_cards.li.div)
 
 for card in all_cards:
-    print(card)
+    print(card.find(class_='big-artist-list-wrap').find(class_='big-artist-list-title').text)
