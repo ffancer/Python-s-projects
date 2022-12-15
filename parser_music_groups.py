@@ -18,4 +18,5 @@ all_cards = soup.find_all(class_='big-artist-list')
 # print(all_cards.li.div)
 
 for card in all_cards:
-    print(card.find(class_='big-artist-list-wrap').find(class_='big-artist-list-title').text)
+    # print(card.find(class_='big-artist-list-wrap').find(class_='big-artist-list-title').text)
+    print(card.find(class_='big-artist-list-wrap').find(class_='big-artist-list-listeners').text.strip())
