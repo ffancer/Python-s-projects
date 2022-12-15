@@ -18,6 +18,6 @@ all_cards = soup.find_all(class_='big-artist-list')
 # print(all_cards.li.div)
 
 for card in all_cards:
-    # print(card.find(class_='big-artist-list-wrap').find(class_='big-artist-list-title').text)
-    # print(card.find(class_='big-artist-list-wrap').find(class_='big-artist-list-listeners').text.replace('слушателей', '').strip())
-    print(card.find(class_='big-artist-list-wrap').find(class_='big-artist-list-bio').p.text)
+    group_name = card.find(class_='big-artist-list-wrap').find(class_='big-artist-list-title').text
+    listeners_count = card.find(class_='big-artist-list-wrap').find(class_='big-artist-list-listeners').text.replace('слушателей', '').strip()
+    short_description = card.find(class_='big-artist-list-wrap').find(class_='big-artist-list-bio').p.text
