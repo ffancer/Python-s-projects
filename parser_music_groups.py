@@ -15,7 +15,6 @@ req = requests.get(url, headers=headers)
 soup = BeautifulSoup(req.text, 'lxml')
 all_cards = soup.find_all(class_='big-artist-list')
 
-
 # for card in all_cards:
 #     lst = []
 #     string_listeners_count = card.find(class_='big-artist-list-wrap').find(class_='big-artist-list-listeners').text.strip().replace('слушателей', '')
@@ -38,5 +37,8 @@ all_cards = soup.find_all(class_='big-artist-list')
 # for music_group in music_groups_info:
 #     print(music_group.find(class_='big-artist-list-title'))
 
-music_groups_info = soup.find_all('li')
-print(music_groups_info)
+music_groups_info = soup.find_all('div', class_='big-artist-list-item js-link-block link-block')
+i = 0
+while i < 21:
+    print(music_groups_info[i].find('h3').text)
+    i += 1
