@@ -39,6 +39,17 @@ all_cards = soup.find_all(class_='big-artist-list')
 
 music_groups_info = soup.find_all('div', class_='big-artist-list-item js-link-block link-block')
 i = 0
-while i < 21:
-    print(music_groups_info[i].find('h3').text)
-    i += 1
+for i in range(4):
+# while i < 21:
+#     json_list.append(
+#         {
+#             'название группы': music_groups_info[i].find('h3').text,
+#             'кол-во любителей данной группы': music_groups_info[i].find(class_='big-artist-list-listeners').text.strip()
+#         }
+#     )
+#     i += 1
+#
+# print(json_list)
+    short_description = music_groups_info[i].find(class_='big-artist-list-bio')
+    print(short_description.p.text)
+
