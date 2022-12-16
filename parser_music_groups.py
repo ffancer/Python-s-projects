@@ -38,21 +38,19 @@ all_cards = soup.find_all(class_='big-artist-list')
 #     print(music_group.find(class_='big-artist-list-title'))
 
 music_groups_info = soup.find_all('div', class_='big-artist-list-item js-link-block link-block')
-i = 0
-for i in range(4):
-# while i < 21:
-#     json_list.append(
-#         {
-#             'название группы': music_groups_info[i].find('h3').text,
-#             'кол-во любителей данной группы': music_groups_info[i].find(class_='big-artist-list-listeners').text.strip(),
-#             'краткое описание': music_groups_info[i].find(class_='big-artist-list-bio').p.text
-#         }
-#     )
-#     i += 1
-#
-# print(json_list)
-    a = music_groups_info[i].find(class_='big-artist-list-listeners').text.strip().replace('слушателей', '').replace('слушателя', '').replace(' ', '')
-    print(a)
+
+for i in range(21):
+
+    json_list.append(
+        {
+            'название группы': music_groups_info[i].find('h3').text,
+            'число фанатов': int(music_groups_info[i].find(class_='big-artist-list-listeners').text.strip().replace('слушатель', '').replace('слушателей', '').replace('слушателя', '').replace(' ', '')),
+            'краткое описание': music_groups_info[i].find(class_='big-artist-list-bio').p.text
+        }
+    )
+
+
+print(json_list)
 
 
 
