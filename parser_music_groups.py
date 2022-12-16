@@ -44,12 +44,15 @@ for i in range(4):
 #     json_list.append(
 #         {
 #             'название группы': music_groups_info[i].find('h3').text,
-#             'кол-во любителей данной группы': music_groups_info[i].find(class_='big-artist-list-listeners').text.strip()
+#             'кол-во любителей данной группы': music_groups_info[i].find(class_='big-artist-list-listeners').text.strip(),
+#             'краткое описание': music_groups_info[i].find(class_='big-artist-list-bio').p.text
 #         }
 #     )
 #     i += 1
 #
 # print(json_list)
-    short_description = music_groups_info[i].find(class_='big-artist-list-bio')
-    print(short_description.p.text)
+    a = music_groups_info[i].find(class_='big-artist-list-listeners').text.strip().replace('слушателей', '').replace('слушателя', '').replace(' ', '')
+    print(a)
+
+
 
