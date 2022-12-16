@@ -34,4 +34,9 @@ all_cards = soup.find_all(class_='big-artist-list')
 #
 # print(json_list)
 
-print(type(all_cards))
+# music_groups_info = soup.find(class_='big-artist-list').find_all('li')
+# for music_group in music_groups_info:
+#     print(music_group.find(class_='big-artist-list-title'))
+
+music_groups_info = soup.find_all('li')
+print(music_groups_info)
