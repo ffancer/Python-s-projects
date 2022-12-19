@@ -1,6 +1,8 @@
 """
 Будем собирать данные про музыкальные группы из США
 работа тут - https://docs.google.com/spreadsheets/d/1qh4VfMNBrmbVXmD2EuM35Dh9LfiuyYwC/edit#gid=56478989
+upd.:
+зайти в каждую карточку (для удобства буду звать карточкой) с описанием группы и достать оттуда более подробную инфу
 """
 import requests
 from bs4 import BeautifulSoup
