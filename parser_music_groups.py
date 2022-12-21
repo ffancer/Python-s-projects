@@ -72,15 +72,16 @@ def get_data(url):
     req = requests.get(url, headers)
     soup = BeautifulSoup(req.text, 'lxml')
     # articles = soup.find_all('li', class_='big-artist-list-wrap')
-    articles = soup.find('ol', class_='big-artist-list').find_all('li', class_='big-artist-list-wrap')
-    print(articles)
+    # print(articles)
     # try:
     #     for article in articles:
-    #         project_url = article.find('div', class_='big-artist-list-item js-link-block link-block').find('a').get('href')
+    #         project_url = article.find('div', class_='big-artist-list-item js-link-block link-block').p
     #         print(project_url)
     # except AttributeError:
     #     print('gg')
-
+    articles = soup.find_all('li')
+    article = [i.text.strip() for i in articles]
+    print(article)
 
 
 get_data('https://www.last.fm/ru/tag/rock/artists?page=1')
