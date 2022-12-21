@@ -79,9 +79,9 @@ def get_data(url):
     #         print(project_url)
     # except AttributeError:
     #     print('gg')
-    articles = soup.find_all('li')
-    article = [i.text.strip() for i in articles]
-    print(article)
+    articles = soup.find_all('a', class_='js-link-block-cover-link link-block-cover-link')
+    for article in articles:
+        print(article)
 
 
 get_data('https://www.last.fm/ru/tag/rock/artists?page=1')
