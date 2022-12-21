@@ -69,10 +69,11 @@ headers = {
 
 
 def get_data(url):
-
-
     req = requests.get(url, headers)
-    print(req.text)
+    soup = BeautifulSoup(req.text, 'lxml')
+    articles = soup.find_all('li', class_='big-artist-list-wrap')
+    print(articles)
+
 
 # li
         # js-link-block-cover-link link-block-cover-link
