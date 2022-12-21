@@ -67,5 +67,14 @@ headers = {
 # time.sleep(1)
 # from_json_to_excel()
 
+
+def get_data(url):
+
+
+    req = requests.get(url, headers)
+    print(req.text)
+
 # li
         # js-link-block-cover-link link-block-cover-link
+
+get_data('https://www.last.fm/ru/tag/rock/artists?page=1')
