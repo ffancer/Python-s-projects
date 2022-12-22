@@ -68,15 +68,21 @@ headers = {
 # from_json_to_excel()
 
 
+
 def get_data(url):
+    project_urls = []
     req = requests.get(url, headers)
     soup = BeautifulSoup(req.text, 'lxml')
     articles = soup.find_all('a', class_='js-link-block-cover-link link-block-cover-link')
-    project_urls = []
 
     for article in articles:
         project_url = 'https://www.last.fm' + article.get('href')
         project_urls.append(project_url)
 
+    for project_url in project_urls[:1]:
+        req = requests.get(project_url, headers)
+        project_name = project_url.split('/')[-1]
+
 
 get_data('https://www.last.fm/ru/tag/rock/artists?page=1')
+
