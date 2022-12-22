@@ -79,7 +79,7 @@ def get_data(url):
         project_url = 'https://www.last.fm' + article.get('href')
         project_urls.append(project_url)
 
-    for project_url in project_urls:
+    for project_url in project_urls[:1]:
         req = requests.get(project_url, headers)
         project_name = project_url.split('/')[-1]
 
@@ -92,6 +92,7 @@ def get_data(url):
         soup = BeautifulSoup(src, 'lxml')
         wiki = f'https://www.last.fm/ru/music/{project_name}/+wiki'
         print(wiki)
+
 
 get_data('https://www.last.fm/ru/tag/rock/artists?page=1')
 
