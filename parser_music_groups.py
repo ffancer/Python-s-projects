@@ -82,6 +82,7 @@ def get_data(url):
     for project_url in project_urls[:1]:
         req = requests.get(project_url, headers)
         project_name = project_url.split('/')[-1]
+        print(project_name)
 
         with open(f'data/{project_name}.html', 'w', encoding='utf-8') as file:
             file.write(req.text)
@@ -90,8 +91,8 @@ def get_data(url):
             src = file.read()
 
         soup = BeautifulSoup(src, 'lxml')
-        print(soup)
-
+        bio_info = soup.find('div', class_='wiki-block-inner-2 wiki-truncate-6-lines').text
+        print(bio_info)
 
 get_data('https://www.last.fm/ru/tag/rock/artists?page=1')
 
