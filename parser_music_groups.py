@@ -71,15 +71,8 @@ headers = {
 def get_data(url):
     req = requests.get(url, headers)
     soup = BeautifulSoup(req.text, 'lxml')
-    # articles = soup.find_all('li', class_='big-artist-list-wrap')
-    # print(articles)
-    # try:
-    #     for article in articles:
-    #         project_url = article.find('div', class_='big-artist-list-item js-link-block link-block').p
-    #         print(project_url)
-    # except AttributeError:
-    #     print('gg')
     articles = soup.find_all('a', class_='js-link-block-cover-link link-block-cover-link')
+
     for article in articles:
         print('https://www.last.fm' + article.get('href'))
 
