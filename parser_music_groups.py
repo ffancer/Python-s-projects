@@ -72,9 +72,11 @@ def get_data(url):
     req = requests.get(url, headers)
     soup = BeautifulSoup(req.text, 'lxml')
     articles = soup.find_all('a', class_='js-link-block-cover-link link-block-cover-link')
+    project_urls = []
 
     for article in articles:
-        print('https://www.last.fm' + article.get('href'))
+        project_url = 'https://www.last.fm' + article.get('href')
+        project_urls.append(project_url)
 
 
 get_data('https://www.last.fm/ru/tag/rock/artists?page=1')
