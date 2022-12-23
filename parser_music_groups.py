@@ -110,10 +110,13 @@ def get_data(url):
         for album in albums:
             albums_list.append(album.text.strip())
 
-        links = soup.find_all('ul', class_='resource-external-links')
-        for link in links:
-            print(link)
-        # print(links)
+        # links = soup.find_all('ul', class_='resource-external-links')
+        # for link in links:
+        #     print(link.find_all('li'))
+
+        # links = soup.find('ul', {'class': 'resource-external-links'}).get('href')
+        links = soup.find_all('ul', {'class': 'resource-external-links'})
+        print(links)
 
 
 
