@@ -78,7 +78,7 @@ def get_data(url):
         project_url = 'https://www.last.fm' + article.get('href')
         project_urls.append(project_url)
 
-    for project_url in project_urls[:1]:
+    for project_url in project_urls[:10]:
         req = requests.get(project_url, headers)
         project_name = project_url.split('/')[-1]
 
@@ -110,13 +110,13 @@ def get_data(url):
         for album in albums:
             albums_list.append(album.text.strip())
 
-        # links = soup.find_all('ul', class_='resource-external-links')
-        # for link in links:
-        #     print(link.find_all('li'))
+        links_list = []
+        links = soup.find_all('a', {'class': 'resource-external-link'})
+        for link in links:
+            if link['href'] not in links_list:
+                links_list.append(link['href'])
 
-        # links = soup.find('ul', {'class': 'resource-external-links'}).get('href')
-        links = soup.find_all('ul', {'class': 'resource-external-links'})
-        print(links)
+        print(links_list)
 
 
 
