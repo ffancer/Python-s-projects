@@ -68,7 +68,6 @@ headers = {
 # from_json_to_excel()
 
 
-
 def get_data(url):
     project_urls = []
     req = requests.get(url, headers)
