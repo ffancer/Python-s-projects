@@ -78,7 +78,7 @@ def get_data(url):
         project_url = 'https://www.last.fm' + article.get('href')
         project_urls.append(project_url)
 
-    for project_url in project_urls[:10]:
+    for project_url in project_urls[:1]:
         req = requests.get(project_url, headers)
         project_name = project_url.split('/')[-1]
 
@@ -100,7 +100,10 @@ def get_data(url):
                 continue
             tags_list.append(tag.text)
 
-        print(tags_list)
+        # top_songs = soup.find_all(class_='col-main buffer-standard').find('section', class_='section-with-separator section-with-hover-control artist-overview-top-tracks')
+        # top_songs = soup.find('section', class_='section-with-separator section-with-hover-control artist-overview-top-tracks')
+        top_songs = soup.find_all('td', class_='chartlist-name')
+        print(top_songs)
 
 
 get_data('https://www.last.fm/ru/tag/rock/artists?page=1')
