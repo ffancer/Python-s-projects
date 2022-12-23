@@ -90,8 +90,13 @@ def get_data(url):
 
         soup = BeautifulSoup(req.text, 'lxml')
         wiki = f'https://www.last.fm/ru/music/{project_name}/+wiki'
-        print(soup)
-
+        place_and_activity = soup.find('dl', class_='catalogue-metadata').find_all(class_='catalogue-metadata-description')
+        place = place_and_activity[1].text
+        activity = place_and_activity[0].text
+        # print(place_and_activity.find_all(class_='catalogue-metadata-description')[0])
+        print(place)
+        print('*' * 20)
+        print(activity)
 
 get_data('https://www.last.fm/ru/tag/rock/artists?page=1')
 
