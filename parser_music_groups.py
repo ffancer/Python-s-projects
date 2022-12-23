@@ -103,7 +103,8 @@ def get_data(url):
         # top_songs = soup.find_all(class_='col-main buffer-standard').find('section', class_='section-with-separator section-with-hover-control artist-overview-top-tracks')
         # top_songs = soup.find('section', class_='section-with-separator section-with-hover-control artist-overview-top-tracks')
         top_songs = soup.find_all('td', class_='chartlist-name')
-        print(top_songs)
+        for song in top_songs:
+            print(song.a.text)
 
 
 get_data('https://www.last.fm/ru/tag/rock/artists?page=1')
