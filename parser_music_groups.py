@@ -78,7 +78,7 @@ def get_data(url):
         project_url = 'https://www.last.fm' + article.get('href')
         project_urls.append(project_url)
 
-    for project_url in project_urls[:10]:
+    for project_url in project_urls[:1]:
         req = requests.get(project_url, headers)
         project_name = project_url.split('/')[-1]
 
