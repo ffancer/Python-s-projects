@@ -78,7 +78,7 @@ def get_data(url):
         project_url = 'https://www.last.fm' + article.get('href')
         project_urls.append(project_url)
 
-    for project_url in project_urls[:1]:
+    for project_url in project_urls[:10]:
         req = requests.get(project_url, headers)
         project_name = project_url.split('/')[-1]
 
@@ -93,6 +93,14 @@ def get_data(url):
         place_and_activity = soup.find('dl', class_='catalogue-metadata').find_all(class_='catalogue-metadata-description')
         place = place_and_activity[1].text  # nado
         activity = place_and_activity[0].text  # nado
+        tags = soup.find('ul', class_='tags-list tags-list--global')
+        tags_list = []
+        for tag in tags:
+            if tag == '\n':
+                continue
+            tags_list.append(tag.text)
+
+        print(tags_list)
 
 
 get_data('https://www.last.fm/ru/tag/rock/artists?page=1')
