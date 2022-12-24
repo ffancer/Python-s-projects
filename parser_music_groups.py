@@ -69,6 +69,7 @@ headers = {
 
 def get_data(url):
     project_urls = []
+    more_info = []
     req = requests.get(url, headers)
     soup = BeautifulSoup(req.text, 'lxml')
     articles = soup.find_all('a', class_='js-link-block-cover-link link-block-cover-link')
@@ -140,5 +141,20 @@ def get_data(url):
         except Exception:
             links_list = 'No links'
 
+        more_info.append(
+            {
+                'Wiki': wiki,
+                'Place': place,
+                'Activity': activity,
+                'Tags': tags_list,
+                'Best songs': songs_list,
+                'Best albums': albums_list,
+                'Links': links_list
+            }
+        )
+
+        print(more_info)
+
 
 get_data('https://www.last.fm/ru/tag/rock/artists?page=1')
+
