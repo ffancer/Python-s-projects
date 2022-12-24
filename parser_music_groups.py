@@ -78,7 +78,7 @@ def get_data(url):
         project_url = 'https://www.last.fm' + article.get('href')
         project_urls.append(project_url)
 
-    for project_url in project_urls[:1]:
+    for project_url in project_urls[:10]:
         req = requests.get(project_url, headers)
         project_name = project_url.split('/')[-1]
 
@@ -153,8 +153,13 @@ def get_data(url):
             }
         )
 
-        print(more_info)
+    return more_info
 
 
-get_data('https://www.last.fm/ru/tag/rock/artists?page=1')
+def save_json_file():
+    with open('all music groups2.json', 'a', encoding='utf-8') as file:
+        json.dump(get_data('https://www.last.fm/ru/tag/rock/artists?page=1'), file, indent=4, ensure_ascii=False)
 
+
+# get_data('https://www.last.fm/ru/tag/rock/artists?page=1')
+save_json_file()
