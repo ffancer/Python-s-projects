@@ -88,36 +88,57 @@ def get_data(url):
         #     src = file.read()
 
         soup = BeautifulSoup(req.text, 'lxml')
-        wiki = f'https://www.last.fm/ru/music/{project_name}/+wiki'  # nado
+
+        try:
+            wiki = f'https://www.last.fm/ru/music/{project_name}/+wiki'  # nado
+        except Exception:
+            wiki = 'no wiki'
+
         place_and_activity = soup.find('dl', class_='catalogue-metadata').find_all(
             class_='catalogue-metadata-description')
-        place = place_and_activity[1].text  # nado
-        activity = place_and_activity[0].text  # nado
+        try:
+            place = place_and_activity[1].text  # nado
+        except Exception:
+            place = 'No place'
+        try:
+            activity = place_and_activity[0].text  # nado
+        except Exception:
+            activity = 'No activity'
 
         tags = soup.find('ul', class_='tags-list tags-list--global')
-        tags_list = []  # nado
-        for tag in tags:
-            if tag == '\n':
-                continue
-            tags_list.append(tag.text)
+        try:
+            tags_list = []  # nado
+            for tag in tags:
+                if tag == '\n':
+                    continue
+                tags_list.append(tag.text)
+        except Exception:
+            tags_list = 'No tags'
 
-        songs_list = []  # nado
-        songs = soup.find_all('td', class_='chartlist-name')
-        for song in songs:
-            songs_list.append(song.a.text)
+        try:
+            songs_list = []  # nado
+            songs = soup.find_all('td', class_='chartlist-name')
+            for song in songs:
+                songs_list.append(song.a.text)
+        except Exception:
+            songs_list = 'No songs'
 
-        albums_list = []  # nado
-        albums = soup.find_all('h3', class_='artist-top-albums-item-name')
-        for album in albums:
-            albums_list.append(album.text.strip())
+        try:
+            albums_list = []  # nado
+            albums = soup.find_all('h3', class_='artist-top-albums-item-name')
+            for album in albums:
+                albums_list.append(album.text.strip())
+        except Exception:
+            albums_list = 'No albums'
 
-        links_list = []  # nado
-        links = soup.find_all('a', {'class': 'resource-external-link'})
-        for link in links:
-            if link['href'] not in links_list:
-                links_list.append(link['href'])
-
-        print(links_list)
+        try:
+            links_list = []  # nado
+            links = soup.find_all('a', {'class': 'resource-external-link'})
+            for link in links:
+                if link['href'] not in links_list:
+                    links_list.append(link['href'])
+        except Exception:
+            links_list = 'No links'
 
 
 get_data('https://www.last.fm/ru/tag/rock/artists?page=1')
