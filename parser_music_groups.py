@@ -11,7 +11,6 @@ import json
 import pandas as pd
 import time
 
-
 headers = {
     'Accept': '*/*',
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
@@ -90,27 +89,29 @@ def get_data(url):
 
         soup = BeautifulSoup(req.text, 'lxml')
         wiki = f'https://www.last.fm/ru/music/{project_name}/+wiki'  # nado
-        place_and_activity = soup.find('dl', class_='catalogue-metadata').find_all(class_='catalogue-metadata-description')
+        place_and_activity = soup.find('dl', class_='catalogue-metadata').find_all(
+            class_='catalogue-metadata-description')
         place = place_and_activity[1].text  # nado
         activity = place_and_activity[0].text  # nado
+
         tags = soup.find('ul', class_='tags-list tags-list--global')
-        tags_list = []
+        tags_list = []  # nado
         for tag in tags:
             if tag == '\n':
                 continue
             tags_list.append(tag.text)
 
-        songs_list = []
+        songs_list = []  # nado
         songs = soup.find_all('td', class_='chartlist-name')
         for song in songs:
             songs_list.append(song.a.text)
 
-        albums_list = []
+        albums_list = []  # nado
         albums = soup.find_all('h3', class_='artist-top-albums-item-name')
         for album in albums:
             albums_list.append(album.text.strip())
 
-        links_list = []
+        links_list = []  # nado
         links = soup.find_all('a', {'class': 'resource-external-link'})
         for link in links:
             if link['href'] not in links_list:
@@ -119,7 +120,4 @@ def get_data(url):
         print(links_list)
 
 
-
-
 get_data('https://www.last.fm/ru/tag/rock/artists?page=1')
-
