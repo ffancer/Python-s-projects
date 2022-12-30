@@ -172,3 +172,12 @@ save_json_file()
 
 # сделать все группы, отсчетом страниц с первой по 23 включительно с паузами между страницами
 # отдыхаю, т.к. грипп
+def from_json_to_excel():
+    with open('all music groups2.json', encoding='utf-8') as json_file:
+        data = json.load(json_file)
+
+    df = pd.DataFrame(data)
+    return df.to_excel('all music groups2.xlsx')
+
+
+from_json_to_excel()
