@@ -68,6 +68,7 @@ headers = {
 
 
 def get_data(url):
+    global place_and_activity
     project_urls = []
     more_info = []
     req = requests.get(url, headers)
@@ -95,9 +96,10 @@ def get_data(url):
         except Exception:
             wiki = 'no wiki'
 
-        place_and_activity = soup.find('dl', class_='catalogue-metadata').find_all(
-            class_='catalogue-metadata-description')
+
         try:
+            place_and_activity = soup.find('dl', class_='catalogue-metadata').find_all(
+                class_='catalogue-metadata-description')
             place = place_and_activity[1].text  # nado
         except Exception:
             place = 'No place'
@@ -158,8 +160,12 @@ def get_data(url):
 
 def save_json_file():
     with open('all music groups2.json', 'a', encoding='utf-8') as file:
-        # 23 страница - последняя
-        json.dump(get_data('https://www.last.fm/ru/tag/rock/artists?page=1'), file, indent=4, ensure_ascii=False)
+        page = 1
+        while page != 24:
+            time.sleep(1)
+            # 23 страница - последняя
+            json.dump(get_data(f'https://www.last.fm/ru/tag/rock/artists?page={page}'), file, indent=4, ensure_ascii=False)
+            page += 1
 
 
 # get_data('https://www.last.fm/ru/tag/rock/artists?page=1')
