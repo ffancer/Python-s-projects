@@ -79,7 +79,7 @@ def get_data(url):
         project_url = 'https://www.last.fm' + article.get('href')
         project_urls.append(project_url)
 
-    for project_url in project_urls[:10]:
+    for project_url in project_urls:
         req = requests.get(project_url, headers)
         project_name = project_url.split('/')[-1]
 
@@ -95,7 +95,6 @@ def get_data(url):
             wiki = f'https://www.last.fm/ru/music/{project_name}/+wiki'  # nado
         except Exception:
             wiki = 'no wiki'
-
 
         try:
             place_and_activity = soup.find('dl', class_='catalogue-metadata').find_all(
@@ -161,10 +160,11 @@ def get_data(url):
 def save_json_file():
     with open('all music groups2.json', 'a', encoding='utf-8') as file:
         page = 1
-        while page != 24:
-            time.sleep(1)
+        while page != 25:
+            # time.sleep(1)
             # 23 страница - последняя
-            json.dump(get_data(f'https://www.last.fm/ru/tag/rock/artists?page={page}'), file, indent=4, ensure_ascii=False)
+            json.dump(get_data(f'https://www.last.fm/ru/tag/rock/artists?page={page}'), file, indent=4,
+                      ensure_ascii=False)
             page += 1
 
 
