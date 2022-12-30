@@ -159,13 +159,13 @@ def get_data(url):
 
 def save_json_file():
     with open('all music groups2.json', 'a', encoding='utf-8') as file:
-        page = 1
-        while page != 25:
+
+        # for page in range(1, 25):
+        for page in range(1, 4):
             # time.sleep(1)
             # 23 страница - последняя
             json.dump(get_data(f'https://www.last.fm/ru/tag/rock/artists?page={page}'), file, indent=4,
                       ensure_ascii=False)
-            page += 1
 
 
 # get_data('https://www.last.fm/ru/tag/rock/artists?page=1')
