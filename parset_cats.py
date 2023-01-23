@@ -13,4 +13,6 @@ headers = {
 
 req = requests.get(URL, headers=headers)
 soup = BeautifulSoup(req.text, 'lxml')
-print(soup)
+# all_cats = soup.find(class_='breeds-list__items')
+all_cats = soup.find(class_='pet-page__main')
+print(all_cats)
