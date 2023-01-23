@@ -12,5 +12,5 @@ headers = {
 }
 
 req = requests.get(URL, headers=headers)
-print(req)
 soup = BeautifulSoup(req.text, 'lxml')
+print(soup)
