@@ -13,13 +13,16 @@ headers = {
 
 req = requests.get(URL, headers=headers)
 soup = BeautifulSoup(req.text, 'lxml')
-# all_cats = soup.find(class_='breeds-list__items')
+json_list = []
 
-# all_cats = soup.find_all(class_='pet-page__main')
-# for cat in all_cats:
-#     print(cat.find_all(class_='breeds-list-i__name'))
-
-all_cats = soup.find_all('div', class_='breeds-list__items')
+all_cats = soup.find_all('a', class_='breeds-list-i')
 for cat in all_cats:
-    print('https://hvost.news/' + cat.find_all('a', class_='breeds-list-i')['href'])
+    link = 'https://hvost.news/' + cat['href']
 
+    json_list.append(
+        {
+            'Link': link
+        }
+    )
+
+print(json_list)
