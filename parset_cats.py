@@ -25,6 +25,7 @@ for cat in all_cats:
 #         }
 #     )
 #     name =
-    character = cat.find(class_='breeds-list-i__label').text
-    print(character)
+#     character = cat.find(class_='breeds-list-i__label').text
+    name = cat.find(class_='breeds-list-i__name').text.strip()
+    print(name)
 # print(json_list)
