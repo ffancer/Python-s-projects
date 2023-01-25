@@ -21,4 +21,5 @@ soup = BeautifulSoup(req.text, 'lxml')
 
 all_cats = soup.find_all('div', class_='breeds-list__items')
 for cat in all_cats:
-    print(cat.find('a', class_='breeds-list-i')['href'])
+    print('https://hvost.news/' + cat.find_all('a', class_='breeds-list-i')['href'])
+
