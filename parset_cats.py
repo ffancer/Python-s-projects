@@ -16,5 +16,5 @@ soup = BeautifulSoup(req.text, 'lxml')
 # all_cats = soup.find(class_='breeds-list__items')
 all_cats = soup.find_all(class_='pet-page__main')
 for cat in all_cats:
-    # print(cat)
+    print(cat)
     print(cat.find_all(class_='breeds-list-i__name'))
