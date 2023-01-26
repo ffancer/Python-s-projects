@@ -1,5 +1,6 @@
 """
 Соберем породы кошек в список
+breed - порода по англ.
 """
 import requests
 from bs4 import BeautifulSoup
@@ -17,14 +18,15 @@ json_list = []
 
 all_cats = soup.find_all('a', class_='breeds-list-i')
 for cat in all_cats:
+    breed = cat.find(class_='breeds-list-i__name').text.strip()
     character = cat.find(class_='breeds-list-i__label').text
-    name = cat.find(class_='breeds-list-i__name').text.strip()
     link = 'https://hvost.news/' + cat['href']
 
     json_list.append(
         {
+            'Порода': breed,
+            'Характер': character,
             'Более подробная информация по ссылке': link
         }
     )
 
-print(json_list)
