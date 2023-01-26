@@ -17,15 +17,14 @@ json_list = []
 
 all_cats = soup.find_all('a', class_='breeds-list-i')
 for cat in all_cats:
-#     link = 'https://hvost.news/' + cat['href']
-#
-#     json_list.append(
-#         {
-#             'Более подробная информация по ссылке': link
-#         }
-#     )
-#     name =
-#     character = cat.find(class_='breeds-list-i__label').text
+    character = cat.find(class_='breeds-list-i__label').text
     name = cat.find(class_='breeds-list-i__name').text.strip()
-    print(name)
-# print(json_list)
+    link = 'https://hvost.news/' + cat['href']
+
+    json_list.append(
+        {
+            'Более подробная информация по ссылке': link
+        }
+    )
+
+print(json_list)
