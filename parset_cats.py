@@ -4,6 +4,8 @@ breed - порода по англ.
 """
 import requests
 from bs4 import BeautifulSoup
+import json
+import pandas as pd
 
 
 URL = 'https://hvost.news/animals/cats-breeds/'
@@ -35,4 +37,10 @@ def collect_data():
     return json_list
 
 
-print(collect_data())
+def save_json_file():
+    with open('cat_breeds.json', 'a', encoding='utf-8') as file:
+        json.dump(collect_data(), file, indent=4, ensure_ascii=False)
+
+
+save_json_file()
+
