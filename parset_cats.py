@@ -14,19 +14,25 @@ headers = {
 
 req = requests.get(URL, headers=headers)
 soup = BeautifulSoup(req.text, 'lxml')
-json_list = []
 
-all_cats = soup.find_all('a', class_='breeds-list-i')
-for cat in all_cats:
-    breed = cat.find(class_='breeds-list-i__name').text.strip()
-    character = cat.find(class_='breeds-list-i__label').text
-    link = 'https://hvost.news/' + cat['href']
 
-    json_list.append(
-        {
-            'Порода': breed,
-            'Характер': character,
-            'Более подробная информация по ссылке': link
-        }
-    )
+def collect_data():
+    json_list = []
+    all_cats = soup.find_all('a', class_='breeds-list-i')
 
+    for cat in all_cats:
+        breed = cat.find(class_='breeds-list-i__name').text.strip()
+        character = cat.find(class_='breeds-list-i__label').text
+        link = 'https://hvost.news/' + cat['href']
+        json_list.append(
+            {
+                'Порода': breed,
+                'Активность': character,
+                'Более подробная информация по ссылке': link
+            }
+        )
+
+    return json_list
+
+
+print(collect_data())
