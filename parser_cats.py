@@ -1,6 +1,7 @@
 """
 Соберем породы кошек в список
 breed - порода по англ.
+was renamed
 """
 import requests
 from bs4 import BeautifulSoup
