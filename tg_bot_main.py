@@ -8,7 +8,6 @@
 """
 from typing import Union, List, Optional, Literal, Any
 
-
 # в пайчарме разницы нет, указывать тип данных или нет, но это яляется хорошей практикой написания кода
 # def say_something(number: int, word: str) -> str:
 # #     word = word.capitalize()
@@ -60,7 +59,6 @@ from typing import Union, List, Optional, Literal, Any
 # print(get_string.__annotations__)
 
 
-
 # где прямо сейчас находится Международная Космическая Станция.
 # import requests
 #
@@ -77,12 +75,9 @@ from typing import Union, List, Optional, Literal, Any
 import requests
 
 api_url = 'http://numbersapi.com/' + '43'
-res = requests.get(api_url)
-if res.status_code == 200:
-    print(res.text)
-else:
+res = requests.get(api_url).text
+
+try:
+    print(res)
+except:
     print(res.status_code)
-
-
-
-
