@@ -10,13 +10,18 @@ print('test')
 
 
 # в пайчарме разницы нет, указывать тип данных или нет, но это яляется хорошей практикой написания кода
-def say_something(number: int, word: str) -> str:
-    word = word.capitalize()
-    return word * number
+# def say_something(number: int, word: str) -> str:
+# #     word = word.capitalize()
+# #     return word * number
+# #
+# #
+# # def test(number_1: int, number_2: int, word='well done') -> tuple:
+# #     return number_1 * number_2, word
+# #
+# #
+# # print(test(4, 5))
 
+def get_tuple(lst: list[float | bool]) -> tuple[int]:
+    return (int(num) for num in lst)
 
-def test(number_1: int, number_2: int, word='well done') -> tuple:
-    return number_1 * number_2, word
-
-
-print(test(4, 5))
+print(get_tuple([1.0, False, 2.3]))
