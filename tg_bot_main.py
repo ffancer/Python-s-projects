@@ -9,9 +9,14 @@
 print('test')
 
 
-def say_something(number, word):
+# в пайчарме разницы нет, указывать тип данных или нет, но это яляется хорошей практикой написания кода
+def say_something(number: int, word: str) -> str:
     word = word.capitalize()
     return word * number
 
 
-print(say_something(5, 'hello '))
+def test(number_1: int, number_2: int, word='well done') -> tuple:
+    return number_1 * number_2, word
+
+
+print(test(4, 5))
