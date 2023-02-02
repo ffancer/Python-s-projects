@@ -6,6 +6,8 @@
 ====================================================================
 ВСЕГДА ПРОВЕРЯЙ ТОЧНОСТЬ ВВОДА, ВСЕГДА
 """
+from typing import Union, List, Optional, Literal, Any
+
 print('test')
 
 
@@ -21,7 +23,8 @@ print('test')
 # #
 # # print(test(4, 5))
 
-def get_tuple(lst: list[float | bool]) -> tuple[int]:
+def get_tuple(lst: Union[float, bool]) -> [int]:
     return (int(num) for num in lst)
 
 print(get_tuple([1.0, False, 2.3]))
+
