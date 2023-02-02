@@ -8,8 +8,6 @@
 """
 from typing import Union, List, Optional, Literal, Any
 
-print('test')
-
 
 # в пайчарме разницы нет, указывать тип данных или нет, но это яляется хорошей практикой написания кода
 # def say_something(number: int, word: str) -> str:
@@ -55,8 +53,35 @@ print('test')
 #                                   database=DATABASE))
 
 
+# def get_string(string: str, number: int) -> str:
+#     return string * number
+#
+#
+# print(get_string.__annotations__)
 
 
+
+# где прямо сейчас находится Международная Космическая Станция.
+# import requests
+#
+# api_url = 'http://api.open-notify.org/iss-now.json'
+#
+# response = requests.get(api_url)   # Отправляем GET-запрос и сохраняем ответ в переменной response
+#
+# if response.status_code == 200:    # Если код ответа на запрос - 200, то смотрим, что пришло в ответе
+#     print(response.text)
+# else:
+#     print(response.status_code)    # При другом коде ответа выводим этот код
+
+
+import requests
+
+api_url = 'http://numbersapi.com/' + '43'
+res = requests.get(api_url)
+if res.status_code == 200:
+    print(res.text)
+else:
+    print(res.status_code)
 
 
 
