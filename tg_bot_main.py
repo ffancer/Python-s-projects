@@ -82,37 +82,38 @@ from typing import Union, List, Optional, Literal, Any
 # except:
 #     print(res.status_code)
 
-import random
-import requests
-import time
 
-
-API_URL: str = 'https://api.telegram.org/bot'
-BOT_TOKEN: str = '*'
-# TEXT: str = 'Привет Паша :*'
-# TEXT: str = random.choice(['a', 'b', 'c', 'd'])
-MAX_COUNTER: int = 20
-
-offset: int = -2
-counter: int = 0
-chat_id: int
-
-
-while counter < MAX_COUNTER:
-
-    print('attempt =', counter)  #Чтобы видеть в консоли, что код живет
-
-    updates = requests.get(f'{API_URL}{BOT_TOKEN}/getUpdates?offset={offset + 1}').json()
-
-    if updates['result']:
-        for result in updates['result']:
-            offset = result['update_id']
-            chat_id = result['message']['from']['id']
-            # requests.get(f'{API_URL}{BOT_TOKEN}/sendMessage?chat_id={chat_id}&text={TEXT}')
-            requests.get(f"{API_URL}{BOT_TOKEN}/sendMessage?chat_id={chat_id}&text={random.choice(['Котик', 'Зая', ':*', 'Малыш'])}")
-
-    time.sleep(1)
-    counter += 1
+# import random
+# import requests
+# import time
+#
+#
+# API_URL: str = 'https://api.telegram.org/bot'
+# BOT_TOKEN: str = '*'
+# # TEXT: str = 'Привет Паша :*'
+# # TEXT: str = random.choice(['a', 'b', 'c', 'd'])
+# MAX_COUNTER: int = 20
+#
+# offset: int = -2
+# counter: int = 0
+# chat_id: int
+#
+#
+# while counter < MAX_COUNTER:
+#
+#     print('attempt =', counter)  #Чтобы видеть в консоли, что код живет
+#
+#     updates = requests.get(f'{API_URL}{BOT_TOKEN}/getUpdates?offset={offset + 1}').json()
+#
+#     if updates['result']:
+#         for result in updates['result']:
+#             offset = result['update_id']
+#             chat_id = result['message']['from']['id']
+#             # requests.get(f'{API_URL}{BOT_TOKEN}/sendMessage?chat_id={chat_id}&text={TEXT}')
+#             requests.get(f"{API_URL}{BOT_TOKEN}/sendMessage?chat_id={chat_id}&text={random.choice(['Котик', 'Зая', ':*', 'Малыш'])}")
+#
+#     time.sleep(1)
+#     counter += 1
 
 
 # import requests
@@ -147,3 +148,30 @@ while counter < MAX_COUNTER:
 #
 #     time.sleep(1)
 #     counter += 1
+
+import requests
+import time
+
+
+API_URL: str = 'https://api.telegram.org/bot'
+BOT_TOKEN: str = '*'
+offset: int = -2
+updates: dict
+
+
+def do_something() -> None:
+    print('Был апдейт')
+
+
+while True:
+    start_time = time.time()
+    updates = requests.get(f'{API_URL}{BOT_TOKEN}/getUpdates?offset={offset + 1}').json()
+
+    if updates['result']:
+        for result in updates['result']:
+            offset = result['update_id']
+            do_something()
+
+    time.sleep(3)
+    end_time = time.time()
+    print(f'Время между запросами к Telegram Bot API: {end_time - start_time}')
