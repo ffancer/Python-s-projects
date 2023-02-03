@@ -6,6 +6,8 @@
 ====================================================================
 ВСЕГДА ПРОВЕРЯЙ ТОЧНОСТЬ ВВОДА, ВСЕГДА
 """
+TOKEN = open('my_token.txt').read(46)
+
 from typing import Union, List, Optional, Literal, Any
 
 # в пайчарме разницы нет, указывать тип данных или нет, но это яляется хорошей практикой написания кода
@@ -154,7 +156,7 @@ import time
 
 
 API_URL: str = 'https://api.telegram.org/bot'
-BOT_TOKEN: str = '*'
+BOT_TOKEN: str = TOKEN
 offset: int = -2
 updates: dict
 
@@ -175,3 +177,4 @@ while True:
     time.sleep(3)
     end_time = time.time()
     print(f'Время между запросами к Telegram Bot API: {end_time - start_time}')
+
