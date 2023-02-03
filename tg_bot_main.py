@@ -180,30 +180,58 @@ from typing import Union, List, Optional, Literal, Any
 #     print(f'Время между запросами к Telegram Bot API: {end_time - start_time}')
 
 
-import requests
-import time
+# import requests
+# import time
 
 
-API_URL: str = 'https://api.telegram.org/bot'
-BOT_TOKEN: str = TOKEN
-offset: int = -2
-timeout: int = 60
-updates: dict
+# API_URL: str = 'https://api.telegram.org/bot'
+# BOT_TOKEN: str = TOKEN
+# offset: int = -2
+# timeout: int = 60
+# updates: dict
+#
+#
+# def do_something() -> None:
+#     print('Был апдейт')
+#
+#
+# while True:
+#     start_time = time.time()
+#     updates = requests.get(f'{API_URL}{BOT_TOKEN}/getUpdates?offset={offset + 1}&timeout={timeout}').json()
+#
+#     if updates['result']:
+#         for result in updates['result']:
+#             offset = result['update_id']
+#             do_something()
+#
+#     end_time = time.time()
+#     print(f'Время между запросами к Telegram Bot API: {end_time - start_time}')
 
 
-def do_something() -> None:
-    print('Был апдейт')
+
+from aiogram import Bot, types
+from aiogram.dispatcher import Dispatcher
+from aiogram.utils import executor
+
+bot = Bot(token=TOKEN)
+dp = Dispatcher(bot)
 
 
-while True:
-    start_time = time.time()
-    updates = requests.get(f'{API_URL}{BOT_TOKEN}/getUpdates?offset={offset + 1}&timeout={timeout}').json()
+@dp.message_handler(commands=['start'])
+async def process_start_command(message: types.Message):
+    await message.reply("Привет!\nНапиши мне что-нибудь!")
 
-    if updates['result']:
-        for result in updates['result']:
-            offset = result['update_id']
-            do_something()
 
-    end_time = time.time()
-    print(f'Время между запросами к Telegram Bot API: {end_time - start_time}')
+@dp.message_handler(commands=['help'])
+async def process_help_command(message: types.Message):
+    await message.reply("Напиши мне что-нибудь, и я отпрпавлю этот текст тебе в ответ!")
+
+
+@dp.message_handler()
+async def echo_message(msg: types.Message):
+    await bot.send_message(msg.from_user.id, msg.text)
+
+
+if __name__ == '__main__':
+    executor.start_polling(dp)
 
