@@ -237,6 +237,10 @@ async def get_file_id_p(message: types.Message):
     await message.reply_photo(message.photo[-1].file_id)
 
 
+@dp.message_handler(content_types=['voice'])
+async def get_file_id_p(message: types.Message):
+    await message.reply_voice(message.voice.file_id)
+
 
 if __name__ == '__main__':
     executor.start_polling(dp)
