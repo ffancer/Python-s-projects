@@ -233,7 +233,9 @@ async def echo_message(msg: types.Message):
 
 @dp.message_handler(content_types=['photo'])
 async def get_file_id_p(message: types.Message):
-    await message.reply(message.photo[-1].file_id)
+    # await message.reply(message.photo[-1].file_id)
+    await message.reply_photo(message.photo[-1].file_id)
+
 
 
 if __name__ == '__main__':
