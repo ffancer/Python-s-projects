@@ -231,6 +231,11 @@ async def echo_message(msg: types.Message):
     await bot.send_message(msg.from_user.id, msg.text)
 
 
+@dp.message_handler(content_types=['photo'])
+async def get_file_id_p(message: types.Message):
+    await message.reply(message.photo[-1].file_id)
+
+
 if __name__ == '__main__':
     executor.start_polling(dp)
 
