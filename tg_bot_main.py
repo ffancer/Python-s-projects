@@ -207,68 +207,69 @@ from typing import Union, List, Optional, Literal, Any
 #     end_time = time.time()
 #     print(f'Время между запросами к Telegram Bot API: {end_time - start_time}')
 
-# from aiogram import Bot, types
-# from aiogram.dispatcher import Dispatcher
-# from aiogram.utils import executor
-#
-# bot = Bot(token=TOKEN)
-# dp = Dispatcher(bot)
-#
-#
-# @dp.message_handler(commands=['start'])
-# async def process_start_command(message: types.Message):
-#     await message.reply("Привет!\nНапиши мне что-нибудь!")
-#
-#
-# @dp.message_handler(commands=['help'])
-# async def process_help_command(message: types.Message):
-#     await message.reply("Напиши мне что-нибудь, и я отпрпавлю этот текст тебе в ответ!")
-#
-#
-# @dp.message_handler()
-# async def echo_message(msg: types.Message):
-#     await bot.send_message(msg.from_user.id, msg.text)
-#
-#
-# if __name__ == '__main__':
-#     executor.start_polling(dp)
+
+from aiogram import Bot, types
+from aiogram.dispatcher import Dispatcher
+from aiogram.utils import executor
+
+bot = Bot(token=TOKEN)
+dp = Dispatcher(bot)
 
 
-
-from aiogram import Bot, Dispatcher
-from aiogram.filters import Command
-from aiogram.types import Message
-
-# Вместо BOT TOKEN HERE нужно вставить токен вашего бота,
-# полученный у @BotFather
-API_TOKEN: str = 'BOT TOKEN HERE'
-
-# Создаем объекты бота и диспетчера
-bot: Bot = Bot(token=API_TOKEN)
-dp: Dispatcher = Dispatcher()
+@dp.message_handler(commands=['start'])
+async def process_start_command(message: types.Message):
+    await message.reply("Привет!\nНапиши мне что-нибудь!")
 
 
-# Этот хэндлер будет срабатывать на команду "/start"
-async def process_start_command(message: Message):
-    await message.answer('Привет!\nМеня зовут Эхо-бот!\nНапиши мне что-нибудь')
+@dp.message_handler(commands=['help'])
+async def process_help_command(message: types.Message):
+    await message.reply("Напиши мне что-нибудь, и я отпрпавлю этот текст тебе в ответ!")
 
 
-# Этот хэндлер будет срабатывать на команду "/help"
-async def process_help_command(message: Message):
-    await message.answer('Напиши мне что-нибудь и в ответ '
-                         'я пришлю тебе твое сообщение')
+@dp.message_handler()
+async def echo_message(msg: types.Message):
+    await bot.send_message(msg.from_user.id, msg.text)
 
-
-# Этот хэндлер будет срабатывать на любые ваши текстовые сообщения,
-# кроме команд "/start" и "/help"
-async def send_echo(message: Message):
-    await message.reply(text=message.text)
-
-
-# Регистрируем хэндлеры
-dp.message.register(process_start_command, Command(commands=["start"]))
-dp.message.register(process_help_command, Command(commands=['help']))
-dp.message.register(send_echo)
 
 if __name__ == '__main__':
-    dp.run_polling(bot)
+    executor.start_polling(dp)
+
+
+
+# from aiogram import Bot, Dispatcher
+# from aiogram.filters import Command
+# from aiogram.types import Message
+#
+# # Вместо BOT TOKEN HERE нужно вставить токен вашего бота,
+# # полученный у @BotFather
+# API_TOKEN: str = 'BOT TOKEN HERE'
+#
+# # Создаем объекты бота и диспетчера
+# bot: Bot = Bot(token=API_TOKEN)
+# dp: Dispatcher = Dispatcher()
+#
+#
+# # Этот хэндлер будет срабатывать на команду "/start"
+# async def process_start_command(message: Message):
+#     await message.answer('Привет!\nМеня зовут Эхо-бот!\nНапиши мне что-нибудь')
+#
+#
+# # Этот хэндлер будет срабатывать на команду "/help"
+# async def process_help_command(message: Message):
+#     await message.answer('Напиши мне что-нибудь и в ответ '
+#                          'я пришлю тебе твое сообщение')
+#
+#
+# # Этот хэндлер будет срабатывать на любые ваши текстовые сообщения,
+# # кроме команд "/start" и "/help"
+# async def send_echo(message: Message):
+#     await message.reply(text=message.text)
+#
+#
+# # Регистрируем хэндлеры
+# dp.message.register(process_start_command, Command(commands=["start"]))
+# dp.message.register(process_help_command, Command(commands=['help']))
+# dp.message.register(send_echo)
+#
+# if __name__ == '__main__':
+#     dp.run_polling(bot)
