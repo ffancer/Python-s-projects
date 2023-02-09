@@ -208,79 +208,76 @@ from typing import Union, List, Optional, Literal, Any
 #     print(f'Время между запросами к Telegram Bot API: {end_time - start_time}')
 
 
-from aiogram import Bot, types
-from aiogram.dispatcher import Dispatcher
+# from aiogram import Bot, types
+# from aiogram.dispatcher import Dispatcher
+# from aiogram.utils import executor
+#
+# bot = Bot(token=TOKEN)
+# dp = Dispatcher(bot)
+#
+#
+# @dp.message_handler(commands=['start'])
+# async def process_start_command(message: types.Message):
+#     await message.reply("Привет!\nНапиши мне что-нибудь!")
+#
+#
+# @dp.message_handler(commands=['help'])
+# async def process_help_command(message: types.Message):
+#     await message.reply("Напиши мне что-нибудь, и я отпрпавлю этот текст тебе в ответ!")
+#
+#
+# @dp.message_handler()
+# async def echo_message(msg: types.Message):
+#     await bot.send_message(msg.from_user.id, msg.text)
+#
+#
+# @dp.message_handler(content_types=['photo'])
+# async def get_file_id_p(message: types.Message):
+#     # await message.reply(message.photo[-1].file_id)
+#     await message.reply_photo(message.photo[-1].file_id)
+#
+#
+# @dp.message_handler(content_types=['voice'])
+# async def get_file_id_p(message: types.Message):
+#     await message.reply_voice(message.voice.file_id)
+#
+#
+# if __name__ == '__main__':
+#     executor.start_polling(dp)
+
+
+
+from aiogram import Bot, Dispatcher, types
+from aiogram.dispatcher import FSMContext
+from aiogram.dispatcher.filters import Text
+from aiogram.dispatcher.filters.state import State, StatesGroup
+from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.utils import executor
+import random
 
 bot = Bot(token=TOKEN)
-dp = Dispatcher(bot)
+storage = MemoryStorage()
+dp = Dispatcher(bot, storage=storage)
 
 
-@dp.message_handler(commands=['start'])
-async def process_start_command(message: types.Message):
-    await message.reply("Привет!\nНапиши мне что-нибудь!")
+class Form(StatesGroup):
+    random_number = State()
+    number = State()
 
 
 @dp.message_handler(commands=['help'])
-async def process_help_command(message: types.Message):
-    await message.reply("Напиши мне что-нибудь, и я отпрпавлю этот текст тебе в ответ!")
+async def help(message: types.Message):
+    await message.reply('Hi! I am the Telegram bot. I can play Guess the number game. /start to start the game.')
 
+@dp.message_handler(commands=['start'])
+async def start(message: types.Message):
+    await Form.random_number.set()
+    await bot.send_message(message.chat.id, 'I am thinking of a number from 1 to 100. Try to guess it. (/cancel to stop the game)')
 
-@dp.message_handler()
-async def echo_message(msg: types.Message):
-    await bot.send_message(msg.from_user.id, msg.text)
-
-
-@dp.message_handler(content_types=['photo'])
-async def get_file_id_p(message: types.Message):
-    # await message.reply(message.photo[-1].file_id)
-    await message.reply_photo(message.photo[-1].file_id)
-
-
-@dp.message_handler(content_types=['voice'])
-async def get_file_id_p(message: types.Message):
-    await message.reply_voice(message.voice.file_id)
-
-
-if __name__ == '__main__':
-    executor.start_polling(dp)
-
-
-
-# from aiogram import Bot, Dispatcher
-# from aiogram.filters import Command
-# from aiogram.types import Message
-#
-# # Вместо BOT TOKEN HERE нужно вставить токен вашего бота,
-# # полученный у @BotFather
-# API_TOKEN: str = 'BOT TOKEN HERE'
-#
-# # Создаем объекты бота и диспетчера
-# bot: Bot = Bot(token=API_TOKEN)
-# dp: Dispatcher = Dispatcher()
-#
-#
-# # Этот хэндлер будет срабатывать на команду "/start"
-# async def process_start_command(message: Message):
-#     await message.answer('Привет!\nМеня зовут Эхо-бот!\nНапиши мне что-нибудь')
-#
-#
-# # Этот хэндлер будет срабатывать на команду "/help"
-# async def process_help_command(message: Message):
-#     await message.answer('Напиши мне что-нибудь и в ответ '
-#                          'я пришлю тебе твое сообщение')
-#
-#
-# # Этот хэндлер будет срабатывать на любые ваши текстовые сообщения,
-# # кроме команд "/start" и "/help"
-# async def send_echo(message: Message):
-#     await message.reply(text=message.text)
-#
-#
-# # Регистрируем хэндлеры
-# dp.message.register(process_start_command, Command(commands=["start"]))
-# dp.message.register(process_help_command, Command(commands=['help']))
-# dp.message.register(send_echo)
-#
-# if __name__ == '__main__':
-#     dp.run_polling(bot)
+@dp.message_handler(state='*', commands='cancel')
+@dp.message_handler(Text(equals='stop', ignore_case=True), state='*')
+async def cancel_handler(message: types.Message, state: FSMContext):
+    current_state = await state.get_state()
+    if current_state is None:
+        return
+    await state.finish()
