@@ -249,9 +249,9 @@ TOKEN = open('my_token.txt').read(46)
 # if __name__ == '__main__':
 #     executor.start_polling(dp)
 
-
+city = input()
 # r = requests.get(f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={OPEN_WEATHER_TOKEN}')
-r = requests.get(f'https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid={OPEN_WEATHER_TOKEN}')
+r = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={OPEN_WEATHER_TOKEN}')
 pprint(r.json())
 
 
