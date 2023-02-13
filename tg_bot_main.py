@@ -6,6 +6,7 @@
 ====================================================================
 ВСЕГДА ПРОВЕРЯЙ ТОЧНОСТЬ ВВОДА, ВСЕГДА
 """
+from pprint import pprint
 import requests
 from typing import Union, List, Optional, Literal, Any
 from weather_api import OPEN_WEATHER_TOKEN
@@ -251,7 +252,7 @@ TOKEN = open('my_token.txt').read(46)
 
 # r = requests.get(f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={OPEN_WEATHER_TOKEN}')
 r = requests.get(f'https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid={OPEN_WEATHER_TOKEN}')
-print(r)
+pprint(r.json())
 
 
 
