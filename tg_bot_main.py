@@ -6,9 +6,12 @@
 ====================================================================
 ВСЕГДА ПРОВЕРЯЙ ТОЧНОСТЬ ВВОДА, ВСЕГДА
 """
+import requests
+from typing import Union, List, Optional, Literal, Any
+from weather_api import OPEN_WEATHER_TOKEN
 TOKEN = open('my_token.txt').read(46)
 
-from typing import Union, List, Optional, Literal, Any
+
 
 # в пайчарме разницы нет, указывать тип данных или нет, но это яляется хорошей практикой написания кода
 # def say_something(number: int, word: str) -> str:
@@ -246,35 +249,9 @@ from typing import Union, List, Optional, Literal, Any
 #     executor.start_polling(dp)
 
 
-# from telebot import types
-
-import telebot
-import random
-import config
+# r = requests.get(f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={OPEN_WEATHER_TOKEN}')
+r = requests.get(f'https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid={OPEN_WEATHER_TOKEN}')
+print(r)
 
 
-@bot.message_handler(commands=['start'])
-def start(message: types.Message):
-    rnumber = random.randint(0, 100)
-    bot.send_message(message.chat.id, 'Отгадайте число от 0 до 100, у вас 5 попыток')
-    bot.register_next_step_handler(message, get_number, 1, rnumber)
 
-
-def get_number(message: types.Message, try_num: int, right_num: int):
-    if message.text.isdigit():
-        if right_num == int(message.text):
-            bot.send_message(message.chat.id, 'Вы отгадали число!')
-        else:
-            if try_num >= 4:
-                bot.send_message(message.chat.id, 'Мимо! Попытки кончились!')
-                return
-
-            if right_num < int(message.text):
-                bot.send_message(message.chat.id, 'Загаданное число меньше введенного.')
-            else:
-                bot.send_message(message.chat.id, 'Загаданное число больше введенного.')
-            bot.register_next_step_handler(message, get_number, try_num + 1, right_num)
-
-    else:
-        bot.send_message(message.chat.id, 'Вы ввели не число. Попробуйте еще раз.')
-        bot.register_next_step_handler(message, get_number, try_num, right_num)
