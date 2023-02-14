@@ -261,6 +261,8 @@ temp = data['main']['temp']
 pressure = data['main']['pressure']
 feels_like = data['main']['feels_like']
 wind = data['wind']['speed']
-print(f'Температура {temp}\nОщущается как {feels_like}\nДавление {pressure}\nВетер {wind}')
+sunrise = data['sys']['sunrise']
+sunset = data['sys']['sunset']
+print(f'Температура {temp}\nОщущается как {feels_like}\nДавление {pressure}\nВетер {wind}\nРассвет {sunrise}\nЗакат {sunset}')
 
 
