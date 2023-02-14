@@ -6,10 +6,10 @@
 ====================================================================
 ВСЕГДА ПРОВЕРЯЙ ТОЧНОСТЬ ВВОДА, ВСЕГДА
 """
-from pprint import pprint
 import requests
-from typing import Union, List, Optional, Literal, Any
+import datetime
 from weather_api import OPEN_WEATHER_TOKEN
+
 TOKEN = open('my_token.txt').read(46)
 
 
@@ -257,12 +257,14 @@ r = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q={city}&appi
 data = r.json()
 # pprint(data)
 
+time_now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
 temp = data['main']['temp']
 pressure = data['main']['pressure']
 feels_like = data['main']['feels_like']
 wind = data['wind']['speed']
-sunrise = data['sys']['sunrise']
-sunset = data['sys']['sunset']
-print(f'Температура {temp}\nОщущается как {feels_like}\nДавление {pressure}\nВетер {wind}\nРассвет {sunrise}\nЗакат {sunset}')
+sunrise = datetime.datetime.fromtimestamp(data['sys']['sunrise'])
+sunset = datetime.datetime.fromtimestamp(data['sys']['sunset'])
+print(time_now)
+# print(f'Температура {temp}\nОщущается как {feels_like}\nДавление {pressure}\nВетер {wind}\nРассвет {sunrise}\nЗакат {sunset}')
 
 
