@@ -266,7 +266,8 @@ sunrise = datetime.datetime.fromtimestamp(data['sys']['sunrise'])
 sunset = datetime.datetime.fromtimestamp(data['sys']['sunset'])
 day_length = sunset - sunrise
 
-print(f'Температура {temp} C\nОщущается как {feels_like} C\nДавление {pressure} мм.рт.ст\nВетер {wind} метр\сек\nРассвет {sunrise}\nЗакат {sunset}\n'
+print(f'==== {time_now} ====\n'
+      f'Температура {temp} C\nОщущается как {feels_like} C\nДавление {pressure} мм.рт.ст\nВетер {wind} метр\сек\nРассвет {sunrise}\nЗакат {sunset}\n'
       f'Продолжительность дня: {day_length}')
 
 
