@@ -251,8 +251,9 @@ TOKEN = open('my_token.txt').read(46)
 
 city = input()
 # r = requests.get(f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={OPEN_WEATHER_TOKEN}')
-r = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={OPEN_WEATHER_TOKEN}')
+r = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={OPEN_WEATHER_TOKEN}&units=metric')
+# r = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q=tikhvin&appid={OPEN_WEATHER_TOKEN}')
 pprint(r.json())
 
-
+# 4-22
 
