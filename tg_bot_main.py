@@ -249,11 +249,18 @@ TOKEN = open('my_token.txt').read(46)
 # if __name__ == '__main__':
 #     executor.start_polling(dp)
 
-city = input()
+# city = input()
+city = 'moscow'
 # r = requests.get(f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={OPEN_WEATHER_TOKEN}')
 r = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={OPEN_WEATHER_TOKEN}&units=metric')
 # r = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q=tikhvin&appid={OPEN_WEATHER_TOKEN}')
-pprint(r.json())
+data = r.json()
+# pprint(data)
 
-# 4-22
+temp = data['main']['temp']
+pressure = data['main']['pressure']
+feels_like = data['main']['feels_like']
+wind = data['wind']['speed']
+print(f'Температура {temp}\nОщущается как {feels_like}\nДавление {pressure}\nВетер {wind}')
+
 
