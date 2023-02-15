@@ -250,7 +250,8 @@ TOKEN = open('my_token.txt').read(46)
 #     executor.start_polling(dp)
 
 # city = input()
-city = 'moscow'
+# city = 'moscow'
+city = 'tikhvin'
 # r = requests.get(f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={OPEN_WEATHER_TOKEN}')
 r = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={OPEN_WEATHER_TOKEN}&units=metric')
 # r = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q=tikhvin&appid={OPEN_WEATHER_TOKEN}')
@@ -267,7 +268,7 @@ sunset = datetime.datetime.fromtimestamp(data['sys']['sunset'])
 day_length = sunset - sunrise
 
 print(f'==== {time_now} ====\n'
-      f'Температура {temp} C\nОщущается как {feels_like} C\nДавление {pressure} мм.рт.ст\nВетер {wind} метр\сек\nРассвет {sunrise}\nЗакат {sunset}\n'
+      f'Температура {temp} °C\nОщущается как {feels_like} °C\nДавление {pressure} мм.рт.ст\nВетер {wind} м\сек\nРассвет {sunrise}\nЗакат {sunset}\n'
       f'Продолжительность дня: {day_length}')
 
-
+#9-33
