@@ -12,8 +12,6 @@ from weather_api import OPEN_WEATHER_TOKEN
 
 TOKEN = open('my_token.txt').read(46)
 
-
-
 # в пайчарме разницы нет, указывать тип данных или нет, но это яляется хорошей практикой написания кода
 # def say_something(number: int, word: str) -> str:
 # #     word = word.capitalize()
@@ -249,26 +247,24 @@ TOKEN = open('my_token.txt').read(46)
 # if __name__ == '__main__':
 #     executor.start_polling(dp)
 
-# city = input()
-# city = 'moscow'
-city = 'tikhvin'
-# r = requests.get(f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={OPEN_WEATHER_TOKEN}')
-r = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={OPEN_WEATHER_TOKEN}&units=metric')
-# r = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q=tikhvin&appid={OPEN_WEATHER_TOKEN}')
-data = r.json()
-# pprint(data)
 
-time_now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
-temp = data['main']['temp']
-pressure = data['main']['pressure']
-feels_like = data['main']['feels_like']
-wind = data['wind']['speed']
-sunrise = datetime.datetime.fromtimestamp(data['sys']['sunrise'])
-sunset = datetime.datetime.fromtimestamp(data['sys']['sunset'])
-day_length = sunset - sunrise
+def get_weather(city='moscow'):
+    r = requests.get(
+        f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={OPEN_WEATHER_TOKEN}&units=metric')
+    data = r.json()
 
-print(f'==== {time_now} ====\n'
-      f'Температура {temp} °C\nОщущается как {feels_like} °C\nДавление {pressure} мм.рт.ст\nВетер {wind} м\сек\nРассвет {sunrise}\nЗакат {sunset}\n'
-      f'Продолжительность дня: {day_length}')
+    time_now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+    temp = data['main']['temp']
+    pressure = data['main']['pressure']
+    feels_like = data['main']['feels_like']
+    wind = data['wind']['speed']
+    sunrise = datetime.datetime.fromtimestamp(data['sys']['sunrise'])
+    sunset = datetime.datetime.fromtimestamp(data['sys']['sunset'])
+    day_length = sunset - sunrise
 
-#9-33
+    return f'==== {time_now} ====\nТемпература {temp} °C\nОщущается как {feels_like} °C\n' \
+           f'Давление {pressure} мм.рт.ст\nВетер {wind} м\сек\nРассвет {sunrise}\nЗакат {sunset}\n' \
+           f'Продолжительность дня: {day_length}'
+
+
+print(get_weather())
