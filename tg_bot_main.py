@@ -6,6 +6,7 @@
 ====================================================================
 ВСЕГДА ПРОВЕРЯЙ ТОЧНОСТЬ ВВОДА, ВСЕГДА
 """
+import pprint
 import requests
 import datetime
 from weather_api import OPEN_WEATHER_TOKEN
@@ -248,21 +249,29 @@ TOKEN = open('my_token.txt').read(46)
 #     executor.start_polling(dp)
 
 
-def get_weather(city='moscow'):
+def get_weather(city):
     code_to_smile = {
         'Clear': 'Ясно \U00002600',
-        'Clouds': 'Ясно \U00002601',
-        'Rain': 'Ясно \U00002614',
-        'Thunderstorm': 'Ясно \U000026A1',
-        'Snow': 'Ясно \U0001F328',
-        'Mist': 'Ясно \U0001F32B',
+        'Clouds': 'Пасмурно \U00002601',
+        'Rain': 'Дождь \U00002614',
+        'Thunderstorm': 'Гроза \U000026A1',
+        'Snow': 'Снег \U0001F328',
+        'Mist': 'Туман \U0001F32B',
     }
     r = requests.get(
         f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={OPEN_WEATHER_TOKEN}&units=metric')
     data = r.json()
 
     time_now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+    city = data['name']
     temp = data['main']['temp']
+
+    weather_description = data['weather'][0]['main']
+    if weather_description in code_to_smile:
+        wd = code_to_smile[weather_description]
+    else:
+        wd = 'Погляди в окно сам'
+
     pressure = data['main']['pressure']
     feels_like = data['main']['feels_like']
     wind = data['wind']['speed']
@@ -270,10 +279,10 @@ def get_weather(city='moscow'):
     sunset = datetime.datetime.fromtimestamp(data['sys']['sunset'])
     day_length = sunset - sunrise
 
-    return f'==== {time_now} ====\nТемпература {temp} °C\nОщущается как {feels_like} °C\n' \
+    return f'==== {time_now} ====\nТемпература {temp} °C {wd}\nОщущается как {feels_like} °C\n' \
            f'Давление {pressure} мм.рт.ст\nВетер {wind} м\сек\nРассвет {sunrise}\nЗакат {sunset}\n' \
            f'Продолжительность дня: {day_length}'
 
 
-print(get_weather())
-12-32
+city = input('Введите город: ')
+print(get_weather(city))
