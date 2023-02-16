@@ -251,11 +251,11 @@ TOKEN = open('my_token.txt').read(46)
 def get_weather(city='moscow'):
     code_to_smile = {
         'Clear': 'Ясно \U00002600',
-        'Clear': 'Ясно \U00002600',
-        'Clear': 'Ясно \U00002600',
-        'Clear': 'Ясно \U00002600',
-        'Clear': 'Ясно \U00002600',
-        'Clear': 'Ясно \U00002600',
+        'Clouds': 'Ясно \U00002601',
+        'Rain': 'Ясно \U00002614',
+        'Thunderstorm': 'Ясно \U000026A1',
+        'Snow': 'Ясно \U0001F328',
+        'Mist': 'Ясно \U0001F32B',
     }
     r = requests.get(
         f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={OPEN_WEATHER_TOKEN}&units=metric')
