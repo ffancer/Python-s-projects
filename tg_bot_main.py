@@ -249,6 +249,14 @@ TOKEN = open('my_token.txt').read(46)
 
 
 def get_weather(city='moscow'):
+    code_to_smile = {
+        'Clear': 'Ясно \U00002600',
+        'Clear': 'Ясно \U00002600',
+        'Clear': 'Ясно \U00002600',
+        'Clear': 'Ясно \U00002600',
+        'Clear': 'Ясно \U00002600',
+        'Clear': 'Ясно \U00002600',
+    }
     r = requests.get(
         f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={OPEN_WEATHER_TOKEN}&units=metric')
     data = r.json()
@@ -268,3 +276,4 @@ def get_weather(city='moscow'):
 
 
 print(get_weather())
+12-32
