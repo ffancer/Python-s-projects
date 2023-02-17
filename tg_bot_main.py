@@ -249,10 +249,6 @@ TOKEN = open('my_token.txt').read(46)
 #     executor.start_polling(dp)
 
 
-
-
-
-
 # def get_weather(city):
 #     code_to_smile = {
 #         'Clear': 'Ясно \U00002600',
@@ -296,7 +292,6 @@ from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 
-
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
@@ -304,6 +299,42 @@ dp = Dispatcher(bot)
 @dp.message_handler(commands=['gg'])
 async def start_bot(message: types.Message):
     await message.reply('Привет. Все запустилось.')
+
+
+@dp.message_handler()
+async def get_weather(message: types.Message):
+    code_to_smile = {
+        'Clear': 'Ясно \U00002600',
+        'Clouds': 'Пасмурно \U00002601',
+        'Rain': 'Дождь \U00002614',
+        'Thunderstorm': 'Гроза \U000026A1',
+        'Snow': 'Снег \U0001F328',
+        'Mist': 'Туман \U0001F32B',
+    }
+    r = requests.get(
+        f'https://api.openweathermap.org/data/2.5/weather?q={message.text}&appid={OPEN_WEATHER_TOKEN}&units=metric')
+    data = r.json()
+
+    time_now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+    city = data['name']
+    temp = data['main']['temp']
+
+    weather_description = data['weather'][0]['main']
+    if weather_description in code_to_smile:
+        wd = code_to_smile[weather_description]
+    else:
+        wd = 'Погляди в окно сам'
+
+    pressure = data['main']['pressure']
+    feels_like = data['main']['feels_like']
+    wind = data['wind']['speed']
+    sunrise = datetime.datetime.fromtimestamp(data['sys']['sunrise'])
+    sunset = datetime.datetime.fromtimestamp(data['sys']['sunset'])
+    day_length = sunset - sunrise
+
+    await message.reply(f'==== {time_now} ====\nТемпература {temp} °C {wd}\nОщущается как {feels_like} °C\n' \
+           f'Давление {pressure} мм.рт.ст\nВетер {wind} м\сек\nРассвет {sunrise}\nЗакат {sunset}\n' \
+           f'Продолжительность дня: {day_length}')
 
 
 if __name__ == '__main__':
