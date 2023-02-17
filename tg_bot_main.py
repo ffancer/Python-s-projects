@@ -298,10 +298,13 @@ from aiogram.utils import executor
 
 
 bot = Bot(token=TOKEN)
-dp = Dispatcher(Bot)
+dp = Dispatcher(bot)
 
 
-@dp.message_handlers(commands=['gg'])
+@dp.message_handler(commands=['gg'])
 async def start_bot(message: types.Message):
     await message.reply('Привет. Все запустилось.')
 
+
+if __name__ == '__main__':
+    executor.start_polling(dp)
