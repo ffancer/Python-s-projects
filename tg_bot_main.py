@@ -311,33 +311,34 @@ async def get_weather(message: types.Message):
         'Snow': 'Снег \U0001F328',
         'Mist': 'Туман \U0001F32B',
     }
-    r = requests.get(
-        f'https://api.openweathermap.org/data/2.5/weather?q={message.text}&appid={OPEN_WEATHER_TOKEN}&units=metric')
-    data = r.json()
+    try:
+        r = requests.get(
+            f'https://api.openweathermap.org/data/2.5/weather?q={message.text}&appid={OPEN_WEATHER_TOKEN}&units=metric')
+        data = r.json()
 
-    time_now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
-    city = data['name']
-    temp = data['main']['temp']
+        time_now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+        city = data['name']
+        temp = data['main']['temp']
 
-    weather_description = data['weather'][0]['main']
-    if weather_description in code_to_smile:
-        wd = code_to_smile[weather_description]
-    else:
-        wd = 'Погляди в окно сам'
+        weather_description = data['weather'][0]['main']
+        if weather_description in code_to_smile:
+            wd = code_to_smile[weather_description]
+        else:
+            wd = 'Погляди в окно сам'
 
-    pressure = data['main']['pressure']
-    feels_like = data['main']['feels_like']
-    wind = data['wind']['speed']
-    sunrise = datetime.datetime.fromtimestamp(data['sys']['sunrise'])
-    sunset = datetime.datetime.fromtimestamp(data['sys']['sunset'])
-    day_length = sunset - sunrise
+        pressure = data['main']['pressure']
+        feels_like = data['main']['feels_like']
+        wind = data['wind']['speed']
+        sunrise = datetime.datetime.fromtimestamp(data['sys']['sunrise'])
+        sunset = datetime.datetime.fromtimestamp(data['sys']['sunset'])
+        day_length = sunset - sunrise
 
-    await message.reply(f'==== {time_now} ====\nТемпература {temp} °C {wd}\nОщущается как {feels_like} °C\n' \
-                        f'Давление {pressure} мм.рт.ст\nВетер {wind} м\сек\nРассвет {sunrise}\nЗакат {sunset}\n' \
-                        f'Продолжительность дня: {day_length}')
+        await message.reply(f'==== {time_now} ====\nТемпература {temp} °C {wd}\nОщущается как {feels_like} °C\n' \
+                            f'Давление {pressure} мм.рт.ст\nВетер {wind} м\сек\nРассвет {sunrise}\nЗакат {sunset}\n' \
+                            f'Продолжительность дня: {day_length}')
 
-# except:
-#     await message.reply('\U00002620 Неверное название города \U00002620')
+    except KeyError:
+        await message.reply('\U00002620 Неверное название города \U00002620\n Введите город: ')
 
 
 if __name__ == '__main__':
