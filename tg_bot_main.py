@@ -316,7 +316,7 @@ async def get_weather(message: types.Message):
             f'https://api.openweathermap.org/data/2.5/weather?q={message.text}&appid={OPEN_WEATHER_TOKEN}&units=metric')
         data = r.json()
 
-        time_now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+        time_now = datetime.datetime.now().strftime('%d-%m-%Y %H:%M')
         city = data['name']
         temp = data['main']['temp']
 
