@@ -316,7 +316,7 @@ async def get_weather(message: types.Message):
             f'https://api.openweathermap.org/data/2.5/weather?q={message.text}&appid={OPEN_WEATHER_TOKEN}&units=metric')
         data = r.json()
 
-        time_now = datetime.datetime.now().strftime('%d-%m-%Y %H:%M')
+        time_now = datetime.datetime.now().strftime('%H:%M %d-%m-%Y')
         city = data['name']
         temp = data['main']['temp']
 
@@ -333,9 +333,9 @@ async def get_weather(message: types.Message):
         sunset = datetime.datetime.fromtimestamp(data['sys']['sunset'])
         day_length = sunset - sunrise
 
-        await message.reply(f'==== {time_now} ====\nТемпература {temp} °C {wd}\nОщущается как {feels_like} °C\n' \
+        await message.reply(f'       {time_now}       \nТемпература {temp} °C {wd}\nОщущается как {feels_like} °C\n' \
                             f'Давление {pressure} мм.рт.ст\nВетер {wind} м\сек\nРассвет {sunrise}\nЗакат {sunset}\n' \
-                            f'Продолжительность дня: {day_length}')
+                            f'Продолжительность дня: {day_length}', case_insensitive=True)
 
     except KeyError:
         await message.reply('\U00002620 Неверное название города \U00002620\n Введите город: ')
