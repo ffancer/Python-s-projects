@@ -11,6 +11,7 @@ import requests
 import datetime
 from weather_api import OPEN_WEATHER_TOKEN
 
+
 TOKEN = open('my_token.txt').read(46)
 
 # в пайчарме разницы нет, указывать тип данных или нет, но это яляется хорошей практикой написания кода
