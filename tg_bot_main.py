@@ -6,7 +6,6 @@
 ====================================================================
 ВСЕГДА ПРОВЕРЯЙ ТОЧНОСТЬ ВВОДА, ВСЕГДА
 """
-import pprint
 import requests
 import datetime
 from weather_api import OPEN_WEATHER_TOKEN
