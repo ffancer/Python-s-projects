@@ -9,9 +9,15 @@
 import requests
 import datetime
 from weather_api import OPEN_WEATHER_TOKEN
+from bs4 import BeautifulSoup
 
 
 TOKEN = open('my_token.txt').read(46)
+headers = {
+    'Accept': '*/*',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
+}
+
 # в пайчарме разницы нет, указывать тип данных или нет, но это яляется хорошей практикой написания кода
 # def say_something(number: int, word: str) -> str:
 # #     word = word.capitalize()
@@ -299,6 +305,18 @@ dp = Dispatcher(bot)
 async def start_bot(message: types.Message):
     await message.reply('Привет. Все запустилось.')
 
+@dp.message_handler(commands=['курс'])
+async def start_bot(message: types.Message):
+    url = 'https://www.google.com/search?q=google+%D0%BA%D1%83%D1%80%D1%81+%D0%B2%D0%BE%D0%BB%D1%8E%D1%82&sxsrf=AJOqlzXxEhs942fCdEeRf8FWEehzIdBBpg%3A1678773467761&ei=2wwQZLKKK5SGxc8P-9CDkA8&ved=0ahUKEwjy483B3tr9AhUUQ_EDHXvoAPIQ4dUDCA8&uact=5&oq=google+%D0%BA%D1%83%D1%80%D1%81+%D0%B2%D0%BE%D0%BB%D1%8E%D1%82&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIHCAAQDRCABDIHCAAQDRCABDIHCAAQDRCABDIICAAQBRAeEA0yCAgAEAUQHhANMggIABAFEB4QDTIICAAQBRAeEA0yCggAEAUQHhANEA8yCAgAEAUQHhANMgoIABAFEB4QDRAPOgoIABBHENYEELADOgcIABCwAxBDOggIABCABBCxAzoLCAAQgAQQsQMQgwE6BQgAEIAEOgoIABCABBAUEIcCOg8IABCABBAUEIcCEEYQggI6CggAEIAEEEYQggI6CAgAEBYQHhAPOgYIABAWEB46BQghEKABSgQIQRgAUIQIWJEXYMwYaAFwAXgAgAGkAYgBzAeSAQM2LjSYAQCgAQHIAQrAAQE&sclient=gws-wiz-serp'
+    req = requests.get(url, headers=headers)
+    soup = BeautifulSoup(req.text, 'lxml')
+    all_money = soup.find_all('td')
+    dollar = [i.text.strip() for i in all_money][2]
+    euro = [i.text.strip() for i in all_money][5]
+    await message.reply('Привет. Курс валют следующий:'
+                        f'Доллар - {dollar}'
+                        f'Евро - {euro}')
+
 
 @dp.message_handler()
 async def get_weather(message: types.Message):
@@ -337,13 +355,6 @@ async def get_weather(message: types.Message):
                             f'Продолжительность дня {day_length}')
     except KeyError:
         await message.reply('\U00002620 Неверное название города \U00002620\n Введите город: ')
-
-
-
-@dp.message_handler(commands=['курс'])
-async def start_bot(message: types.Message):
-
-    await message.reply('Привет. Все запустилось.')
 
 
 if __name__ == '__main__':
