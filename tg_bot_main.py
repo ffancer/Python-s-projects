@@ -339,7 +339,14 @@ async def get_weather(message: types.Message):
         await message.reply('\U00002620 Неверное название города \U00002620\n Введите город: ')
 
 
+
+@dp.message_handler(commands=['курс'])
+async def start_bot(message: types.Message):
+
+    await message.reply('Привет. Все запустилось.')
+
+
 if __name__ == '__main__':
     executor.start_polling(dp)
 
-# добавить курс
+
