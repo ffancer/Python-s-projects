@@ -308,6 +308,7 @@ async def start_bot(message: types.Message):
 
 @dp.message_handler(commands=['курс'])
 async def start_bot(message: types.Message):
+    # url not correct
     url = 'https://www.google.com/search?q=google+%D0%BA%D1%83%D1%80%D1%81+%D0%B2%D0%BE%D0%BB%D1%8E%D1%82&sxsrf=AJOqlzXxEhs942fCdEeRf8FWEehzIdBBpg%3A1678773467761&ei=2wwQZLKKK5SGxc8P-9CDkA8&ved=0ahUKEwjy483B3tr9AhUUQ_EDHXvoAPIQ4dUDCA8&uact=5&oq=google+%D0%BA%D1%83%D1%80%D1%81+%D0%B2%D0%BE%D0%BB%D1%8E%D1%82&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIHCAAQDRCABDIHCAAQDRCABDIHCAAQDRCABDIICAAQBRAeEA0yCAgAEAUQHhANMggIABAFEB4QDTIICAAQBRAeEA0yCggAEAUQHhANEA8yCAgAEAUQHhANMgoIABAFEB4QDRAPOgoIABBHENYEELADOgcIABCwAxBDOggIABCABBCxAzoLCAAQgAQQsQMQgwE6BQgAEIAEOgoIABCABBAUEIcCOg8IABCABBAUEIcCEEYQggI6CggAEIAEEEYQggI6CAgAEBYQHhAPOgYIABAWEB46BQghEKABSgQIQRgAUIQIWJEXYMwYaAFwAXgAgAGkAYgBzAeSAQM2LjSYAQCgAQHIAQrAAQE&sclient=gws-wiz-serp'
     req = requests.get(url, headers=headers)
     soup = BeautifulSoup(req.text, 'lxml')
