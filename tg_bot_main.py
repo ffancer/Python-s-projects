@@ -11,7 +11,6 @@ import datetime
 from weather_api import OPEN_WEATHER_TOKEN
 from bs4 import BeautifulSoup
 
-
 TOKEN = open('my_token.txt').read(46)
 headers = {
     'Accept': '*/*',
@@ -308,13 +307,16 @@ async def start_bot(message: types.Message):
 
 @dp.message_handler(commands=['курс'])
 async def start_bot(message: types.Message):
-    url = 'http://www.finmarket.ru/currency/rates/'
-    req = requests.get(url, headers=headers)
-    soup = BeautifulSoup(req.text, 'lxml')
-    all_money = soup.find_all('div', class_='value')
-    dollar = all_money[0].text
-    euro = all_money[1].text
-    await message.reply(f'Привет. Курс валют следующий:\nДоллар - {dollar}\nЕвро - {euro}')
+    try:
+        url = 'http://www.finmarket.ru/currency/rates/'
+        req = requests.get(url, headers=headers)
+        soup = BeautifulSoup(req.text, 'lxml')
+        all_money = soup.find_all('div', class_='value')
+        dollar = all_money[0].text
+        euro = all_money[1].text
+        await message.reply(f'Привет. Курс валют следующий:\nДоллар - {dollar}\nЕвро - {euro}')
+    except:
+        await message.reply('Что-то пошло не так.')
 
 
 @dp.message_handler()
@@ -358,5 +360,3 @@ async def get_weather(message: types.Message):
 
 if __name__ == '__main__':
     executor.start_polling(dp)
-
-
