@@ -11,3 +11,9 @@ def show_board():
 
 
 show_board()
+
+num = input('num: ')
+if num in board:
+    print('good')
+else:
+    print('wrong')
