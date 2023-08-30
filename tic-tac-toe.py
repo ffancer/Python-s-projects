@@ -53,10 +53,15 @@ def player_turn():
     if board[0] == board[1] == board[2] or board[0] == board[4] == board[8] or \
             board[3] == board[4] == board[5] or board[6] == board[7] == board[8] or \
             board[6] == board[4] == board[2]:
-        # return 'You win'
-        print('You win')
-    print('next turn')
+        return 'You win'
+    #     print('You win')
+    # else:
+    #     print('next turn')
+    return 'next turn'
 
 
 while True:
-    player_turn()
+    if player_turn() == 'You win':
+        print('You win')
+        break
+    print(player_turn())
