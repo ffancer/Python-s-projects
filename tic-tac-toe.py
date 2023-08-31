@@ -47,16 +47,17 @@ show_board()
 def player_turn():
     global board
     num = input('num: ')
+    computer_num = str(randint(1, 9))
+
     if num in board:
         board = board.replace(num, 'X')
+    if computer_num in board:
+        board = board.replace(computer_num, 'O')
     show_board()
     if board[0] == board[1] == board[2] or board[0] == board[4] == board[8] or \
             board[3] == board[4] == board[5] or board[6] == board[7] == board[8] or \
             board[6] == board[4] == board[2]:
         return 'You win'
-    #     print('You win')
-    # else:
-    #     print('next turn')
     return 'next turn'
 
 
