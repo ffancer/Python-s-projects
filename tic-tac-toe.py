@@ -14,7 +14,7 @@ def show_board():
     print(f'{board[6]} | {board[7]} | {board[8]}')
 
 
-show_board()
+# show_board()
 
 
 # flag = True
@@ -44,25 +44,48 @@ show_board()
 #         flag = False
 
 
-def player_turn():
-    global board
-    num = input('num: ')
-    computer_num = str(randint(1, 9))
-
-    if num in board:
-        board = board.replace(num, 'X')
-    if computer_num in board:
-        board = board.replace(computer_num, 'O')
-    show_board()
-    if board[0] == board[1] == board[2] or board[0] == board[4] == board[8] or \
-            board[3] == board[4] == board[5] or board[6] == board[7] == board[8] or \
-            board[6] == board[4] == board[2]:
-        return 'You win'
-    return 'next turn'
+# def player_turn():
+#     global board
+#     num = input('num: ')
+#
+#     if num in board:
+#         board = board.replace(num, 'X')
+#
+#     show_board()
+#     if board[0] == board[1] == board[2] or board[0] == board[4] == board[8] or \
+#             board[3] == board[4] == board[5] or board[6] == board[7] == board[8] or \
+#             board[6] == board[4] == board[2]:
+#         return 'You win'
+#     return 'next turn'
 
 
-while True:
-    if player_turn() == 'You win':
-        print('You win')
-        break
-    print(player_turn())
+# def computer_turn():
+#     computer_num = str(randint(1, 9))
+#     if computer_num in board:
+#         board = board.replace(computer_num, 'O')
+
+
+# while True:
+#     if player_turn() == 'You win':
+#         print('You win')
+#         break
+#     print(player_turn())
+
+
+class Turn():
+    def __init__(self, number, sign):
+        self.number = number
+        self.sign = 'X'
+
+        if self.number in '123456789':
+            board = '123456789'
+            board = board.replace(number, self.sign)
+            def show_board():
+                print(f'{board[0]} | {board[1]} | {board[2]}')
+                print(f'{board[3]} | {board[4]} | {board[5]}')
+                print(f'{board[6]} | {board[7]} | {board[8]}')
+
+            show_board()
+
+
+Turn(str(2), 'X')
