@@ -88,4 +88,6 @@ class Turn():
             show_board()
 
 
-Turn(str(2), 'X')
+while True:
+    player_turn = input('Your turn: ')
+    Turn(player_turn, '')
