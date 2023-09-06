@@ -73,21 +73,23 @@ def show_board():
 
 
 class Turn():
-    def __init__(self, number, sign):
-        self.number = number
+    def __init__(self):
+        self.player_turn = input('Your turn: ')
         self.sign = 'X'
 
-        if self.number in '123456789':
+        if self.player_turn in '123456789':
             board = '123456789'
-            board = board.replace(number, self.sign)
+            board = board.replace(self.player_turn, self.sign)
+
             def show_board():
                 print(f'{board[0]} | {board[1]} | {board[2]}')
                 print(f'{board[3]} | {board[4]} | {board[5]}')
                 print(f'{board[6]} | {board[7]} | {board[8]}')
 
             show_board()
+        else:
+            print('not correct')
 
 
 while True:
-    player_turn = input('Your turn: ')
-    Turn(player_turn, '')
+    Turn()
