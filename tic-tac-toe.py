@@ -72,7 +72,7 @@ def show_board():
 #     print(player_turn())
 
 
-class Turn():
+class TicTacToe:
     def __init__(self):
         self.player_turn = input('Your turn: ')
         self.sign = 'X'
@@ -89,7 +89,8 @@ class Turn():
             show_board()
         else:
             print('not correct')
+    show_board()
 
 
 while True:
-    Turn()
+    TicTacToe()
