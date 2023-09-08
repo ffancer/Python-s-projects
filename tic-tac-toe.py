@@ -83,16 +83,19 @@ class TicTacToe:
         print(f'{self.board[3]} | {self.board[4]} | {self.board[5]}')
         print(f'{self.board[6]} | {self.board[7]} | {self.board[8]}')
 
-
+    @classmethod
     def player_turn(self):
         self.player_turn = input('Your turn: ')
 
         if self.player_turn in '123456789':
-            self.a = self.board.replace(self.player_turn, self.sign)
+            # self.a = self.board.replace(self.player_turn, self.sign)
+            print('good morning')
+        else:
+            print('bad night')
 
 
-        return a
-    player_turn()
 
-while True:
-    TicTacToe()
+        # return a
+
+
+TicTacToe.player_turn()
