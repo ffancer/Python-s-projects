@@ -85,17 +85,20 @@ class TicTacToe:
 
     @classmethod
     def player_turn(self):
+        num = '777'
+
         self.player_turn = input('Your turn: ')
 
         if self.player_turn in '123456789':
-            # self.a = self.board.replace(self.player_turn, self.sign)
-            print('good morning')
+            self.show_board() = self.board.replace(self.player_turn, self.sign)
+
         else:
             print('bad night')
 
 
 
-        # return a
+
+
 
 
 TicTacToe.player_turn()
