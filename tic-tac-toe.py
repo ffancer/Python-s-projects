@@ -1,17 +1,11 @@
 from random import randint
 from time import sleep
 
+
 # board = ['1', '2', '3',
 #          '4', '5', '6',
 #          '7', '8', '9'
 #          ]
-board = '123456789'
-
-
-def show_board():
-    print(f'{board[0]} | {board[1]} | {board[2]}')
-    print(f'{board[3]} | {board[4]} | {board[5]}')
-    print(f'{board[6]} | {board[7]} | {board[8]}')
 
 
 # show_board()
@@ -73,32 +67,30 @@ def show_board():
 
 
 class TicTacToe:
+    board = '123456789'
+
+    def show_board(board):
+        print(f'{board[0]} | {board[1]} | {board[2]}')
+        print(f'{board[3]} | {board[4]} | {board[5]}')
+        print(f'{board[6]} | {board[7]} | {board[8]}')
+
     def __init__(self):
-        self.board = '123456789'
+
         self.sign = 'X'
 
-
-    def show_board(self):
-        print(f'{self.board[0]} | {self.board[1]} | {self.board[2]}')
-        print(f'{self.board[3]} | {self.board[4]} | {self.board[5]}')
-        print(f'{self.board[6]} | {self.board[7]} | {self.board[8]}')
-
     @classmethod
-    def player_turn(self):
-        num = '777'
-
+    def player_turn(self, sign='X'):
         self.player_turn = input('Your turn: ')
 
+
         if self.player_turn in '123456789':
-            self.show_board() = self.board.replace(self.player_turn, self.sign)
+            self.board = self.board.replace(self.player_turn, sign)
+            # print(self.board)
+            # print(self.show_board(self.board))
+            return self.show_board(self.board)
 
         else:
-            print('bad night')
+            print('wrong input')
 
-
-
-
-
-
-
+# while True:
 TicTacToe.player_turn()
