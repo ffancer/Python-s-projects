@@ -14,4 +14,7 @@ headers = {
 
 req = requests.get(url, headers)
 src = req.text
-print(src)
+
+# сохраняем файл на комп, что бы не получить бан
+with open('ps1games.html', 'w') as file:
+    file.write(src)
