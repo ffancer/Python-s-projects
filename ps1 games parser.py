@@ -16,5 +16,5 @@ req = requests.get(url, headers)
 src = req.text
 
 # сохраняем файл на комп, что бы не получить бан
-with open('ps1games.html', 'w') as file:
+with open('ps1games.html', 'w', encoding="utf-8") as file:
     file.write(src)
