@@ -33,4 +33,4 @@ for item in all_hrefs:
     game_genre = item.find(class_='col_4 Genre').text
     category = item.find(class_='col_7 Category').text
     date = item.find(class_='col_9 Date').text
-    print(original_game_name, game_genre, category, date)
+    print(f'game - {original_game_name} || genre: {game_genre} || category - {category} || date: {date}')
