@@ -23,7 +23,7 @@ with open('ps1games.html', encoding="utf-8") as file:
     src = file.read()
 
 soup = BeautifulSoup(src, 'lxml')
-all_hrefs = soup.find_all(class_='even')
+all_hrefs = soup.find_all(class_='even') + soup.find_all(class_='odd')
 for item in all_hrefs:
     name = item.find('a').text
     print(name)
