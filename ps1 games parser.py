@@ -25,5 +25,12 @@ with open('ps1games.html', encoding="utf-8") as file:
 soup = BeautifulSoup(src, 'lxml')
 all_hrefs = soup.find_all(class_='even') + soup.find_all(class_='odd')
 for item in all_hrefs:
-    name = item.find('a').text
-    print(name)
+    # patch_name = item.find('a').text
+    # print(patch_name)
+    # print(item.find('td class_3'))
+    # print(item.find(class_='col_2 Released By').text)
+    original_game_name = item.find(class_='col_3 Original Game').text
+    game_genre = item.find(class_='col_4 Genre').text
+    category = item.find(class_='col_7 Category').text
+    date = item.find(class_='col_9 Date').text
+    print(original_game_name, game_genre, category, date)
