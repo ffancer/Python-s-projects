@@ -22,4 +22,7 @@ from bs4 import BeautifulSoup
 with open('ps1games.html', encoding="utf-8") as file:
     src = file.read()
 
-print(src)
+soup = BeautifulSoup(src, 'lxml')
+all_hrefs = soup.find_all(class_='even')
+for item in all_hrefs:
+    print(item)
