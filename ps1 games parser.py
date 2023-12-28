@@ -4,6 +4,7 @@
 import requests
 from bs4 import BeautifulSoup
 
+json_list = []
 # выбрал на сайте игры из секции пс1
 # url = 'https://www.romhacking.net/?page=hacks&category=&platform=17&game=&perpage=20&order=&title=&dir=&hacksearch=Go'
 #
@@ -33,4 +34,15 @@ for item in all_hrefs:
     game_genre = item.find(class_='col_4 Genre').text
     category = item.find(class_='col_7 Category').text
     date = item.find(class_='col_9 Date').text
-    print(f'game - {original_game_name} || genre: {game_genre} || category - {category} || date: {date}')
+    # print(f'game - {original_game_name} || genre: {game_genre} || category - {category} || date: {date}')
+    json_list.append(
+        {
+            'Game': original_game_name,
+            'Genre': {game_genre},
+            'Category': {category},
+            'Date': {date}
+        }
+    )
+
+print(json_list)
+# первая страница https://www.romhacking.net/?page=hacks&platform=17&perpage=20&startpage=1 потом только цыфра меняется
