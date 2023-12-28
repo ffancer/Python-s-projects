@@ -3,6 +3,9 @@
 """
 import requests
 from bs4 import BeautifulSoup
+import pandas as pd
+import json
+
 
 json_list = []
 # выбрал на сайте игры из секции пс1
@@ -38,11 +41,17 @@ for item in all_hrefs:
     json_list.append(
         {
             'Game': original_game_name,
-            'Genre': {game_genre},
-            'Category': {category},
-            'Date': {date}
+            'Genre': game_genre,
+            'Category': category,
+            'Date': date
         }
     )
 
-print(json_list)
+
+def save_json_file():
+    with open('top ps1 games.json', 'a', encoding='utf-8') as file:
+        json.dump(json_list, file, indent=4, ensure_ascii=False)
+
+
+save_json_file()
 # первая страница https://www.romhacking.net/?page=hacks&platform=17&perpage=20&startpage=1 потом только цыфра меняется
